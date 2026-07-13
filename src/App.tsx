@@ -142,7 +142,7 @@ export default function App() {
                   </motion.div>
                   <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
                     <span className="text-accent2 font-mono text-[22px] tracking-[0.3em] uppercase">Quién Soy</span>
-                    <h2 className="text-5xl sm:text-6xl font-display font-bold tracking-tight">Ingeniería Frontend de <span className="bg-gradient-to-r from-accent to-accent2 bg-clip-text text-transparent">Alto Impacto</span></h2>
+                    <h2 className="text-5xl sm:text-6xl font-display font-bold tracking-tight">Frontend de <span className="bg-gradient-to-r from-accent to-accent2 bg-clip-text text-transparent">Alto Impacto</span></h2>
                     <div className="space-y-4 text-white/50 leading-relaxed text-[22px]">
                       <p><strong className="text-white">AlcaTech-WebDesign</strong> transforma ideas complejas en plataformas digitales de alto rendimiento. Ingeniería frontend de vanguardia con enfoque en resultados.</p>
                       <p>Me especializo en optimización técnica avanzada, despliegue eficiente de arquitecturas de software e ingeniería frontend con herramientas locales y de vanguardia.</p>
