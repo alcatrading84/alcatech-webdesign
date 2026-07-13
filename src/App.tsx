@@ -246,31 +246,14 @@ export default function App() {
                         <p className="text-[17px] text-white/30">{t.plans.entrega}: <span className="text-white/60">{plan.delivery}</span></p>
                         <p className="text-[17px] text-white/30">{t.plans.tecnologia}: <span className="text-accent2">{plan.tech}</span></p>
                       </div>
-                      <button onClick={async () => {
-                        setLoading(i);
-                        try {
-                          const res = await fetch('/.netlify/functions/create-checkout', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                              planId: ['landing','empresarial','cinematografico','portal'][i],
-                              planName: plan.title,
-                              planPrice: PRICES[i],
-                              planPriceRange: PRICE_RANGES[i],
-                              locale: lang,
-                            }),
-                          });
-                          const data = await res.json();
-                          if (data.url) window.location.href = data.url;
-                          else alert('Error al procesar el pago');
-                        } catch(e) { alert('Error de conexión'); }
-                        setLoading(null);
-                      }}
-                        className={`w-full mt-2 py-3 rounded-xl font-bold text-[16px] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-accent/25 ${
-                          loading === i ? 'bg-accent/50 cursor-wait' : 'bg-accent hover:bg-accent/80 hover:scale-[1.02] active:scale-95'
-                        }`}>
-                        {loading === i ? 'Procesando...' : 'Contratar'} {loading !== i && <ArrowRight className="w-4 h-4" />}
-                      </button>
+                      <a href={['https://wa.me/393801028239?text=' + encodeURIComponent('Hola! Me interesa el plan Landing Simple ($200+). Quiero más información.'),
+                        'https://wa.me/393801028239?text=' + encodeURIComponent('Hola! Me interesa el plan Landing Empresarial ($500+). Quiero más información.'),
+                        'https://wa.me/393801028239?text=' + encodeURIComponent('Hola! Me interesa el plan Landing Cinematográfico ($1,200+). Quiero más información.'),
+                        'https://wa.me/393801028239?text=' + encodeURIComponent('Hola! Me interesa el plan Portal Interactivo SaaS ($2,500+). Quiero más información.')][i]}
+                        target="_blank"
+                        className="w-full mt-2 py-3 rounded-xl font-bold text-[16px] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-accent/25 bg-accent hover:bg-accent/80 hover:scale-[1.02] active:scale-95">
+                        Contratar <ArrowRight className="w-4 h-4" />
+                      </a>
                     </motion.div>
                   ))}
                 </div>
