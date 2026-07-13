@@ -187,7 +187,7 @@ export default function App() {
                 <div className="grid md:grid-cols-2 gap-6">
                   {t.focusCards.map((item, i) => (
                     <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                      className="glass rounded-xl p-6 space-y-3 hover:shadow-lg hover:shadow-accent/5 transition-all">
+                      className="glass rounded-xl p-6 space-y-3 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/20 hover:border-accent/30">
                       <h4 className={`font-display font-bold text-[24px] ${['text-accent2','text-accent','text-accent3','text-green-400'][i]}`}>{item.title}</h4>
                       <p className="text-[22px] text-white/50 leading-relaxed">{item.desc}</p>
                     </motion.div>
@@ -230,7 +230,7 @@ export default function App() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                   {t.plansData.map((plan, i) => (
                     <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                      className={`relative glass rounded-xl p-8 space-y-4 ${i === 1 ? 'ring-2 ring-accent shadow-lg shadow-accent/10' : ''}`}>
+                      className={`relative glass rounded-xl p-8 space-y-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/20 hover:border-accent/30 ${i === 1 ? 'ring-2 ring-accent shadow-lg shadow-accent/10' : ''}`}>
                       {plan.badge && <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-accent text-white text-[15px] font-bold rounded-full whitespace-nowrap">{plan.badge}</span>}
                       <Monitor className="w-10 h-10 text-accent" />
                       <div>
@@ -266,8 +266,8 @@ export default function App() {
                         } catch(e) { alert('Error de conexión'); }
                         setLoading(null);
                       }}
-                        className={`w-full mt-2 py-3 rounded-xl font-bold text-[16px] transition-all flex items-center justify-center gap-2 shadow-lg shadow-accent/25 ${
-                          loading === i ? 'bg-accent/50 cursor-wait' : 'bg-accent hover:bg-accent/80'
+                        className={`w-full mt-2 py-3 rounded-xl font-bold text-[16px] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-accent/25 ${
+                          loading === i ? 'bg-accent/50 cursor-wait' : 'bg-accent hover:bg-accent/80 hover:scale-[1.02] active:scale-95'
                         }`}>
                         {loading === i ? 'Procesando...' : 'Contratar'} {loading !== i && <ArrowRight className="w-4 h-4" />}
                       </button>
