@@ -230,7 +230,7 @@ export default function App() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                   {t.plansData.map((plan, i) => (
                     <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                      className={`relative glass rounded-xl p-8 space-y-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/20 hover:border-accent/30 ${i === 1 ? 'ring-2 ring-accent shadow-lg shadow-accent/10' : ''}`}>
+                      className={`relative glass rounded-xl p-8 space-y-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/20 hover:border-accent/30 ${i === 2 ? 'ring-2 ring-accent shadow-lg shadow-accent/10' : ''}`}>
                       {plan.badge && <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-accent text-white text-[15px] font-bold rounded-full whitespace-nowrap">{plan.badge}</span>}
                       <Monitor className="w-10 h-10 text-accent" />
                       <div>
