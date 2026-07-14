@@ -18,6 +18,7 @@ export default function App() {
   const tabs = [
     { id: 'inicio', label: t.nav.inicio, icon: <Star className="w-5 h-5" /> },
     { id: 'portafolio', label: t.nav.portafolio, icon: <Briefcase className="w-5 h-5" /> },
+    { id: 'planes', label: t.nav.planes, icon: <Layers className="w-5 h-5" /> },
   ];
 
   return (
@@ -318,6 +319,57 @@ export default function App() {
                   <a href="mailto:alcatechwebdesign@gmail.com" className="px-8 py-4 glass rounded-xl hover:bg-white/5 transition-all flex items-center gap-2 text-[18px]"><Mail className="w-5 h-5" />Email</a>
                   <a href="https://www.instagram.com/alcatechwebdesign" target="_blank" className="px-8 py-4 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-orange-400/20 border border-pink-500/30 rounded-xl text-pink-400 hover:bg-pink-500/30 transition-all flex items-center gap-2 text-[18px]"><Instagram className="w-5 h-5" />Instagram</a>
                   <a href="https://www.facebook.com/profile.php?id=61591897798944" target="_blank" className="px-8 py-4 bg-blue-600/20 border border-blue-600/30 rounded-xl text-blue-400 hover:bg-blue-600/30 transition-all flex items-center gap-2 text-[18px]"><Facebook className="w-5 h-5" />Facebook</a>
+                </div>
+              </div>
+            </section>
+          </motion.div>
+        )}
+
+        {activeTab === 'planes' && (
+          <motion.div key={lang + '-planes'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-24">
+            <section className="py-20">
+              <div className="max-w-7xl mx-auto px-6">
+                <div className="text-center mb-16 space-y-4">
+                  <h2 className="text-4xl sm:text-5xl font-display font-bold tracking-tight">{t.plansTable.title}</h2>
+                  <p className="text-white/40 max-w-3xl mx-auto text-[20px]">{t.plansTable.subtitle}</p>
+                </div>
+
+                {/* Table wrapper for horizontal scroll on mobile */}
+                <div className="overflow-x-auto pb-4">
+                  <table className="w-full min-w-[900px] border-collapse">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="text-left py-4 pr-6 text-[20px] font-display font-bold text-white/50">{t.plansTable.header}</th>
+                        <th className="text-center py-4 px-4 text-[16px] font-display font-bold text-white/70">Landing Simple<br/><span className="text-[14px] font-normal text-white/30">$200 – $500</span></th>
+                        <th className="text-center py-4 px-4 text-[16px] font-display font-bold text-accent">Landing Empresarial<br/><span className="text-[14px] font-normal text-white/30">$500 – $1,200</span></th>
+                        <th className="text-center py-4 px-4 text-[16px] font-display font-bold text-white/70">Landing Cinematográfico<br/><span className="text-[14px] font-normal text-white/30">$1,200 – $2,500</span></th>
+                        <th className="text-center py-4 px-4 text-[16px] font-display font-bold text-white/70">Portal SaaS<br/><span className="text-[14px] font-normal text-white/30">$2,500 – $6,000</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {t.plansTable.rows.map((row, i) => (
+                        <tr key={i} className={`border-b border-white/5 ${i % 2 === 0 ? 'bg-white/[0.02]' : ''} hover:bg-white/[0.04] transition-colors`}>
+                          <td className="py-4 pr-6 text-[17px] font-medium text-accent2">{row.label}</td>
+                          {row.vals.map((v, j) => (
+                            <td key={j} className={`text-center py-4 px-4 text-[15px] text-white/60 ${j === 1 ? 'text-accent/80' : ''}`}>{v}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Upgrade descriptions */}
+                <div className="mt-20 space-y-8 max-w-5xl mx-auto">
+                  <div className="glass rounded-xl p-8 border-l-4 border-accent2">
+                    <p className="text-[18px] text-white/60 leading-relaxed">{t.plansTable.upgrade1}</p>
+                  </div>
+                  <div className="glass rounded-xl p-8 border-l-4 border-accent">
+                    <p className="text-[18px] text-white/60 leading-relaxed">{t.plansTable.upgrade2}</p>
+                  </div>
+                  <div className="glass rounded-xl p-8 border-l-4 border-accent3">
+                    <p className="text-[18px] text-white/60 leading-relaxed">{t.plansTable.upgrade3}</p>
+                  </div>
                 </div>
               </div>
             </section>
