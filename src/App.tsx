@@ -423,39 +423,39 @@ export default function App() {
         <p className="text-white/10 text-[18px] font-mono mt-2">{t.footer}</p>
 
         {/* Legal links expandibles */}
-        <div className="max-w-3xl mx-auto mt-8 space-y-2">
+        <div className="max-w-3xl mx-auto mt-8 space-y-3">
           <details className="group">
-            <summary className="cursor-pointer text-[16px] text-white/30 hover:text-accent transition-colors list-none flex items-center justify-center gap-2">
-              <span className="underline underline-offset-4 decoration-white/10 hover:decoration-accent/50">{t.legal.footerLinks[0]}</span>
-              <span className="text-white/20 group-open:rotate-180 transition-transform">▼</span>
+            <summary className="cursor-pointer text-[18px] text-white/60 hover:text-accent transition-colors list-none flex items-center justify-center gap-2 font-medium">
+              <span className="underline underline-offset-4 decoration-white/20 hover:decoration-accent/50">📄 {t.legal.footerLinks[0]}</span>
+              <span className="text-white/30 group-open:rotate-180 transition-transform text-[12px]">▼</span>
             </summary>
-            <div className="mt-4 glass rounded-xl p-6 text-left space-y-3">
-              <h4 className="text-[20px] font-display font-bold text-white">{t.legal.aviso.title}</h4>
-              <p className="text-[17px] text-white/60 leading-relaxed">{t.legal.aviso.p1}</p>
-              <p className="text-[17px] text-white/60 leading-relaxed">{t.legal.aviso.p2}</p>
+            <div className="mt-4 glass rounded-xl p-8 text-left space-y-4">
+              <h4 className="text-[22px] font-display font-bold text-white">{t.legal.aviso.title}</h4>
+              <p className="text-[18px] text-white/60 leading-relaxed">{t.legal.aviso.p1}</p>
+              <p className="text-[18px] text-white/60 leading-relaxed">{t.legal.aviso.p2}</p>
             </div>
           </details>
           <details className="group">
-            <summary className="cursor-pointer text-[16px] text-white/30 hover:text-accent transition-colors list-none flex items-center justify-center gap-2">
-              <span className="underline underline-offset-4 decoration-white/10 hover:decoration-accent/50">{t.legal.footerLinks[1]}</span>
-              <span className="text-white/20 group-open:rotate-180 transition-transform">▼</span>
+            <summary className="cursor-pointer text-[18px] text-white/60 hover:text-accent transition-colors list-none flex items-center justify-center gap-2 font-medium">
+              <span className="underline underline-offset-4 decoration-white/20 hover:decoration-accent/50">📋 {t.legal.footerLinks[1]}</span>
+              <span className="text-white/30 group-open:rotate-180 transition-transform text-[12px]">▼</span>
             </summary>
-            <div className="mt-4 glass rounded-xl p-6 text-left space-y-3">
-              <h4 className="text-[20px] font-display font-bold text-white">{t.legal.terminos.title}</h4>
-              <p className="text-[17px] text-white/60 leading-relaxed">{t.legal.terminos.p1}</p>
-              <p className="text-[17px] text-white/60 leading-relaxed">{t.legal.terminos.p2}</p>
-              <p className="text-[17px] text-white/60 leading-relaxed">{t.legal.terminos.p3}</p>
+            <div className="mt-4 glass rounded-xl p-8 text-left space-y-4">
+              <h4 className="text-[22px] font-display font-bold text-white">{t.legal.terminos.title}</h4>
+              <p className="text-[18px] text-white/60 leading-relaxed">{t.legal.terminos.p1}</p>
+              <p className="text-[18px] text-white/60 leading-relaxed">{t.legal.terminos.p2}</p>
+              <p className="text-[18px] text-white/60 leading-relaxed">{t.legal.terminos.p3}</p>
             </div>
           </details>
           <details className="group">
-            <summary className="cursor-pointer text-[16px] text-white/30 hover:text-accent transition-colors list-none flex items-center justify-center gap-2">
-              <span className="underline underline-offset-4 decoration-white/10 hover:decoration-accent/50">{t.legal.footerLinks[2]}</span>
-              <span className="text-white/20 group-open:rotate-180 transition-transform">▼</span>
+            <summary className="cursor-pointer text-[18px] text-white/60 hover:text-accent transition-colors list-none flex items-center justify-center gap-2 font-medium">
+              <span className="underline underline-offset-4 decoration-white/20 hover:decoration-accent/50">🔒 {t.legal.footerLinks[2]}</span>
+              <span className="text-white/30 group-open:rotate-180 transition-transform text-[12px]">▼</span>
             </summary>
-            <div className="mt-4 glass rounded-xl p-6 text-left space-y-3">
-              <h4 className="text-[20px] font-display font-bold text-white">{t.legal.privacidad.title}</h4>
-              <p className="text-[17px] text-white/60 leading-relaxed">{t.legal.privacidad.p1}</p>
-              <p className="text-[17px] text-white/60 leading-relaxed">{t.legal.privacidad.p2}</p>
+            <div className="mt-4 glass rounded-xl p-8 text-left space-y-4">
+              <h4 className="text-[22px] font-display font-bold text-white">{t.legal.privacidad.title}</h4>
+              <p className="text-[18px] text-white/60 leading-relaxed">{t.legal.privacidad.p1}</p>
+              <p className="text-[18px] text-white/60 leading-relaxed">{t.legal.privacidad.p2}</p>
             </div>
           </details>
         </div>
