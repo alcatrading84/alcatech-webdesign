@@ -309,6 +309,44 @@ export default function App() {
               </div>
             </section>
 
+            {/* TESTIMONIOS */}
+            <section className="py-24 relative">
+              <div className="absolute inset-0 bg-dark-900/20" />
+              <div className="max-w-6xl mx-auto px-6">
+                <div className="text-center mb-16 space-y-4">
+                  <span className="text-accent font-mono text-[22px] tracking-[0.3em] uppercase">{lang === 'es' ? 'Testimonios' : lang === 'en' ? 'Testimonials' : lang === 'it' ? 'Testimonianze' : lang === 'de' ? 'Testimonien' : 'Témoignages'}</span>
+                  <h2 className="text-5xl sm:text-6xl font-display font-bold tracking-tight">{lang === 'es' ? 'Lo que dicen' : lang === 'en' ? 'What our' : lang === 'it' ? 'Cosa dicono' : lang === 'de' ? 'Was unsere' : 'Ce que disent'}{' '}<span className="bg-gradient-to-r from-accent to-accent2 bg-clip-text text-transparent">{lang === 'es' ? 'nuestros clientes' : lang === 'en' ? 'clients say' : lang === 'it' ? 'i nostri clienti' : lang === 'de' ? 'Kunden sagen' : 'nos clients'}</span></h2>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    { stars: 5, text: lang === 'es' ? 'El plan Empresarial transformó nuestro negocio. La velocidad de carga aumentó un 200% y nuestras ventas se dispararon en solo 3 meses.' : lang === 'en' ? 'The Business plan transformed our business. Load speed increased 200% and sales skyrocketed in just 3 months.' : lang === 'it' ? 'Il piano Aziendale ha trasformato la nostra attività. La velocità di caricamento è aumentata del 200% e le vendite sono esplose in soli 3 mesi.' : lang === 'de' ? 'Der Unternehmensplan hat unser Geschäft verwandelt. Die Ladegeschwindigkeit stieg um 200% und die Verkäufe schossen in nur 3 Monaten in die Höhe.' : "Le plan Entreprise a transformé notre activité. La vitesse de chargement a augmenté de 200% et les ventes ont explosé en seulement 3 mois.", name: 'Pedro Martínez', role: lang === 'es' ? 'CEO de AlfaTech' : lang === 'en' ? 'CEO of AlfaTech' : lang === 'it' ? 'CEO di AlfaTech' : lang === 'de' ? 'CEO von AlfaTech' : 'CEO d\'AlfaTech' },
+                    { stars: 5, text: lang === 'es' ? 'Pasamos de una web estática a una plataforma con IA integrada. Ahora nuestros clientes reservan solos sin necesidad de intervención humana.' : lang === 'en' ? 'We went from a static site to an AI-powered platform. Now our clients book on their own without human intervention.' : lang === 'it' ? 'Siamo passati da un sito statico a una piattaforma con IA integrata. Ora i nostri clienti prenotano da soli senza intervento umano.' : lang === 'de' ? 'Wir gingen von einer statischen Website zu einer KI-gestützten Plattform. Jetzt buchen unsere Kunden eigenständig ohne menschliches Eingreifen.' : "Nous sommes passés d'un site statique à une plateforme intégrant l'IA. Nos clients réservent désormais seuls sans intervention humaine.", name: 'Ana García', role: lang === 'es' ? 'Directora de Clínica MediSalud' : lang === 'en' ? 'Director of MediSalud Clinic' : lang === 'it' ? 'Direttrice della Clinica MediSalud' : lang === 'de' ? 'Direktorin der MediSalud Klinik' : 'Directrice de la Clinique MediSalud' },
+                    { stars: 5, text: lang === 'es' ? 'El diseño cinematográfico superó todas nuestras expectativas. Nuestros clientes quedan impactados con la experiencia 3D y eso nos diferencia de la competencia.' : lang === 'en' ? 'The cinematic design exceeded all our expectations. Our clients are amazed by the 3D experience, setting us apart from the competition.' : lang === 'it' ? 'Il design cinematografico ha superato tutte le nostre aspettative. I nostri clienti rimangono colpiti dall\'esperienza 3D e questo ci distingue dalla concorrenza.' : lang === 'de' ? 'Das cineastische Design hat alle unsere Erwartungen übertroffen. Unsere Kunden sind von der 3D-Erfahrung begeistert, was uns von der Konkurrenz abhebt.' : "Le design cinématographique a dépassé toutes nos attentes. Nos clients sont impressionnés par l'expérience 3D, ce qui nous différencie de la concurrence.", name: 'Carlos Ruiz', role: lang === 'es' ? 'Fundador de Restaurante La Mesa' : lang === 'en' ? 'Founder of La Mesa Restaurant' : lang === 'it' ? 'Fondatore del Ristorante La Mesa' : lang === 'de' ? 'Gründer des Restaurants La Mesa' : 'Fondateur du Restaurant La Mesa' },
+                    { stars: 5, text: lang === 'es' ? 'Tener un panel de administración donde puedo editar todo yo mismo me ahorra llamar a un programador cada vez. La mejor inversión para mi negocio.' : lang === 'en' ? 'Having an admin panel where I can edit everything myself saves me from calling a programmer every time. The best investment for my business.' : lang === 'it' ? 'Avere un pannello di amministrazione dove posso modificare tutto da solo mi evita di chiamare un programmatore ogni volta. Il miglior investimento per la mia attività.' : lang === 'de' ? 'Ein Admin-Panel zu haben, in dem ich alles selbst bearbeiten kann, erspart mir, jedes Mal einen Programmierer zu rufen. Die beste Investition für mein Unternehmen.' : "Avoir un panneau d'administration où je peux tout éditer moi-même m'évite d'appeler un programmeur à chaque fois. Le meilleur investissement pour mon entreprise.", name: 'María López', role: lang === 'es' ? 'CEO de StartUp NovaTech' : lang === 'en' ? 'CEO of NovaTech StartUp' : lang === 'it' ? 'CEO di NovaTech StartUp' : lang === 'de' ? 'CEO von NovaTech StartUp' : 'CEO de la StartUp NovaTech' },
+                  ].map((item, i) => (
+                    <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                      className="glass rounded-xl p-8 space-y-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10">
+                      {/* Stars */}
+                      <div className="flex gap-1 text-[28px]" style={{ color: '#fbbf24' }}>
+                        {[...Array(item.stars)].map((_, s) => <span key={s}>★</span>)}
+                      </div>
+                      {/* Text */}
+                      <p className="text-[22px] text-white/60 leading-relaxed italic">"{item.text}"</p>
+                      {/* Client info */}
+                      <div className="pt-2">
+                        <p className="text-[20px] font-display font-bold text-white">{item.name}</p>
+                        <p className="text-[18px] text-white/40">{item.role}</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="w-5 h-5 rounded-full bg-green-500/20 border border-green-500/40 flex items-center justify-center text-green-400 text-[12px] font-bold">✓</span>
+                          <span className="text-[18px] text-green-400 font-medium">{lang === 'es' ? 'Cliente Verificado' : lang === 'en' ? 'Verified Client' : lang === 'it' ? 'Cliente Verificato' : lang === 'de' ? 'Verifizierter Kunde' : 'Client Vérifié'}</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
             {/* CONTACT */}
             <section className="py-20 bg-dark-900/30">
               <div className="max-w-6xl mx-auto px-6 text-center space-y-6">
