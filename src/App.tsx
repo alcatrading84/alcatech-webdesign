@@ -336,40 +336,40 @@ export default function App() {
 
                 {/* Table wrapper for horizontal scroll on mobile */}
                 <div className="overflow-x-auto pb-4">
-                  <table className="w-full min-w-[900px] border-collapse">
-                    <thead>
-                      <tr className="border-b border-white/10">
-                        <th className="text-left py-4 pr-6 text-[20px] font-display font-bold text-white/50">{t.plansTable.header}</th>
-                        <th className="text-center py-4 px-4 text-[16px] font-display font-bold text-white/70">Landing Simple<br/><span className="text-[14px] font-normal text-white/30">$200 – $500</span></th>
-                        <th className="text-center py-4 px-4 text-[16px] font-display font-bold text-accent">Landing Empresarial<br/><span className="text-[14px] font-normal text-white/30">$500 – $1,200</span></th>
-                        <th className="text-center py-4 px-4 text-[16px] font-display font-bold text-white/70">Landing Cinematográfico<br/><span className="text-[14px] font-normal text-white/30">$1,200 – $2,500</span></th>
-                        <th className="text-center py-4 px-4 text-[16px] font-display font-bold text-white/70">Portal SaaS<br/><span className="text-[14px] font-normal text-white/30">$2,500 – $6,000</span></th>
+                <table className="w-full min-w-[1000px] border-collapse">
+                  <thead>
+                    <tr className="border-b border-white/10">
+                      <th className="text-left py-5 pr-6 text-[22px] font-display font-bold text-white/50">{t.plansTable.header}</th>
+                      <th className="text-center py-5 px-4 text-[20px] font-display font-bold text-white/70">Landing Simple<br/><span className="text-[18px] font-normal text-white/30">$200 – $500</span></th>
+                      <th className="text-center py-5 px-4 text-[20px] font-display font-bold text-accent">Landing Empresarial<br/><span className="text-[18px] font-normal text-white/30">$500 – $1,200</span></th>
+                      <th className="text-center py-5 px-4 text-[20px] font-display font-bold text-white/70">Landing Cinematográfico<br/><span className="text-[18px] font-normal text-white/30">$1,200 – $2,500</span></th>
+                      <th className="text-center py-5 px-4 text-[20px] font-display font-bold text-white/70">Portal SaaS<br/><span className="text-[18px] font-normal text-white/30">$2,500 – $6,000</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {t.plansTable.rows.map((row, i) => (
+                      <tr key={i} className={`border-b border-white/5 ${i % 2 === 0 ? 'bg-white/[0.02]' : ''} hover:bg-white/[0.04] transition-colors`}>
+                        <td className="py-5 pr-6 text-[22px] font-medium text-accent2">{row.label}</td>
+                        {row.vals.map((v, j) => (
+                          <td key={j} className={`text-center py-5 px-4 text-[20px] text-white/60 ${j === 1 ? 'text-accent/80' : ''}`}>{v}</td>
+                        ))}
                       </tr>
-                    </thead>
-                    <tbody>
-                      {t.plansTable.rows.map((row, i) => (
-                        <tr key={i} className={`border-b border-white/5 ${i % 2 === 0 ? 'bg-white/[0.02]' : ''} hover:bg-white/[0.04] transition-colors`}>
-                          <td className="py-4 pr-6 text-[17px] font-medium text-accent2">{row.label}</td>
-                          {row.vals.map((v, j) => (
-                            <td key={j} className={`text-center py-4 px-4 text-[15px] text-white/60 ${j === 1 ? 'text-accent/80' : ''}`}>{v}</td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                    ))}
+                  </tbody>
+                </table>
                 </div>
 
                 {/* Upgrade descriptions */}
                 <div className="mt-20 space-y-8 max-w-5xl mx-auto">
-                  <div className="glass rounded-xl p-8 border-l-4 border-accent2">
-                    <p className="text-[18px] text-white/60 leading-relaxed">{t.plansTable.upgrade1}</p>
-                  </div>
-                  <div className="glass rounded-xl p-8 border-l-4 border-accent">
-                    <p className="text-[18px] text-white/60 leading-relaxed">{t.plansTable.upgrade2}</p>
-                  </div>
-                  <div className="glass rounded-xl p-8 border-l-4 border-accent3">
-                    <p className="text-[18px] text-white/60 leading-relaxed">{t.plansTable.upgrade3}</p>
-                  </div>
+                <div className="glass rounded-xl p-8 border-l-4 border-accent2">
+                  <p className="text-[22px] text-white/60 leading-relaxed">{t.plansTable.upgrade1}</p>
+                </div>
+                <div className="glass rounded-xl p-8 border-l-4 border-accent">
+                  <p className="text-[22px] text-white/60 leading-relaxed">{t.plansTable.upgrade2}</p>
+                </div>
+                <div className="glass rounded-xl p-8 border-l-4 border-accent3">
+                  <p className="text-[22px] text-white/60 leading-relaxed">{t.plansTable.upgrade3}</p>
+                </div>
                 </div>
               </div>
             </section>
