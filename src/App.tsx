@@ -13,6 +13,7 @@ export default function App() {
   const [lang, setLang] = useState('es');
   const [showLang, setShowLang] = useState(false);
   const [loading, setLoading] = useState(null);
+  const [legalSection, setLegalSection] = useState(null);
   const t = locales[lang];
 
   const tabs = [
@@ -421,7 +422,50 @@ export default function App() {
       <footer className="border-t border-white/5 py-12 text-center">
         <p className="text-white/20 text-[22px]">© {new Date().getFullYear()} AlcaTech-WebDesign</p>
         <p className="text-white/10 text-[18px] font-mono mt-2">{t.footer}</p>
+        <div className="flex flex-wrap justify-center gap-6 mt-6">
+          {t.legal.footerLinks.map((link, i) => (
+            <button key={i} onClick={() => setLegalSection(i)}
+              className="text-[16px] text-white/30 hover:text-accent transition-colors underline underline-offset-4 decoration-white/10 hover:decoration-accent/50">
+              {link}
+            </button>
+          ))}
+        </div>
       </footer>
+
+      {/* LEGAL MODAL */}
+      {legalSection !== null && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={() => setLegalSection(null)}>
+          <div className="relative max-w-3xl w-full max-h-[85vh] overflow-y-auto glass rounded-2xl p-8 sm:p-12" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setLegalSection(null)}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all">
+              <X className="w-5 h-5 text-white/60" />
+            </button>
+            <h2 className="text-4xl font-display font-bold mb-8 bg-gradient-to-r from-accent to-accent2 bg-clip-text text-transparent">{t.legal.title}</h2>
+
+            {/* Aviso Legal */}
+            <section className="mb-8">
+              <h3 className="text-[22px] font-display font-bold text-white mb-3">{t.legal.aviso.title}</h3>
+              <p className="text-[18px] text-white/60 leading-relaxed mb-2">{t.legal.aviso.p1}</p>
+              <p className="text-[18px] text-white/60 leading-relaxed">{t.legal.aviso.p2}</p>
+            </section>
+
+            {/* Términos */}
+            <section className="mb-8">
+              <h3 className="text-[22px] font-display font-bold text-white mb-3">{t.legal.terminos.title}</h3>
+              <p className="text-[18px] text-white/60 leading-relaxed mb-2">{t.legal.terminos.p1}</p>
+              <p className="text-[18px] text-white/60 leading-relaxed mb-2">{t.legal.terminos.p2}</p>
+              <p className="text-[18px] text-white/60 leading-relaxed">{t.legal.terminos.p3}</p>
+            </section>
+
+            {/* Privacidad */}
+            <section>
+              <h3 className="text-[22px] font-display font-bold text-white mb-3">{t.legal.privacidad.title}</h3>
+              <p className="text-[18px] text-white/60 leading-relaxed mb-2">{t.legal.privacidad.p1}</p>
+              <p className="text-[18px] text-white/60 leading-relaxed">{t.legal.privacidad.p2}</p>
+            </section>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
