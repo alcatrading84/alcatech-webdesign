@@ -246,10 +246,10 @@ export default function App() {
                         <p className="text-[17px] text-white/30">{t.plans.entrega}: <span className="text-white/60">{plan.delivery}</span></p>
                         <p className="text-[17px] text-white/30">{t.plans.tecnologia}: <span className="text-accent2">{plan.tech}</span></p>
                       </div>
-                      <a href={['https://wa.me/393801028239?text=' + encodeURIComponent('Hola! Me interesa el plan Landing Simple ($200+). Quiero más información.'),
-                        'https://wa.me/393801028239?text=' + encodeURIComponent('Hola! Me interesa el plan Landing Empresarial ($500+). Quiero más información.'),
-                        'https://wa.me/393801028239?text=' + encodeURIComponent('Hola! Me interesa el plan Landing Cinematográfico ($1,200+). Quiero más información.'),
-                        'https://wa.me/393801028239?text=' + encodeURIComponent('Hola! Me interesa el plan Portal Interactivo SaaS ($2,500+). Quiero más información.')][i]}
+                      <a href={['https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01',
+                        'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03',
+                        'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04',
+                        'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'][i]}
                         target="_blank"
                         className="w-full mt-2 py-3 rounded-xl font-bold text-[16px] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-accent/25 bg-accent hover:bg-accent/80 hover:scale-[1.02] active:scale-95">
                         Contratar <ArrowRight className="w-4 h-4" />
