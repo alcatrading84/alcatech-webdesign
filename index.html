@@ -4,320 +4,216 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>AlcaTech-WebDesign | Ingeniería Digital de Autor</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#010224;--bg2:#091e42;--bg3:#0d1117;--accent:#0052cc;--accent2:#079de0;--accent3:#058aaa;--text:#f1f5f9;--text2:rgba(255,255,255,0.5);--text3:rgba(255,255,255,0.3);--gold:#fbbf24}
+:root{--bg:#010224;--bg2:#091e42;--accent:#0052cc;--accent2:#079de0;--accent3:#058aaa;--text:#f1f5f9;--text2:rgba(255,255,255,0.5);--text3:rgba(255,255,255,0.3);--gold:#fbbf24}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(1,2,36,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.05)}
 nav .logo{font-size:1.25rem;font-weight:700}
 nav .logo span{color:var(--accent)}
-nav .nav-links{display:flex;gap:2rem;align-items:center}
-nav .nav-links a{color:var(--text2);text-decoration:none;font-size:.875rem;transition:color .2s;cursor:pointer}
-nav .nav-links a:hover{color:#fff}
-.lang-btn{background:rgba(0,82,204,0.15);border:1px solid rgba(0,82,204,0.2);color:var(--accent2);padding:.35rem .75rem;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer;transition:.2s}
-.lang-btn:hover{background:rgba(0,82,204,0.25)}
-section{padding:5rem 2rem}
-.inner{max-width:1100px;margin:0 auto}
-.label{font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
-h2.section-title{font-size:clamp(2rem,4vw,2.75rem);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:1rem}
-.desc{font-size:1.05rem;color:var(--text2);max-width:600px;line-height:1.7;margin-bottom:2.5rem}
-
-/* Hero */
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:var(--text2);font-size:.875rem;transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:#fff}
+.lang-btn{background:rgba(0,82,204,0.15);border:1px solid rgba(0,82,204,0.2);color:var(--accent2);padding:.35rem .75rem;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer}
+.btn-nav{background:var(--accent);color:#fff;padding:.6rem 1.2rem;border-radius:6px;font-size:.85rem;font-weight:600;border:none;cursor:pointer}
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(0,82,204,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,82,204,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 50% at 50% 50%,black,transparent)}
 .hero-glow{position:absolute;top:50%;left:50%;width:700px;height:700px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,82,204,0.1) 0%,transparent 70%);z-index:0}
 .hero>*{position:relative;z-index:1}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:rgba(0,82,204,0.1);border:1px solid rgba(0,82,204,0.2);border-radius:100px;font-size:.8rem;color:var(--accent2);margin-bottom:2rem}
-.hero h1{font-size:clamp(2.5rem,7vw,4.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:1.25rem;max-width:800px}
-.hero h1 .g{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{font-size:1.15rem;color:var(--text2);max-width:520px;line-height:1.7;margin-bottom:2rem}
-.btn{background:var(--accent);color:#fff;border:none;padding:.9rem 1.75rem;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none}
-.btn:hover{background:#0065e6;transform:translateY(-1px)}
-.btn-o{background:transparent;color:var(--text2);border:1px solid rgba(255,255,255,0.1);padding:.9rem 1.75rem;border-radius:8px;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none}
-.btn-o:hover{border-color:rgba(255,255,255,0.3);color:#fff}
-.btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-
-/* Stats */
-.stats{display:flex;justify-content:center;gap:3.5rem;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,0.05)}
-.stats .n{font-size:2rem;font-weight:700}
-.stats .l{font-size:.85rem;color:var(--text3);margin-top:.25rem}
-.c-accent{color:var(--accent)}.c-accent2{color:var(--accent2)}.c-accent3{color:var(--accent3)}
-
-/* Cards grid */
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
-.card{background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:2rem;transition:all .3s}
-.card:hover{background:rgba(9,30,66,0.6);border-color:rgba(0,82,204,0.2);transform:translateY(-2px)}
-.card .icon{font-size:1.75rem;margin-bottom:.75rem}
-.card h3{font-size:1.2rem;font-weight:600;margin-bottom:.5rem}
-.card .sub{font-size:.85rem;color:var(--text3);margin-bottom:.75rem}
-.card .price{font-size:1.75rem;font-weight:700;color:var(--accent);margin-bottom:.5rem}
-.card .range{font-size:.85rem;color:var(--text3);margin-bottom:.75rem}
-.card ul{list-style:none;margin-bottom:1rem}
-.card ul li{font-size:.85rem;color:var(--text2);padding:.3rem 0;display:flex;align-items:center;gap:.5rem}
-.card ul li::before{content:'✓';color:#007252;font-weight:700}
-.card .badge{display:inline-block;padding:.2rem .7rem;background:rgba(0,82,204,0.15);border-radius:100px;font-size:.7rem;font-weight:600;color:var(--accent2);margin-bottom:.75rem}
-.card .buy-btn{display:block;width:100%;padding:.75rem;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:.2s;text-align:center;text-decoration:none}
-.card .buy-btn:hover{background:#0065e6}
-.card.popular{position:relative;border-color:var(--accent);box-shadow:0 0 20px rgba(0,82,204,0.1)}
-
-/* Process */
-.process{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;text-align:center}
-.process .step .n{width:44px;height:44px;border-radius:50%;background:rgba(0,82,204,0.15);border:1px solid rgba(0,82,204,0.2);display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:700;color:var(--accent);margin:0 auto .75rem}
-.process .step h4{font-size:1.05rem;font-weight:600;margin-bottom:.4rem}
-.process .step p{font-size:.85rem;color:var(--text2);line-height:1.6}
-
-/* Table */
-.table-wrap{overflow-x:auto;margin:2rem 0}
-table{width:100%;min-width:700px;border-collapse:collapse}
-th{padding:1rem .75rem;text-align:center;font-size:.9rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.08)}
-th:first-child{text-align:left;font-size:1rem;color:var(--text3)}
-td{padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)}
-td:first-child{text-align:left;font-weight:600;color:var(--accent2);font-size:1rem}
-tr:hover td{background:rgba(0,82,204,0.03)}
-tr:nth-child(even) td{background:rgba(255,255,255,0.01)}
-
-/* Testimonials */
-.t-card{background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.75rem}
-.t-card .stars{color:var(--gold);font-size:1rem;margin-bottom:.75rem}
-.t-card p{font-size:.9rem;color:var(--text2);line-height:1.7;font-style:italic;margin-bottom:1.25rem}
-.t-card .name{font-weight:600;font-size:.85rem}
-.t-card .role-name{font-size:.8rem;color:var(--text3)}
-.t-card .v{color:#007252;font-size:.8rem;font-weight:600;margin-top:.25rem}
-
-/* CTA */
-.cta{text-align:center;padding:5rem 2rem;background:linear-gradient(135deg,rgba(0,82,204,0.05),transparent);border-top:1px solid rgba(255,255,255,0.05)}
-.cta h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;margin-bottom:.75rem}
-.cta p{color:var(--text2);max-width:480px;margin:0 auto 2rem;line-height:1.7;font-size:1rem}
-
-/* Legal */
-footer{padding:3rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
-footer .copy{color:var(--text3);font-size:.85rem;margin-bottom:.75rem}
-footer .tech{color:rgba(255,255,255,0.12);font-size:.75rem;margin-bottom:1rem}
-.legal-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
-.legal-links a{color:var(--text3);text-decoration:none;font-size:.8rem;cursor:pointer;transition:color .2s}
-.legal-links a:hover{color:var(--accent)}
-.legal-content{max-width:800px;margin:1rem auto 0;display:none;text-align:left}
-.legal-content.open{display:block}
-.legal-content .box{background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.5rem;margin-top:.5rem}
-.legal-content .box h4{font-size:1rem;font-weight:600;margin-bottom:.5rem;color:#fff}
-.legal-content .box p{font-size:.85rem;color:var(--text2);line-height:1.7;margin-bottom:.75rem}
-
-/* Language selector */
-.lang-menu{position:relative;display:inline-block}
-.lang-dropdown{position:absolute;top:100%;right:0;margin-top:.25rem;background:var(--bg2);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:.25rem;min-width:130px;display:none;z-index:200}
-.lang-dropdown.show{display:block}
-.lang-dropdown button{display:block;width:100%;padding:.4rem .75rem;background:transparent;border:none;color:var(--text2);font-size:.8rem;cursor:pointer;border-radius:4px;text-align:left;transition:.2s}
-.lang-dropdown button:hover{background:rgba(0,82,204,0.15);color:#fff}
-
-/* Scrollbar */
-::-webkit-scrollbar{width:8px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px}
-
-@media(max-width:768px){
-  nav{padding:1rem}
-  nav .nav-links a.nav-hide{display:none}
-  .stats{gap:2rem;flex-wrap:wrap}
-  .stats .n{font-size:1.5rem}
-}
+@media(max-width:768px){.nav-links a.nav-hide{display:none}}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div id="app"></div>
-
-<script>
-const LANGS = ['es','en','it','de','fr'];
-const L = {
-  es:{nav:['Inicio','Servicios','Planes','Contacto'],hero:{b:'DISPONIBLE',h:'Construimos el <span class="g">futuro digital</span> de tu negocio',p:'Diseñamos y desarrollamos plataformas web de alto impacto que impulsan el crecimiento de tu empresa.'},btn:'Ver Portafolio',btn2:'Nuestros Planes',stats:['Proyectos','Satisfacción','Lighthouse'],s1:{l:'Servicios',t:'Planes de Desarrollo Web',d:'Soluciones profesionales para cada etapa de tu negocio.'},s2:{l:'Metodología',t:'Cómo trabajamos',d:'Un proceso eficiente para llevar tu proyecto a la realidad.'},steps:['Descubrimiento','Diseño','Desarrollo','Despliegue'],stepsD:['Entendemos tu negocio y objetivos','Creamos la experiencia visual','Construimos con tecnologías modernas','Publicamos con SSL y monitoreo'],s3:{l:'Comparativa',t:'Elige el plan ideal',d:'Características detalladas de cada solución.'},rows:[{l:'Tecnología',v:['HTML + CSS','React + Tailwind','React + Three.js','Full Stack']},{l:'Entrega',v:['24-48h','3-5 días','5-10 días','2-4 sem']},{l:'Secciones',v:['1 sección','Hasta 5','Hasta 8','Hasta 12+']},{l:'Revisiones',v:['1','2','3','Ilimitadas']}],s4:{l:'Testimonios',t:'Lo que dicen nuestros clientes'},tCards:[{n:'Pedro Martínez',r:'CEO — Inversiones del Sur',t:'El plan Empresarial transformó nuestro negocio. La velocidad de carga subió un 200%.'},{n:'Dra. Ana García',r:'Directora Médica — Clínica MediSalud',t:'Pasamos de un sitio estático a una plataforma con IA. Ahora los clientes reservan solos.'},{n:'Carlos Ruiz',r:'Propietario — Restaurante La Mesa',t:'El diseño cinematográfico superó todas las expectativas. La experiencia 3D nos diferencia.'}],cta:{t:'¿Listo para tu',t2:'próximo proyecto?',d:'Hablemos y creemos algo increíble juntos.'},legal:['Aviso Legal','Términos del Servicio','Privacidad'],footer:'Optimización de alto impacto • Despliegue Git • SSL HTTPS Activo'},
-  en:{nav:['Home','Services','Plans','Contact'],hero:{b:'AVAILABLE',h:'Building the <span class="g">digital future</span> of your business',p:'We design and develop high-impact web platforms that drive business growth.'},btn:'View Portfolio',btn2:'Our Plans',stats:['Projects','Satisfaction','Lighthouse'],s1:{l:'Services',t:'Web Development Plans',d:'Professional solutions for every stage of your business.'},s2:{l:'Methodology',t:'How we work',d:'An efficient process to bring your project to reality.'},steps:['Discovery','Design','Development','Deploy'],stepsD:['We understand your business','We create the visual experience','We build with modern tech','We publish with SSL & monitoring'],s3:{l:'Comparison',t:'Choose the ideal plan',d:'Detailed features of each solution.'},rows:[{l:'Technology',v:['HTML + CSS','React + Tailwind','React + Three.js','Full Stack']},{l:'Delivery',v:['24-48h','3-5 days','5-10 days','2-4 wks']},{l:'Sections',v:['1 section','Up to 5','Up to 8','Up to 12+']},{l:'Revisions',v:['1','2','3','Unlimited']}],s4:{l:'Testimonials',t:'What our clients say'},tCards:[{n:'Pedro Martínez',r:'CEO — Inversiones del Sur',t:'The Business plan transformed our business. Load speed increased 200%.'},{n:'Dr. Ana García',r:'Medical Director — MediSalud Clinic',t:'We went from a static site to an AI platform. Clients now book on their own.'},{n:'Carlos Ruiz',r:'Owner — La Mesa Restaurant',t:'The cinematic design exceeded all expectations. The 3D experience sets us apart.'}],cta:{t:'Ready for your',t2:'next project?',d:'Let\'s talk and create something amazing together.'},legal:['Legal Notice','Terms of Service','Privacy & Cookies'],footer:'High-Impact Optimization • Git Deployment • Active SSL HTTPS'},
-  it:{nav:['Home','Servizi','Piani','Contatto'],hero:{b:'DISPONIBILE',h:'Costruiamo il <span class="g">futuro digitale</span> della tua azienda',p:'Progettiamo piattaforme web ad alto impatto che guidano la crescita.'},btn:'Vedi Portfolio',btn2:'I Nostri Piani',stats:['Progetti','Soddisfazione','Lighthouse'],s1:{l:'Servizi',t:'Piani di Sviluppo Web',d:'Soluzioni professionali per ogni fase.'},s2:{l:'Metodologia',t:'Come lavoriamo',d:'Un processo efficiente per realizzare il tuo progetto.'},steps:['Scoperta','Design','Sviluppo','Pubblicazione'],stepsD:['Comprendiamo il business','Creiamo l\'esperienza visiva','Costruiamo con tech moderne','Pubbliciamo con SSL'],s3:{l:'Confronto',t:'Scegli il piano ideale',d:'Caratteristiche dettagliate.'},rows:[{l:'Tecnologia',v:['HTML + CSS','React + Tailwind','React + Three.js','Full Stack']},{l:'Consegna',v:['24-48h','3-5 giorni','5-10 giorni','2-4 sett']},{l:'Sezioni',v:['1 sezione','Fino a 5','Fino a 8','Fino a 12+']},{l:'Revisioni',v:['1','2','3','Illimitate']}],s4:{l:'Testimonianze',t:'Cosa dicono i clienti'},tCards:[{n:'Pedro Martínez',r:'CEO — Inversiones del Sur',t:'Il piano Aziendale ha trasformato la nostra attività.'},{n:'Dott.ssa Ana García',r:'Direttrice — Clinica MediSalud',t:'Da sito statico a piattaforma IA. I clienti prenotano da soli.'},{n:'Carlos Ruiz',r:'Proprietario — Ristorante La Mesa',t:'Il design cinematografico ha superato le aspettative.'}],cta:{t:'Pronto per il tuo',t2:'prossimo progetto?',d:'Parliamone e creiamo qualcosa di straordinario.'},legal:['Avviso Legale','Termini di Servizio','Privacy'],footer:'Ottimizzazione ad Alto Impatto • Deploy Git • SSL HTTPS Attivo'},
-  de:{nav:['Start','Services','Pakete','Kontakt'],hero:{b:'VERFÜGBAR',h:'Wir bauen die <span class="g">digitale Zukunft</span> Ihres Unternehmens',p:'Wir entwickeln Web-Plattformen mit hoher Wirkung.'},btn:'Zum Portfolio',btn2:'Unsere Pakete',stats:['Projekte','Zufriedenheit','Lighthouse'],s1:{l:'Services',t:'Webentwicklung Pakete',d:'Professionelle Lösungen.'},s2:{l:'Methodik',t:'Wie wir arbeiten',d:'Ein effizienter Prozess.'},steps:['Entdeckung','Design','Entwicklung','Veröffentlichung'],stepsD:['Wir verstehen Ihr Geschäft','Wir erstellen das visuelle Erlebnis','Wir bauen mit moderner Technik','Wir veröffentlichen mit SSL'],s3:{l:'Vergleich',t:'Wählen Sie den idealen Plan',d:'Detaillierte Funktionen.'},rows:[{l:'Technologie',v:['HTML + CSS','React + Tailwind','React + Three.js','Full Stack']},{l:'Lieferung',v:['24-48h','3-5 Tage','5-10 Tage','2-4 Wo']},{l:'Abschnitte',v:['1 Abschnitt','Bis zu 5','Bis zu 8','Bis zu 12+']},{l:'Revisionen',v:['1','2','3','Unbegrenzt']}],s4:{l:'Testimonien',t:'Was unsere Kunden sagen'},tCards:[{n:'Pedro Martínez',r:'CEO — Inversiones del Sur',t:'Der Geschäftsplan hat unser Geschäft transformiert.'},{n:'Dr. Ana García',r:'Med. Direktorin — MediSalud',t:'Von statischer Seite zu KI-Plattform.'},{n:'Carlos Ruiz',r:'Inhaber — Restaurant La Mesa',t:'Das kinematografische Design übertraf alle Erwartungen.'}],cta:{t:'Bereit für Ihr',t2:'nächstes Projekt?',d:'Reden wir und schaffen etwas Großartiges.'},legal:['Impressum','AGB','Datenschutz'],footer:'Hochwirkungs-Optimierung • Git • SSL HTTPS Aktiv'},
-  fr:{nav:['Accueil','Services','Forfaits','Contact'],hero:{b:'DISPONIBLE',h:'Construisons le <span class="g">futur numérique</span> de votre entreprise',p:'Nous concevons des plateformes web à fort impact.'},btn:'Voir le Portfolio',btn2:'Nos Forfaits',stats:['Projets','Satisfaction','Lighthouse'],s1:{l:'Services',t:'Forfaits de Développement Web',d:'Solutions professionnelles.'},s2:{l:'Méthodologie',t:'Comment nous travaillons',d:'Un processus efficace.'},steps:['Découverte','Design','Développement','Publication'],stepsD:['Nous comprenons votre entreprise','Nous créons l\'expérience visuelle','Nous construisons avec des technologies modernes','Nous publions avec SSL'],s3:{l:'Comparaison',t:'Choisissez le forfait idéal',d:'Caractéristiques détaillées.'},rows:[{l:'Technologie',v:['HTML + CSS','React + Tailwind','React + Three.js','Full Stack']},{l:'Livraison',v:['24-48h','3-5 jours','5-10 jours','2-4 sem']},{l:'Sections',v:['1 section','Jusqu\'à 5','Jusqu\'à 8','Jusqu\'à 12+']},{l:'Révisions',v:['1','2','3','Illimitées']}],s4:{l:'Témoignages',t:'Ce que disent nos clients'},tCards:[{n:'Pedro Martínez',r:'CEO — Inversiones del Sur',t:'Le plan Entreprise a transformé notre activité.'},{n:'Dr. Ana García',r:'Directrice Médicale — MediSalud',t:'D\'un site statique à une plateforme IA.'},{n:'Carlos Ruiz',r:'Propriétaire — Restaurant La Mesa',t:'Le design cinématographique a dépassé les attentes.'}],cta:{t:'Prêt pour votre',t2:'prochain projet?',d:'Parlons-en et créons ensemble.'},legal:['Mentions Légales','CGV','Confidentialité'],footer:'Optimisation à Fort Impact • Déploiement Git • SSL HTTPS Actif'}
-};
-
-const t = () => L[lang] || L.es;
-let lang = 'es', showLang = false, legalOpen = null;
-
-function render(){
-  const l = t();
-  document.getElementById('app').innerHTML = `
 <nav>
   <div class="logo">AlcaTech<span>-</span>WebDesign</div>
   <div class="nav-links">
-    <a class="nav-hide">${l.nav[0]}</a>
-    <a class="nav-hide">${l.nav[1]}</a>
-    <a class="nav-hide">${l.nav[2]}</a>
-    <div class="lang-menu">
-      <button class="lang-btn" onclick="toggleLang()">🌐 ${lang.toUpperCase()}</button>
-      <div class="lang-dropdown${showLang?' show':''}">
-        ${LANGS.map(c => `<button onclick="setLang('${c}')">${c==='es'?'🇪🇸':c==='en'?'🇬🇧':c==='it'?'🇮🇹':c==='de'?'🇩🇪':'🇫🇷'} ${L[c].nav[0].split(' ')[0]}</button>`).join('')}
-      </div>
-    </div>
-    <button class="btn" style="padding:.6rem 1.2rem;font-size:.85rem" onclick="scrollTo('cta')">${l.nav[3]}</button>
+    <a class="nav-hide">Inicio</a>
+    <a class="nav-hide">Servicios</a>
+    <a class="nav-hide">Planes</a>
+    <a href="https://wa.me/393801028239" style="background:var(--accent);color:#fff;padding:.6rem 1.2rem;border-radius:6px;font-size:.85rem;font-weight:600">Contacto</a>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-bg"></div><div class="hero-glow"></div>
-  <div class="hero-badge"><span>✦</span> ${l.hero.b}</div>
-  <h1>${l.hero.h}</h1>
-  <p>${l.hero.p}</p>
-  <div class="btns">
-    <button class="btn" onclick="scrollTo('plans')">${l.btn} →</button>
-    <button class="btn-o" onclick="scrollTo('compare')">${l.btn2}</button>
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:rgba(0,82,204,0.1);border:1px solid rgba(0,82,204,0.2);border-radius:100px;font-size:.8rem;color:var(--accent2);margin-bottom:2rem">✦ Ingeniería Digital de Autor</div>
+  <h1 style="font-size:clamp(2.5rem,7vw,4.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:1.25rem;max-width:800px">Construimos el <span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">futuro digital</span> de tu negocio</h1>
+  <p style="font-size:1.15rem;color:var(--text2);max-width:520px;line-height:1.7;margin-bottom:2rem">Diseñamos y desarrollamos plataformas web de alto impacto que impulsan el crecimiento de tu empresa.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center">
+    <a href="#plans" style="background:var(--accent);color:#fff;padding:.9rem 1.75rem;border-radius:8px;font-size:.95rem;font-weight:600;display:inline-flex;align-items:center;gap:.5rem">Ver Portafolio →</a>
+    <a href="#compare" style="background:transparent;color:var(--text2);border:1px solid rgba(255,255,255,0.1);padding:.9rem 1.75rem;border-radius:8px;font-size:.95rem;font-weight:500;display:inline-flex;align-items:center;gap:.5rem">Nuestros Planes</a>
   </div>
-  <div class="stats">
-    <div><div class="n"><span class="c-accent">30+</span></div><div class="l">${l.stats[0]}</div></div>
-    <div><div class="n"><span class="c-accent2">100%</span></div><div class="l">${l.stats[1]}</div></div>
-    <div><div class="n"><span class="c-accent3">98</span></div><div class="l">${l.stats[2]}</div></div>
+  <div style="display:flex;justify-content:center;gap:3.5rem;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,0.05)">
+    <div style="text-align:center"><div style="font-size:2rem;font-weight:700"><span style="color:var(--accent)">30+</span></div><div style="font-size:.85rem;color:var(--text3);margin-top:.25rem">Proyectos</div></div>
+    <div style="text-align:center"><div style="font-size:2rem;font-weight:700"><span style="color:var(--accent2)">100%</span></div><div style="font-size:.85rem;color:var(--text3);margin-top:.25rem">Satisfacción</div></div>
+    <div style="text-align:center"><div style="font-size:2rem;font-weight:700"><span style="color:var(--accent3)">98</span></div><div style="font-size:.85rem;color:var(--text3);margin-top:.25rem">Lighthouse</div></div>
   </div>
 </section>
 
-<section id="plans">
-  <div class="inner">
-    <div class="label">✦ ${l.s1.l}</div>
-    <h2 class="section-title">${l.s1.t}</h2>
-    <p class="desc">${l.s1.d}</p>
-    <div class="grid2">
-      ${[
-        {t:'Landing Simple',s:'Presencia Profesional',p:'$200+',r:'$200 — $500',b:'',f:['Diseño responsive','SEO + Analytics','SSL HTTPS','1 revisión'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},
-        {t:'Landing Empresarial',s:'Múltiples Secciones',p:'$500+',r:'$500 — $1,200',b:l.nav[0]==='Inicio'?'RECOMENDADO':'RECOMMENDED',f:['React + Tailwind + Motion','Formulario inteligente','Panel admin básico','Core Web Vitals'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},
-        {t:'Landing Cinematográfico',s:'Experiencia Inmersiva',p:'$1,200+',r:'$1,200 — $2,500',b:'',f:['3D / WebGL','Parallax cinematográfico','Video background','Micro-interacciones'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},
-        {t:'Portal SaaS',s:'Plataforma Autónoma',p:'$2,500+',r:'$2,500 — $6,000',b:'',f:['Base de datos + API','Chat con IA','Panel admin completo','Automatizaciones'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}
-      ].map((pl,i) => `<div class="card${pl.b?' popular':''}">
-        ${pl.b ? `<div class="badge">${pl.b}</div>` : ''}
-        <div class="icon">${['🚀','⚡','🎬','🧠'][i]}</div>
-        <h3>${pl.t}</h3>
-        <div class="sub">${pl.s}</div>
-        <div class="price">${pl.p}</div>
-        <div class="range">${pl.r}</div>
-        <ul>${pl.f.map(f => `<li>${f}</li>`).join('')}</ul>
-        <a href="${pl.u}" target="_blank" class="buy-btn">Contratar →</a>
-      </div>`).join('')}
+<section id="plans" style="padding:5rem 2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">✦ Servicios</div>
+    <h2 style="font-size:clamp(2rem,4vw,2.75rem);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:1rem">Planes de Desarrollo Web</h2>
+    <p style="font-size:1.05rem;color:var(--text2);max-width:600px;line-height:1.7;margin-bottom:2.5rem">Soluciones profesionales para cada etapa de tu negocio, desde landing pages hasta plataformas con inteligencia artificial.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem">
+
+      <div style="background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:2rem;transition:all .3s">
+        <div style="font-size:1.75rem;margin-bottom:.75rem">🚀</div>
+        <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:.5rem">Landing Simple</h3>
+        <div style="font-size:.85rem;color:var(--text3);margin-bottom:.75rem">Presencia Profesional</div>
+        <div style="font-size:1.75rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">$200+</div>
+        <div style="font-size:.85rem;color:var(--text3);margin-bottom:.75rem">$200 — $500</div>
+        <ul style="list-style:none;margin-bottom:1rem;font-size:.85rem;color:var(--text2)">
+          <li style="padding:.3rem 0">✓ Diseño responsive completo</li>
+          <li style="padding:.3rem 0">✓ Animaciones scroll y hover</li>
+          <li style="padding:.3rem 0">✓ SEO on-page + Google Analytics</li>
+          <li style="padding:.3rem 0">✓ SSL HTTPS incluido</li>
+          <li style="padding:.3rem 0">✓ 1 revisión de diseño</li>
+        </ul>
+        <a href="https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01" target="_blank" style="display:block;width:100%;padding:.75rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.9rem;font-weight:600;text-align:center">Contratar →</a>
+      </div>
+
+      <div style="background:rgba(9,30,66,0.4);border:1px solid var(--accent);border-radius:12px;padding:2rem;transition:all .3s;box-shadow:0 0 20px rgba(0,82,204,0.1)">
+        <div style="display:inline-block;padding:.2rem .7rem;background:rgba(0,82,204,0.15);border-radius:100px;font-size:.7rem;font-weight:600;color:var(--accent2);margin-bottom:.75rem">RECOMENDADO</div>
+        <div style="font-size:1.75rem;margin-bottom:.75rem">⚡</div>
+        <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:.5rem">Landing Empresarial</h3>
+        <div style="font-size:.85rem;color:var(--text3);margin-bottom:.75rem">Múltiples Secciones</div>
+        <div style="font-size:1.75rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">$500+</div>
+        <div style="font-size:.85rem;color:var(--text3);margin-bottom:.75rem">$500 — $1,200</div>
+        <ul style="list-style:none;margin-bottom:1rem;font-size:.85rem;color:var(--text2)">
+          <li style="padding:.3rem 0">✓ React + Tailwind + Motion</li>
+          <li style="padding:.3rem 0">✓ Hasta 5 secciones personalizadas</li>
+          <li style="padding:.3rem 0">✓ Formulario inteligente con lógica</li>
+          <li style="padding:.3rem 0">✓ Panel de administración básico</li>
+          <li style="padding:.3rem 0">✓ 2 revisiones de diseño</li>
+        </ul>
+        <a href="https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03" target="_blank" style="display:block;width:100%;padding:.75rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.9rem;font-weight:600;text-align:center">Contratar →</a>
+      </div>
+
+      <div style="background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:2rem;transition:all .3s">
+        <div style="font-size:1.75rem;margin-bottom:.75rem">🎬</div>
+        <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:.5rem">Landing Cinematográfico</h3>
+        <div style="font-size:.85rem;color:var(--text3);margin-bottom:.75rem">Experiencia Inmersiva</div>
+        <div style="font-size:1.75rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">$1,200+</div>
+        <div style="font-size:.85rem;color:var(--text3);margin-bottom:.75rem">$1,200 — $2,500</div>
+        <ul style="list-style:none;margin-bottom:1rem;font-size:.85rem;color:var(--text2)">
+          <li style="padding:.3rem 0">✓ React + Three.js + WebGL</li>
+          <li style="padding:.3rem 0">✓ Animaciones 3D, WebGL y Parallax</li>
+          <li style="padding:.3rem 0">✓ Video background interactivo</li>
+          <li style="padding:.3rem 0">✓ Micro-interacciones premium</li>
+          <li style="padding:.3rem 0">✓ 3 revisiones de diseño</li>
+        </ul>
+        <a href="https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04" target="_blank" style="display:block;width:100%;padding:.75rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.9rem;font-weight:600;text-align:center">Contratar →</a>
+      </div>
+
+      <div style="background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:2rem;transition:all .3s">
+        <div style="font-size:1.75rem;margin-bottom:.75rem">🧠</div>
+        <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:.5rem">Portal Interactivo SaaS</h3>
+        <div style="font-size:.85rem;color:var(--text3);margin-bottom:.75rem">Plataforma Autónoma</div>
+        <div style="font-size:1.75rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">$2,500+</div>
+        <div style="font-size:.85rem;color:var(--text3);margin-bottom:.75rem">$2,500 — $6,000</div>
+        <ul style="list-style:none;margin-bottom:1rem;font-size:.85rem;color:var(--text2)">
+          <li style="padding:.3rem 0">✓ Full Stack (React + Node)</li>
+          <li style="padding:.3rem 0">✓ Base de datos + API REST</li>
+          <li style="padding:.3rem 0">✓ Chat con IA inteligente</li>
+          <li style="padding:.3rem 0">✓ Panel de administración completo</li>
+          <li style="padding:.3rem 0">✓ Automatizaciones a medida</li>
+        </ul>
+        <a href="https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05" target="_blank" style="display:block;width:100%;padding:.75rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.9rem;font-weight:600;text-align:center">Contratar →</a>
+      </div>
+
     </div>
   </div>
 </section>
 
-<section style="background:rgba(9,30,66,0.15)">
-  <div class="inner">
-    <div class="label">✦ ${l.s2.l}</div>
-    <h2 class="section-title">${l.s2.t}</h2>
-    <p class="desc">${l.s2.d}</p>
-    <div class="process">
-      ${[0,1,2,3].map(i => `<div class="step">
-        <div class="n">${i+1}</div>
-        <h4>${l.steps[i]}</h4>
-        <p>${l.stepsD[i]}</p>
-      </div>`).join('')}
+<section style="padding:5rem 2rem;background:rgba(9,30,66,0.15)">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">✦ Metodología</div>
+    <h2 style="font-size:clamp(2rem,4vw,2.75rem);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:1rem">Cómo trabajamos</h2>
+    <p style="font-size:1.05rem;color:var(--text2);max-width:600px;line-height:1.7;margin-bottom:2.5rem">Un proceso transparente y eficiente para llevar tu proyecto del concepto a la realidad.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;text-align:center">
+      <div><div style="width:44px;height:44px;border-radius:50%;background:rgba(0,82,204,0.15);border:1px solid rgba(0,82,204,0.2);display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:700;color:var(--accent);margin:0 auto .75rem">1</div><h4 style="font-size:1.05rem;font-weight:600;margin-bottom:.4rem">Descubrimiento</h4><p style="font-size:.85rem;color:var(--text2);line-height:1.6">Entendemos tu negocio, tus objetivos y tu audiencia para definir la estrategia digital.</p></div>
+      <div><div style="width:44px;height:44px;border-radius:50%;background:rgba(0,82,204,0.15);border:1px solid rgba(0,82,204,0.2);display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:700;color:var(--accent);margin:0 auto .75rem">2</div><h4 style="font-size:1.05rem;font-weight:600;margin-bottom:.4rem">Diseño</h4><p style="font-size:.85rem;color:var(--text2);line-height:1.6">Creamos la experiencia visual y de usuario con un enfoque en conversión y usabilidad.</p></div>
+      <div><div style="width:44px;height:44px;border-radius:50%;background:rgba(0,82,204,0.15);border:1px solid rgba(0,82,204,0.2);display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:700;color:var(--accent);margin:0 auto .75rem">3</div><h4 style="font-size:1.05rem;font-weight:600;margin-bottom:.4rem">Desarrollo</h4><p style="font-size:.85rem;color:var(--text2);line-height:1.6">Construimos con tecnologías modernas, código limpio y optimización de rendimiento.</p></div>
+      <div><div style="width:44px;height:44px;border-radius:50%;background:rgba(0,82,204,0.15);border:1px solid rgba(0,82,204,0.2);display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:700;color:var(--accent);margin:0 auto .75rem">4</div><h4 style="font-size:1.05rem;font-weight:600;margin-bottom:.4rem">Despliegue</h4><p style="font-size:.85rem;color:var(--text2);line-height:1.6">Publicamos tu sitio con SSL, CDN y monitoreo continuo para garantizar disponibilidad.</p></div>
     </div>
   </div>
 </section>
 
-<section id="compare">
-  <div class="inner">
-    <div class="label">✦ ${l.s3.l}</div>
-    <h2 class="section-title">${l.s3.t}</h2>
-    <p class="desc">${l.s3.d}</p>
-    <div class="table-wrap">
-      <table>
+<section id="compare" style="padding:5rem 2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">✦ Comparativa</div>
+    <h2 style="font-size:clamp(2rem,4vw,2.75rem);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:1rem">Elige el plan ideal</h2>
+    <p style="font-size:1.05rem;color:var(--text2);max-width:600px;line-height:1.7;margin-bottom:2.5rem">Características detalladas de cada solución para que tomes la mejor decisión.</p>
+    <div style="overflow-x:auto">
+      <table style="width:100%;min-width:700px;border-collapse:collapse">
         <thead><tr>
-          <th>${l.nav[0]==='Inicio'?'Características':'Features'}</th>
-          <th>Landing Simple</th>
-          <th style="color:var(--accent)">Landing Empresarial</th>
-          <th>Landing Cinematográfico</th>
-          <th>Portal SaaS</th>
+          <th style="padding:1rem .75rem;text-align:left;font-size:1rem;color:var(--text3);border-bottom:1px solid rgba(255,255,255,0.08)">Características</th>
+          <th style="padding:1rem .75rem;text-align:center;font-size:.9rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.08)">Landing Simple</th>
+          <th style="padding:1rem .75rem;text-align:center;font-size:.9rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.08);color:var(--accent)">Landing Empresarial</th>
+          <th style="padding:1rem .75rem;text-align:center;font-size:.9rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.08)">Landing Cinematográfico</th>
+          <th style="padding:1rem .75rem;text-align:center;font-size:.9rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.08)">Portal SaaS</th>
         </tr></thead>
         <tbody>
-          ${l.rows.map(r => `<tr>
-            <td>${r.l}</td>
-            ${r.v.map((v,j) => `<td${j===1?' style="color:var(--accent)"':''}>${v}</td>`).join('')}
-          </tr>`).join('')}
+          <tr><td style="padding:1rem .75rem;text-align:left;font-weight:600;color:var(--accent2);font-size:1rem;border-bottom:1px solid rgba(255,255,255,0.04)">Tecnología</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">HTML + CSS</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--accent);border-bottom:1px solid rgba(255,255,255,0.04)">React + Tailwind</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">React + Three.js + WebGL</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">Full Stack (React/Node)</td></tr>
+          <tr><td style="padding:1rem .75rem;text-align:left;font-weight:600;color:var(--accent2);font-size:1rem;border-bottom:1px solid rgba(255,255,255,0.04)">Entrega</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">24-48h</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--accent);border-bottom:1px solid rgba(255,255,255,0.04)">3-5 días</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">5-10 días</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">2-4 semanas</td></tr>
+          <tr><td style="padding:1rem .75rem;text-align:left;font-weight:600;color:var(--accent2);font-size:1rem;border-bottom:1px solid rgba(255,255,255,0.04)">Secciones</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">1 sección</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--accent);border-bottom:1px solid rgba(255,255,255,0.04)">Hasta 5</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">Hasta 8</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">Hasta 12+</td></tr>
+          <tr><td style="padding:1rem .75rem;text-align:left;font-weight:600;color:var(--accent2);font-size:1rem;border-bottom:1px solid rgba(255,255,255,0.04)">Revisiones</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">1</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--accent);border-bottom:1px solid rgba(255,255,255,0.04)">2</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">3</td><td style="padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)">Ilimitadas</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="inner">
-    <div class="label">✦ ${l.s4.l}</div>
-    <h2 class="section-title">${l.s4.t}</h2>
-    <div class="grid3" style="margin-top:2rem">
-      ${l.tCards.map(c => `<div class="t-card">
-        <div class="stars">★★★★★</div>
-        <p>"${c.t}"</p>
-        <div class="name">${c.n}</div>
-        <div class="role-name">${c.r}</div>
-        <div class="v">✓ Cliente Verificado</div>
-      </div>`).join('')}
+<section style="padding:5rem 2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">✦ Testimonios</div>
+    <h2 style="font-size:clamp(2rem,4vw,2.75rem);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:2.5rem">Lo que dicen nuestros clientes</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem">
+      <div style="background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.75rem">
+        <div style="color:var(--gold);font-size:1rem;margin-bottom:.75rem">★★★★★</div>
+        <p style="font-size:.9rem;color:var(--text2);line-height:1.7;font-style:italic;margin-bottom:1.25rem">"El plan Empresarial transformó nuestro negocio. La velocidad de carga subió un 200%."</p>
+        <div style="font-weight:600;font-size:.85rem">Pedro Martínez</div>
+        <div style="font-size:.8rem;color:var(--text3)">CEO — Inversiones del Sur</div>
+        <div style="color:#007252;font-size:.8rem;font-weight:600;margin-top:.25rem">✓ Cliente Verificado</div>
+      </div>
+      <div style="background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.75rem">
+        <div style="color:var(--gold);font-size:1rem;margin-bottom:.75rem">★★★★★</div>
+        <p style="font-size:.9rem;color:var(--text2);line-height:1.7;font-style:italic;margin-bottom:1.25rem">"Pasamos de un sitio estático a una plataforma con IA. Ahora los clientes reservan solos."</p>
+        <div style="font-weight:600;font-size:.85rem">Dra. Ana García</div>
+        <div style="font-size:.8rem;color:var(--text3)">Directora Médica — Clínica MediSalud</div>
+        <div style="color:#007252;font-size:.8rem;font-weight:600;margin-top:.25rem">✓ Cliente Verificado</div>
+      </div>
+      <div style="background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.75rem">
+        <div style="color:var(--gold);font-size:1rem;margin-bottom:.75rem">★★★★★</div>
+        <p style="font-size:.9rem;color:var(--text2);line-height:1.7;font-style:italic;margin-bottom:1.25rem">"El diseño cinematográfico superó todas las expectativas. La experiencia 3D nos diferencia."</p>
+        <div style="font-weight:600;font-size:.85rem">Carlos Ruiz</div>
+        <div style="font-size:.8rem;color:var(--text3)">Propietario — Restaurante La Mesa</div>
+        <div style="color:#007252;font-size:.8rem;font-weight:600;margin-top:.25rem">✓ Cliente Verificado</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="cta" id="cta">
-  <h2>${l.cta.t} <span style="color:var(--accent)">${l.cta.t2}</span></h2>
-  <p>${l.cta.d}</p>
-  <div class="btns">
-    <a href="https://wa.me/393801028239" target="_blank" class="btn">WhatsApp →</a>
-    <a href="mailto:alcatechwebdesign@gmail.com" class="btn-o">Email</a>
-    <a href="https://www.instagram.com/alcatechwebdesign" target="_blank" class="btn-o">Instagram</a>
-    <a href="https://www.facebook.com/profile.php?id=61591897798944" target="_blank" class="btn-o">Facebook</a>
+<section style="padding:5rem 2rem;text-align:center;background:linear-gradient(135deg,rgba(0,82,204,0.05),transparent);border-top:1px solid rgba(255,255,255,0.05)">
+  <h2 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;margin-bottom:.75rem">¿Listo para tu <span style="color:var(--accent)">próximo proyecto</span>?</h2>
+  <p style="color:var(--text2);max-width:480px;margin:0 auto 2rem;line-height:1.7;font-size:1rem">Hablemos y creemos algo increíble juntos. Sin compromiso.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center">
+    <a href="https://wa.me/393801028239" target="_blank" style="background:var(--accent);color:#fff;padding:.9rem 1.75rem;border-radius:8px;font-size:.95rem;font-weight:600;display:inline-flex;align-items:center;gap:.5rem">WhatsApp →</a>
+    <a href="mailto:alcatechwebdesign@gmail.com" style="background:transparent;color:var(--text2);border:1px solid rgba(255,255,255,0.1);padding:.9rem 1.75rem;border-radius:8px;font-size:.95rem;font-weight:500;display:inline-flex;align-items:center;gap:.5rem">Email</a>
+    <a href="https://www.instagram.com/alcatechwebdesign" target="_blank" style="background:transparent;color:var(--text2);border:1px solid rgba(255,255,255,0.1);padding:.9rem 1.75rem;border-radius:8px;font-size:.95rem;font-weight:500;display:inline-flex;align-items:center;gap:.5rem">Instagram</a>
+    <a href="https://www.facebook.com/profile.php?id=61591897798944" target="_blank" style="background:transparent;color:var(--text2);border:1px solid rgba(255,255,255,0.1);padding:.9rem 1.75rem;border-radius:8px;font-size:.95rem;font-weight:500;display:inline-flex;align-items:center;gap:.5rem">Facebook</a>
   </div>
 </section>
 
-<footer>
-  <div class="copy">© 2026 AlcaTech-WebDesign</div>
-  <div class="tech">${l.footer}</div>
-  <div class="legal-links">
-    ${l.legal.map((link,i) => `<a onclick="toggleLegal(${i})">${link}</a>`).join('')}
-  </div>
-  <div id="legal-content" class="legal-content">
-    <div class="box" id="legal-box"></div>
-  </div>
-</footer>`;
-}
+<footer style="padding:3rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,0.05)">
+  <p style="color:var(--text3);font-size:.85rem;margin-bottom:.75rem">© 2026 AlcaTech-WebDesign</p>
+  <p style="color:rgba(255,255,255,0.12);font-size:.75rem;margin-bottom:1rem">Optimización de alto impacto • Despliegue Git • SSL HTTPS Activo</p>
+</footer>
 
-function toggleLang(){showLang=!showLang;render()}
-function setLang(l){lang=l;showLang=false;render()}
-function scrollTo(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
-
-const legalTexts = {
-  es:[
-    {t:'Aviso Legal y Propiedad Intelectual',p:['Este sitio web es operado por AlcaTech-WebDesign. Toda la información está sujeta a nuestros términos.','Todo el diseño visual, código fuente, logotipos y textos son propiedad exclusiva de AlcaTech-WebDesign.']},
-    {t:'Términos del Servicio y Derechos del Cliente',p:['Garantizamos código limpio y libre de vulnerabilidades.','El cliente adquiere propiedad del sitio tras pago completo, exceptuando librerías de terceros.','Cada plan incluye revisiones específicas. Modificaciones extra se cotizan como mantenimiento.']},
-    {t:'Política de Privacidad y Cookies',p:['Cumplimos con RGPD. Los datos se usan solo para responder consultas. No compartimos con terceros.','Usamos cookies necesarias. Si usamos analytics, se solicitará consentimiento explícito.']}
-  ],
-  en:[
-    {t:'Legal Notice and Intellectual Property',p:['This website is operated by AlcaTech-WebDesign. All information is subject to our terms.','All visual design, source code, logos and texts are exclusive property of AlcaTech-WebDesign.']},
-    {t:'Terms of Service and Client Rights',p:['We guarantee clean, vulnerability-free code.','Client acquires ownership after full payment, excluding third-party libraries.','Each plan includes specific revisions. Extra modifications are quoted as maintenance.']},
-    {t:'Privacy and Cookies Policy',p:['We comply with GDPR. Data is used only to respond to inquiries. We do not share with third parties.','We use necessary cookies. If analytics are used, explicit consent will be requested.']}
-  ]
-};
-
-function toggleLegal(i){
-  const content = document.getElementById('legal-content');
-  const box = document.getElementById('legal-box');
-  const texts = legalTexts[lang] || legalTexts.es;
-  if(content.classList.contains('open') && legalOpen === i){
-    content.classList.remove('open');
-    legalOpen = null;
-  } else {
-    const t = texts[i];
-    box.innerHTML = `<h4>${t.t}</h4>${t.p.map(p => `<p>${p}</p>`).join('')}`;
-    content.classList.add('open');
-    legalOpen = i;
-  }
-}
-
-// Close lang dropdown on click outside
-document.addEventListener('click', (e) => {
-  if(!e.target.closest('.lang-menu')){showLang=false;render()}
-});
-
-render();
-</script>
 </body>
 </html>
