@@ -419,65 +419,6 @@ function setLang(l){
   });
 
 render();
-}
-
-// Tab click handlers
-document.querySelectorAll('.nav-links a[data-tab]').forEach(a=>{
-  a.addEventListener('click',()=>switchTab(a.dataset.tab));
-});
-
-// Close lang dropdown on outside click
-document.addEventListener('click',e=>{
-  if(!e.target.closest('.lang-btn')){showLang=false;document.getElementById('lang-dd').classList.remove('show')}
-});
-
-
-  // Legal text data
-  const LEGAL_TEXTS = {
-    es:[
-      {t:'Aviso Legal y Propiedad Intelectual',p:['Este sitio web (alcatech-webdesign.netlify.app) es operado por AlcaTech-WebDesign. Toda la información, herramientas y servicios disponibles están condicionados a la aceptación de nuestros términos.','Todo el diseño visual, código fuente, logotipos, textos, gráficos y animaciones presentados en esta web son propiedad exclusiva de AlcaTech-WebDesign o de sus respectivos licenciantes. Queda prohibida su reproducción, distribución o modificación sin autorización previa por escrito.']},
-      {t:'Términos del Servicio y Derechos del Cliente',p:['Al contratar cualquiera de nuestros planes, garantizamos la entrega de un código limpio, optimizado y libre de vulnerabilidades conocidas en el momento del despliegue.','Una vez finalizado el pago total acordado según el plan seleccionado, el cliente adquiere la propiedad y los derechos de uso del sitio web desarrollado, exceptuando las librerías de terceros bajo licencias de software libre (open-source) o de pago utilizadas en el proyecto.','Cada plan incluye un número específico de rondas de revisión técnica y de diseño antes del lanzamiento final. Las modificaciones solicitadas fuera de estas rondas o tras la publicación definitiva del sitio se cotizarán como un servicio de mantenimiento adicional.']},
-      {t:'Política de Privacidad y Cookies (RGPD)',p:['En cumplimiento con el Reglamento General de Protección de Datos (RGPD), los datos personales recopilados a través de nuestros formularios se utilizarán única y exclusivamente para responder a tu consulta o gestionar tu cotización. No vendemos, alquilamos ni compartimos tus datos con terceros.','Utilizamos cookies estrictamente necesarias para el correcto funcionamiento técnico de la plataforma. Si en el futuro utilizamos herramientas de análisis (como Google Analytics) o scripts de terceros, se solicitará tu consentimiento explícito antes de procesar cualquier dato de navegación o IP.']}
-    ],
-    en:[
-      {t:'Legal Notice and Intellectual Property',p:['This website (alcatech-webdesign.netlify.app) is operated by AlcaTech-WebDesign. All information, tools and services are subject to our terms.','All visual design, source code, logos, texts, graphics and animations are the exclusive property of AlcaTech-WebDesign or its licensors. Reproduction, distribution or modification without written authorization is prohibited.']},
-      {t:'Terms of Service and Client Rights',p:['When contracting any of our plans, we guarantee clean, optimized code free of known vulnerabilities at deployment.','Upon full payment according to the selected plan, the client acquires ownership and usage rights of the developed website, excluding third-party libraries under open-source or paid licenses.','Each plan includes a specific number of design and technical revision rounds. Modifications outside these rounds or after publication will be quoted as additional maintenance.']},
-      {t:'Privacy and Cookies Policy (GDPR)',p:['In compliance with GDPR, personal data collected through our forms will be used exclusively to respond to your inquiry or manage your quote. We do not sell, rent or share your data with third parties.','We use strictly necessary cookies for the technical operation of the platform. If analytics tools or third-party scripts are used in the future, explicit consent will be requested.']}
-    ],
-    it:[
-      {t:'Avviso Legale e Proprietà Intellettuale',p:['Questo sito web è gestito da AlcaTech-WebDesign. Tutte le informazioni e servizi sono soggetti ai nostri termini.','Tutto il design, codice sorgente, loghi e testi sono di proprietà esclusiva di AlcaTech-WebDesign.']},
-      {t:'Termini di Servizio e Diritti del Cliente',p:['Garantiamo codice pulito e ottimizzato.','Il cliente acquisisce la proprietà del sito dopo il pagamento completo.','Ogni piano include revisioni specifiche. Modifiche extra vengono quotate come manutenzione.']},
-      {t:'Politica sulla Privacy e Cookie (GDPR)',p:['I dati personali sono usati solo per rispondere alla tua richiesta.','Utilizziamo cookie necessari per il funzionamento tecnico.']}
-    ],
-    de:[
-      {t:'Impressum und Geistiges Eigentum',p:['Diese Website wird von AlcaTech-WebDesign betrieben.','Das gesamte Design, der Quellcode und die Logos sind Eigentum von AlcaTech-WebDesign.']},
-      {t:'Dienstleistungsbedingungen',p:['Wir garantieren sauberen Code.','Der Kunde erwirbt Eigentum nach vollständiger Zahlung.','Jeder Plan beinhaltet bestimmte Überarbeitungen.']},
-      {t:'Datenschutz- und Cookie-Richtlinie',p:['Personenbezogene Daten werden nur zur Beantwortung Ihrer Anfrage verwendet.','Wir verwenden notwendige Cookies für den technischen Betrieb.']}
-    ],
-    fr:[
-      {t:'Mentions Légales et Propriété Intellectuelle',p:['Ce site web est exploité par AlcaTech-WebDesign.','Tout le design, code source, logos et textes sont la propriété exclusive d'AlcaTech-WebDesign.']},
-      {t:'Conditions de Service et Droits du Client',p:['Nous garantissons un code propre et optimisé.','Le client acquiert la propriété du site après paiement complet.','Chaque forfait inclut des révisions spécifiques.']},
-      {t:'Politique de Confidentialité et Cookies',p:['Les données personnelles sont utilisées uniquement pour répondre à votre demande.','Nous utilisons des cookies nécessaires au fonctionnement technique.']}
-    ]
-  };
-
-  function openLegal(i){
-    const texts = LEGAL_TEXTS[lang] || LEGAL_TEXTS.es;
-    document.getElementById('legal-title').textContent = texts[i].t;
-    document.getElementById('legal-body').innerHTML = texts[i].p.map(p => '<p style="margin-bottom:.75rem">'+p+'</p>').join('');
-    document.getElementById('legal-modal').style.display = 'flex';
-  }
-
-  function closeLegal(){
-    document.getElementById('legal-modal').style.display = 'none';
-  }
-
-  // Close legal modal on outside click
-  document.getElementById('legal-modal').addEventListener('click', function(e){
-    if(e.target === this) closeLegal();
-  });
-
-render();
 </script>
 </body>
 </html>
