@@ -422,6 +422,11 @@ function setLang(l){
     if(e.target === this) closeLegal();
   });
 
+  // Tab click handlers
+  document.querySelectorAll('.nav-links a[data-tab]').forEach(a=>{
+    a.addEventListener('click',()=>switchTab(a.dataset.tab));
+  });
+
 render();
 </script>
 </body>
