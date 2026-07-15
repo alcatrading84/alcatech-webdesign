@@ -207,29 +207,8 @@ footer .copy{color:var(--text3);font-size:1rem;margin-bottom:.5rem}
 
 <!-- SERVICIOS -->
 <div class="tab-content" id="tab-servicios">
-<section style="padding:5rem 2rem">
-  <div class="inner">
-    <div class="label">✦ <span id="s-l">Servicios</span></div>
-    <h2 class="st" id="s-t">Planes de Desarrollo Web</h2>
-    <p class="desc" id="s-d">Soluciones profesionales para cada etapa de tu negocio.</p>
-  </div>
-</section>
-<section style="background:rgba(9,30,66,0.1);padding:2rem 2rem">
-  <div class="inner">
-    <div class="label">✦ <span id="s-comp-l">Comparativa</span></div>
-    <h2 class="st" id="s-comp-t">Elige el plan ideal</h2>
-    <div class="table-w">
-      <table>
-        <thead><tr><th id="s-f">Características</th><th>Landing Simple</th><th style="color:var(--accent)">Landing Empresarial</th><th>Landing Cinematográfico</th><th>Portal SaaS</th></tr></thead>
-        <tbody>
-          <tr><td id="s-r1">Tecnología Base</td><td>HTML + CSS</td><td style="color:var(--accent)">React + Tailwind</td><td>React + Three.js</td><td>Full Stack</td></tr>
-          <tr><td id="s-r2">Tiempo de Entrega</td><td>24-48h</td><td style="color:var(--accent)">3-5 días</td><td>5-10 días</td><td>2-4 sem</td></tr>
-          <tr><td id="s-r3">Secciones Incluidas</td><td>1 sección</td><td style="color:var(--accent)">Hasta 5</td><td>Hasta 8</td><td>Hasta 12+</td></tr>
-          <tr><td id="s-r4">Revisiones de Diseño</td><td>1</td><td style="color:var(--accent)">2</td><td>3</td><td>Ilimitadas</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<section style="padding:3rem 2rem">
+  <div class="inner" id="servicios-content"></div>
 </section>
 </div>
 
@@ -288,7 +267,134 @@ footer .copy{color:var(--text3);font-size:1rem;margin-bottom:.5rem}
 
 <script>
 const L = {
-  es:{nav:['Inicio','Servicios','Planes','Contacto'],i:{b:'INGENIERÍA DE AUTOR • DISPONIBLE',r:'Fundador y director de AlcaTech-WebDesign. Ingeniería frontend, arquitectura de experiencias digitales y soluciones web de alto impacto.',d:'Transformo ideas complejas en plataformas digitales rápidas, robustas e interactivas. No creo páginas genéricas; diseño sistemas autónomos que impulsan negocios.',b1:'WhatsApp →',b2:'Email',s1:'Proyectos',s2:'Satisfacción',s3:'Lighthouse',s4:'Seguro',sb1:'Ingeniería de Autor',sb2:'Soluciones que Impactan',al:'Sobre Mí',at:'Ingeniería de',ad:'AlcaTech-WebDesign transforma ideas complejas en plataformas de alto rendimiento.',ap1:'Me especializo en optimización técnica avanzada, despliegue eficiente de arquitecturas de software e ingeniería frontend con herramientas locales y de vanguardia.',ap2:'No creo páginas genéricas. Diseño soluciones rápidas, robustas e interactivas, con sistemas autónomos y automatizaciones a medida.',ml:'Enfoques',mt:'Mi Metodología',md:'Cuatro pilares fundamentales que guían cada proyecto que emprendo.',mc:[{t:'Rendimiento y Velocidad (WPO)',d:'Código Limpio, Cargas Instantáneas — Optimizo cada línea de código para garantizar velocidades de carga mínimas y una experiencia de usuario fluida. Un sitio rápido no solo retiene visitantes, sino que mejora directamente el posicionamiento en buscadores y las tasas de conversión.'},{t:'Automatización y Sistemas',d:'Automatización Estratégica — Desarrollo integraciones y sistemas autónomos que reducen tareas repetitivas en tu negocio. Conecto tu frontend con flujos de trabajo inteligentes para que tu plataforma trabaje por ti en segundo plano las 24 horas del día.'},{t:'Escalabilidad y Futuro',d:'Arquitectura Escalable — Construyo soluciones preparadas para crecer. Utilizo estructuras modulares y tecnologías sólidas que permiten añadir nuevas funcionalidades en el futuro sin necesidad de reescribir el proyecto desde cero.'},{t:'Conversión y Negocio',d:'Diseño con Propósito Comercial — Más allá de la estética, cada elemento interactivo y decisión técnica está orientada a cumplir un objetivo claro: captar clientes, retener usuarios y potenciar el crecimiento de tu marca en el mercado digital.'}],sl:'Habilidades',st:'Tecnologías que domino'},s:{l:'Servicios',t:'Planes de Desarrollo Web',d:'Soluciones profesionales para cada etapa de tu negocio, desde landing pages hasta plataformas con inteligencia artificial.',cl:'Comparativa',ct:'Elige el plan ideal',f:'Características',r:['Tecnología Base','Tiempo de Entrega','Secciones Incluidas','Revisiones de Diseño']},p:{l:'Planes',t:'Nuestros precios',d:'Elige el plan que mejor se adapte a tu negocio.',pl:[{n:'Landing Simple',s:'Presencia Profesional',p:'$200+',r:'$200 — $500',f:['Diseño responsive','Animaciones scroll y hover','SEO + Google Analytics','SSL HTTPS','1 revisión'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},{n:'Landing Empresarial',s:'Múltiples Secciones',p:'$500+',r:'$500 — $1,200',b:'RECOMENDADO',f:['React + Tailwind + Motion','Hasta 5 secciones','Formulario inteligente','Panel admin básico','2 revisiones'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},{n:'Landing Cinematográfico',s:'Experiencia Inmersiva',p:'$1,200+',r:'$1,200 — $2,500',f:['React + Three.js + WebGL','Animaciones 3D, WebGL','Video background interactivo','Micro-interacciones','3 revisiones'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},{n:'Portal Interactivo SaaS',s:'Plataforma Autónoma',p:'$2,500+',r:'$2,500 — $6,000',f:['Full Stack (React + Node)','Base de datos + API','Chat con IA inteligente','Panel admin completo','Automatizaciones'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}],tl:'Testimonios',tt:'Lo que dicen nuestros clientes',tc:[{t:'El plan Empresarial transformó nuestro negocio. La velocidad de carga subió un 200%.',n:'Pedro Martínez',r:'CEO — Inversiones del Sur'},{t:'Pasamos de un sitio estático a una plataforma con IA. Ahora los clientes reservan solos.',n:'Dra. Ana García',r:'Directora Médica — Clínica MediSalud'},{t:'El diseño cinematográfico superó todas las expectativas. La experiencia 3D nos diferencia.',n:'Carlos Ruiz',r:'Propietario — Restaurante La Mesa'}]},c:{t1:'¿Listo para tu',t2:'próximo proyecto?',d:'Hablemos y creemos algo increíble juntos. Sin compromiso.',b1:'WhatsApp →',b2:'Email'},f:['Aviso Legal','Términos del Servicio','Privacidad y Cookies'],ft:'Optimización de alto impacto • Despliegue Git • SSL HTTPS Activo'},
+  es:{nav:['Inicio','Servicios','Planes','Contacto'],i:{b:'INGENIERÍA DE AUTOR • DISPONIBLE',r:'Fundador y director de AlcaTech-WebDesign. Ingeniería frontend, arquitectura de experiencias digitales y soluciones web de alto impacto.',d:'Transformo ideas complejas en plataformas digitales rápidas, robustas e interactivas. No creo páginas genéricas; diseño sistemas autónomos que impulsan negocios.',b1:'WhatsApp →',b2:'Email',s1:'Proyectos',s2:'Satisfacción',s3:'Lighthouse',s4:'Seguro',sb1:'Ingeniería de Autor',sb2:'Soluciones que Impactan',al:'Sobre Mí',at:'Ingeniería de',ad:'AlcaTech-WebDesign transforma ideas complejas en plataformas de alto rendimiento.',ap1:'Me especializo en optimización técnica avanzada, despliegue eficiente de arquitecturas de software e ingeniería frontend con herramientas locales y de vanguardia.',ap2:'No creo páginas genéricas. Diseño soluciones rápidas, robustas e interactivas, con sistemas autónomos y automatizaciones a medida.',ml:'Enfoques',mt:'Mi Metodología',md:'Cuatro pilares fundamentales que guían cada proyecto que emprendo.',mc:[{t:'Rendimiento y Velocidad (WPO)',d:'Código Limpio, Cargas Instantáneas — Optimizo cada línea de código para garantizar velocidades de carga mínimas y una experiencia de usuario fluida. Un sitio rápido no solo retiene visitantes, sino que mejora directamente el posicionamiento en buscadores y las tasas de conversión.'},{t:'Automatización y Sistemas',d:'Automatización Estratégica — Desarrollo integraciones y sistemas autónomos que reducen tareas repetitivas en tu negocio. Conecto tu frontend con flujos de trabajo inteligentes para que tu plataforma trabaje por ti en segundo plano las 24 horas del día.'},{t:'Escalabilidad y Futuro',d:'Arquitectura Escalable — Construyo soluciones preparadas para crecer. Utilizo estructuras modulares y tecnologías sólidas que permiten añadir nuevas funcionalidades en el futuro sin necesidad de reescribir el proyecto desde cero.'},{t:'Conversión y Negocio',d:'Diseño con Propósito Comercial — Más allá de la estética, cada elemento interactivo y decisión técnica está orientada a cumplir un objetivo claro: captar clientes, retener usuarios y potenciar el crecimiento de tu marca en el mercado digital.'}],sl:'Habilidades',st:'Tecnologías que domino'},s:{l:'Servicios',t:'Servicios',d:'',html:`<div class="servicios-content" style="max-width:1100px;margin:0 auto;padding:1rem 0">
+  <div style="font-size:.9rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">✦ Servicios</div>
+  <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;margin-bottom:1rem;line-height:1.15">Innovación Digital y Desarrollo Web de Autor</h2>
+  <p style="font-size:1rem;color:var(--text2);line-height:1.7;margin-bottom:2rem">En AlcaTech-WebDesign transformamos ideas complejas en plataformas digitales de alto impacto. Nos apasiona la optimización técnica avanzada, el despliegue eficiente de arquitecturas de software y la ingeniería frontend con herramientas locales y de vanguardia. No creamos páginas web genéricas; diseñamos soluciones rápidas, robustas e interactivas integrando sistemas autónomos y automatizaciones a medida para que tu negocio destaque en el entorno digital.</p>
+
+  <div style="font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem;margin-top:3rem">✦ NUESTROS SERVICIOS Y PLANES DE DESARROLLO</div>
+  <p style="font-size:1rem;color:var(--text2);line-height:1.7;margin-bottom:2rem">Ofrecemos soluciones digitales de alto nivel adaptadas a la escala y objetivos de tu negocio. Todos nuestros proyectos incluyen por defecto una infraestructura base de alta calidad: despliegue automatizado mediante Git, certificado de seguridad HTTPS activo y la opción de hosting inicial sin costes ocultos.</p>
+  <p style="font-size:1rem;font-weight:600;color:var(--accent2);margin-bottom:1.5rem">Planes de Desarrollo y Diseño Web</p>
+
+  <!-- Plan 1 -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h4 style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">1. Landing Simple &mdash; Página Profesional</h4>
+    <p style="font-size:.9rem;color:var(--text3);margin-bottom:.75rem">La solución ideal para profesionales independientes, emprendedores y comercios locales que buscan validar su oferta y capturar clientes de forma rápida y efectiva.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.75rem;font-size:.85rem;color:var(--accent2)">
+      <div>💰 Rango: <strong>$200 &mdash; $500</strong></div>
+      <div>⏱️ Entrega: <strong>24 a 48 horas</strong></div>
+      <div>🛠️ <strong>HTML + Animaciones</strong></div>
+    </div>
+    <details style="margin-top:.5rem"><summary style="cursor:pointer;color:var(--accent2);font-size:.85rem;font-weight:600">Ver características incluidas ▼</summary>
+      <ul style="list-style:none;margin-top:.75rem;font-size:.9rem;color:var(--text2)">
+        <li style="padding:.3rem 0">✓ Diseño adaptativo optimizado para smartphones, tablets y ordenadores.</li>
+        <li style="padding:.3rem 0">✓ Animaciones interactivas al hacer scroll y efectos hover.</li>
+        <li style="padding:.3rem 0">✓ Configuración SEO esencial e integración con Google Analytics.</li>
+        <li style="padding:.3rem 0">✓ Despliegue y configuración en la infraestructura gratuita de Netlify.</li>
+        <li style="padding:.3rem 0">✓ 1 revisión de diseño incluida.</li>
+      </ul>
+    </details>
+    <a href="https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01" target="_blank" class="btn btn-p" style="margin-top:1rem;display:inline-block">Contratar →</a>
+  </div>
+
+  <!-- Plan 2 -->
+  <div class="card pop" style="margin-bottom:1.5rem">
+    <div class="bdg">RECOMENDADO</div>
+    <h4 style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">2. Site Corporate &mdash; Sitio Profesional Completo</h4>
+    <p style="font-size:.9rem;color:var(--text3);margin-bottom:.75rem">Diseñado para empresas y marcas que exigen una presencia digital corporativa premium, distinguida y con una experiencia de usuario sumamente pulida.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.75rem;font-size:.85rem;color:var(--accent2)">
+      <div>💰 Rango: <strong>$1,200 &mdash; $3,000</strong></div>
+      <div>⏱️ Entrega: <strong>2 a 4 días</strong></div>
+      <div>🛠️ <strong>React + Tailwind</strong></div>
+    </div>
+    <details style="margin-top:.5rem"><summary style="cursor:pointer;color:var(--accent2);font-size:.85rem;font-weight:600">Ver características incluidas ▼</summary>
+      <ul style="list-style:none;margin-top:.75rem;font-size:.9rem;color:var(--text2)">
+        <li style="padding:.3rem 0">✓ Diseño de interfaz premium alineado con la identidad corporativa.</li>
+        <li style="padding:.3rem 0">✓ Animaciones complejas y revelación progresiva de elementos.</li>
+        <li style="padding:.3rem 0">✓ Estructura multipágina o multisección avanzada.</li>
+        <li style="padding:.3rem 0">✓ Indexación SEO completa y formularios de captación de leads.</li>
+        <li style="padding:.3rem 0">✓ Catálogo de tipografías premium e iconos vectoriales SVG.</li>
+        <li style="padding:.3rem 0">✓ Integración directa de WhatsApp Business y redes sociales.</li>
+      </ul>
+    </details>
+    <a href="https://wa.me/393801028239" target="_blank" class="btn btn-p" style="margin-top:1rem;display:inline-block">Consultar →</a>
+  </div>
+
+  <!-- Plan 3 -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h4 style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">3. Cinematográfico &mdash; Sitio con Vídeo y Experiencia Inmersiva</h4>
+    <p style="font-size:.9rem;color:var(--text3);margin-bottom:.75rem">Una propuesta de autor para marcas exclusivas que buscan impactar emocionalmente al usuario a través de una narrativa digital interactiva.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.75rem;font-size:.85rem;color:var(--accent2)">
+      <div>💰 Rango: <strong>$3,000 &mdash; $8,000</strong></div>
+      <div>⏱️ Entrega: <strong>4 a 7 días</strong></div>
+      <div>🛠️ <strong>Three.js + WebGL</strong></div>
+    </div>
+    <details style="margin-top:.5rem"><summary style="cursor:pointer;color:var(--accent2);font-size:.85rem;font-weight:600">Ver características incluidas ▼</summary>
+      <ul style="list-style:none;margin-top:.75rem;font-size:.9rem;color:var(--text2)">
+        <li style="padding:.3rem 0">✓ Fondo de vídeo optimizado con superposiciones.</li>
+        <li style="padding:.3rem 0">✓ Efecto de paralaje 3D interactivo.</li>
+        <li style="padding:.3rem 0">✓ Navegación vertical asistida estilo documental.</li>
+        <li style="padding:.3rem 0">✓ Interfaces con acabados de cristal pulido (glassmorphism).</li>
+        <li style="padding:.3rem 0">✓ Selector interactivo de modo claro/oscuro.</li>
+        <li style="padding:.3rem 0">✓ Pantalla de precarga personalizada con la identidad de la marca.</li>
+      </ul>
+    </details>
+    <a href="https://wa.me/393801028239" target="_blank" class="btn btn-o" style="margin-top:1rem;display:inline-block">Consultar →</a>
+  </div>
+
+  <!-- Plan 4 -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h4 style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">4. Boutique / SaaS &mdash; E-commerce y Plataformas Digitales</h4>
+    <p style="font-size:.9rem;color:var(--text3);margin-bottom:.75rem">Desarrollo de alto rendimiento para aplicaciones web, plataformas SaaS y tiendas virtuales con embudo de ventas optimizado.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.75rem;font-size:.85rem;color:var(--accent2)">
+      <div>💰 Rango: <strong>$2,200 &mdash; $5,000</strong></div>
+      <div>⏱️ Entrega: <strong>3 a 6 días</strong></div>
+      <div>🛠️ <strong>React + Node.js</strong></div>
+    </div>
+    <details style="margin-top:.5rem"><summary style="cursor:pointer;color:var(--accent2);font-size:.85rem;font-weight:600">Ver características incluidas ▼</summary>
+      <ul style="list-style:none;margin-top:.75rem;font-size:.9rem;color:var(--text2)">
+        <li style="padding:.3rem 0">✓ Estructuras inspiradas en sistemas de diseño de marcas líderes.</li>
+        <li style="padding:.3rem 0">✓ Animaciones fluidas con GSAP, Lottie y Framer Motion.</li>
+        <li style="padding:.3rem 0">✓ Panel de control interactivo o catálogo dinámico de productos.</li>
+        <li style="padding:.3rem 0">✓ Optimización de UX orientada a la venta (CRO).</li>
+        <li style="padding:.3rem 0">✓ Integración con pasarelas de pago (Stripe, PayPal) y APIs.</li>
+        <li style="padding:.3rem 0">✓ Rendimiento Lighthouse superior a 90/100.</li>
+      </ul>
+    </details>
+    <a href="https://wa.me/393801028239" target="_blank" class="btn btn-o" style="margin-top:1rem;display:inline-block">Consultar →</a>
+  </div>
+
+  <!-- Plan 5 -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h4 style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:.5rem">5. Expérience 3D &mdash; Efectos Tridimensionales Avanzados</h4>
+    <p style="font-size:.9rem;color:var(--text3);margin-bottom:.75rem">La cúspide del desarrollo frontend. Para proyectos vanguardistas que requieren interactividad tridimensional directamente en el navegador.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.75rem;font-size:.85rem;color:var(--accent2)">
+      <div>💰 Rango: <strong>$5,000 &mdash; $15,000</strong></div>
+      <div>⏱️ Entrega: <strong>1 a 2 semanas</strong></div>
+      <div>🛠️ <strong>Three.js + WebGL</strong></div>
+    </div>
+    <details style="margin-top:.5rem"><summary style="cursor:pointer;color:var(--accent2);font-size:.85rem;font-weight:600">Ver características incluidas ▼</summary>
+      <ul style="list-style:none;margin-top:.75rem;font-size:.9rem;color:var(--text2)">
+        <li style="padding:.3rem 0">✓ Integración con modelos 3D complejos (Three.js / Spline).</li>
+        <li style="padding:.3rem 0">✓ Simulación de físicas y dinámicas avanzadas.</li>
+        <li style="padding:.3rem 0">✓ WebGL avanzado para sistemas de partículas interactivos.</li>
+        <li style="padding:.3rem 0">✓ Soporte nativo para Realidad Aumentada y Realidad Virtual (WebXR).</li>
+        <li style="padding:.3rem 0">✓ Animaciones vectoriales con Rive y Lottie.</li>
+        <li style="padding:.3rem 0">✓ Optimización de memoria y fluidez en cualquier dispositivo.</li>
+      </ul>
+    </details>
+    <a href="https://wa.me/393801028239" target="_blank" class="btn btn-o" style="margin-top:1rem;display:inline-block">Consultar →</a>
+  </div>
+
+  <!-- HOSTING -->
+  <div style="font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem;margin-top:3rem">✦ Infraestructura y Alojamiento Web (Hosting)</div>
+  <p style="font-size:.9rem;color:var(--text2);line-height:1.7;margin-bottom:1.5rem">Un sitio excelente necesita la mejor base técnica. Te asesoramos y configuramos el entorno que mejor se adapte a tu operativa corporativa:</p>
+  <div class="g3">
+    <div class="card"><h4 style="font-size:1rem;font-weight:600;color:var(--accent2);margin-bottom:.5rem">Netlify (Gratuito)</h4><div style="font-size:.9rem;color:var(--accent);font-weight:700;margin-bottom:.5rem">$0/mes</div><p style="font-size:.85rem;color:var(--text2);line-height:1.6">Ideal para landing pages y sitios estáticos. Incluye dominio .netlify.app, SSL automático y deploys Git. Soporte opcional desde $15-25 por intervención.</p></div>
+    <div class="card pop"><div class="bdg">RECOMENDADO</div><h4 style="font-size:1rem;font-weight:600;color:var(--accent2);margin-bottom:.5rem">Hostinger Business</h4><div style="font-size:.9rem;color:var(--accent);font-weight:700;margin-bottom:.5rem">$15-25/mes</div><p style="font-size:.85rem;color:var(--text2);line-height:1.6">Ideal para empresas consolidadas. Incluye dominio propio, SSL avanzado, correo corporativo, backups automáticos y mantenimiento mensual.</p></div>
+    <div class="card"><h4 style="font-size:1rem;font-weight:600;color:var(--accent2);margin-bottom:.5rem">cPanel Existente</h4><div style="font-size:.9rem;color:var(--accent);font-weight:700;margin-bottom:.5rem">$6-12/mes</div><p style="font-size:.85rem;color:var(--text2);line-height:1.6">Para clientes con hosting tradicional. Auditamos, configuramos y desplegamos en tu servidor actual sin coste adicional en la primera entrega.</p></div>
+  </div>
+</div>`},p:{l:'Planes',t:'Nuestros precios',d:'Elige el plan que mejor se adapte a tu negocio.',pl:[{n:'Landing Simple',s:'Presencia Profesional',p:'$200+',r:'$200 — $500',f:['Diseño responsive','Animaciones scroll y hover','SEO + Google Analytics','SSL HTTPS','1 revisión'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},{n:'Landing Empresarial',s:'Múltiples Secciones',p:'$500+',r:'$500 — $1,200',b:'RECOMENDADO',f:['React + Tailwind + Motion','Hasta 5 secciones','Formulario inteligente','Panel admin básico','2 revisiones'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},{n:'Landing Cinematográfico',s:'Experiencia Inmersiva',p:'$1,200+',r:'$1,200 — $2,500',f:['React + Three.js + WebGL','Animaciones 3D, WebGL','Video background interactivo','Micro-interacciones','3 revisiones'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},{n:'Portal Interactivo SaaS',s:'Plataforma Autónoma',p:'$2,500+',r:'$2,500 — $6,000',f:['Full Stack (React + Node)','Base de datos + API','Chat con IA inteligente','Panel admin completo','Automatizaciones'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}],tl:'Testimonios',tt:'Lo que dicen nuestros clientes',tc:[{t:'El plan Empresarial transformó nuestro negocio. La velocidad de carga subió un 200%.',n:'Pedro Martínez',r:'CEO — Inversiones del Sur'},{t:'Pasamos de un sitio estático a una plataforma con IA. Ahora los clientes reservan solos.',n:'Dra. Ana García',r:'Directora Médica — Clínica MediSalud'},{t:'El diseño cinematográfico superó todas las expectativas. La experiencia 3D nos diferencia.',n:'Carlos Ruiz',r:'Propietario — Restaurante La Mesa'}]},c:{t1:'¿Listo para tu',t2:'próximo proyecto?',d:'Hablemos y creemos algo increíble juntos. Sin compromiso.',b1:'WhatsApp →',b2:'Email'},f:['Aviso Legal','Términos del Servicio','Privacidad y Cookies'],ft:'Optimización de alto impacto • Despliegue Git • SSL HTTPS Activo'},
   en:{nav:['Home','Services','Plans','Contact'],i:{b:'AUTHOR ENGINEERING • AVAILABLE',r:'Founder and director of AlcaTech-WebDesign. Frontend engineering, digital experience architecture, and high-impact web solutions.',d:'I transform complex ideas into fast, robust, interactive digital platforms. I don\'t create generic pages; I design autonomous systems that drive businesses.',b1:'WhatsApp →',b2:'Email',s1:'Projects',s2:'Satisfaction',s3:'Lighthouse',s4:'Secure',sb1:'Author Engineering',sb2:'Solutions that Impact',al:'About Me',at:'Author',ad:'AlcaTech-WebDesign transforms complex ideas into high-performance digital platforms.',ap1:'I specialize in advanced technical optimization, efficient software architecture deployment, and frontend engineering with cutting-edge tools.',ap2:'I don\'t create generic pages. I design fast, robust, interactive solutions with autonomous systems and custom automation.',ml:'Methodology',mt:'My work approach',mc:[{t:'Performance & Speed (WPO)',d:'Clean Code, Instant Loads — I optimize every line for minimal load times. A fast site retains visitors and improves rankings.'},{t:'Automation & Systems',d:'Strategic Automation — I develop integrations that reduce repetitive tasks. Your platform works for you 24/7.'},{t:'Scalability & Future',d:'Scalable Architecture — Modular solutions ready to grow without rewriting the project from scratch.'},{t:'Conversion & Business',d:'Design with Business Purpose — Every element is aimed at capturing clients and growing your brand.'}],sl:'Skills',st:'Technologies I master'},s:{l:'Services',t:'Web Development Plans',d:'Professional solutions for every stage of your business, from landing pages to AI-powered platforms.',cl:'Comparison',ct:'Choose the ideal plan',f:'Features',r:['Base Technology','Delivery Time','Included Sections','Design Revisions']},p:{l:'Plans',t:'Our prices',d:'Choose the plan that best fits your business.',pl:[{n:'Landing Simple',s:'Professional Presence',p:'$200+',r:'$200 — $500',f:['Responsive design','Scroll & hover animations','SEO + Google Analytics','SSL HTTPS','1 revision'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},{n:'Landing Business',s:'Multiple Sections',p:'$500+',r:'$500 — $1,200',b:'RECOMMENDED',f:['React + Tailwind + Motion','Up to 5 sections','Smart form with logic','Basic admin panel','2 revisions'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},{n:'Landing Cinematic',s:'Immersive Experience',p:'$1,200+',r:'$1,200 — $2,500',f:['React + Three.js + WebGL','3D, WebGL animations','Interactive video bg','Premium micro-interactions','3 revisions'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},{n:'SaaS Interactive Portal',s:'Autonomous Platform',p:'$2,500+',r:'$2,500 — $6,000',f:['Full Stack (React + Node)','Database + API','AI smart chat','Complete admin panel','Custom automation'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}],tl:'Testimonials',tt:'What our clients say',tc:[{t:'The Business plan transformed our business. Load speed increased 200%.',n:'Pedro Martínez',r:'CEO — Inversiones del Sur'},{t:'We went from a static site to an AI platform. Clients now book on their own.',n:'Dr. Ana García',r:'Medical Director — MediSalud Clinic'},{t:'The cinematic design exceeded all expectations. The 3D experience sets us apart.',n:'Carlos Ruiz',r:'Owner — La Mesa Restaurant'}]},c:{t1:'Ready for your',t2:'next project?',d:'Let\'s talk and create something amazing together. No commitment.',b1:'WhatsApp →',b2:'Email'},f:['Legal Notice','Terms of Service','Privacy & Cookies'],ft:'High-Impact Optimization • Git Deployment • Active SSL HTTPS'},
   it:{nav:['Home','Servizi','Piani','Contatto'],i:{b:'INGEGNERIA D\'AUTORE • DISPONIBILE',r:'Fondatore e direttore di AlcaTech-WebDesign. Ingegneria frontend, architettura di esperienze digitali e soluzioni web ad alto impatto.',d:'Trasformo idee complesse in piattaforme digitali veloci, robuste e interattive.',b1:'WhatsApp →',b2:'Email',s1:'Progetti',s2:'Soddisfazione',s3:'Lighthouse',s4:'Sicuro',sb1:'Ingegneria d\'Autore',sb2:'Soluzioni che Impatto',al:'Su di Me',at:'Ingegneria d\'Autore',ad:'AlcaTech-WebDesign trasforma idee complesse in piattaforme ad alte prestazioni.',ap1:'Mi specializzo in ottimizzazione tecnica avanzata e ingegneria frontend.',ap2:'Non creo pagine generiche. Progetto soluzioni veloci, robuste e interattive.',ml:'Metodologia',mt:'Il mio approccio',mc:[{t:'Performance e Velocità',d:'Codice Pulito, Carichi Istantanei — Ottimizzo ogni linea per velocità minime.'},{t:'Automazione e Sistemi',d:'Automazione Strategica — Sviluppo integrazioni che riducono compiti ripetitivi.'},{t:'Scalabilità e Futuro',d:'Architettura Scalabile — Soluzioni modulari pronte a crescere.'},{t:'Conversione e Business',d:'Design con Scopo Commerciale — Ogni elemento mira a catturare clienti.'}],sl:'Competenze',st:'Tecnologie che padroneggio'},s:{l:'Servizi',t:'Piani di Sviluppo Web',d:'Soluzioni professionali per ogni fase del tuo business.',cl:'Confronto',ct:'Scegli il piano ideale',f:'Caratteristiche',r:['Tecnologia Base','Tempi di Consegna','Sezioni Incluse','Revisioni di Design']},p:{l:'Piani',t:'I nostri prezzi',d:'Scegli il piano più adatto alla tua attività.',pl:[{n:'Landing Simple',s:'Presenza Professionale',p:'€200+',r:'€200 — €500',f:['Design responsive','Animazioni scroll/hover','SEO + Google Analytics','SSL HTTPS','1 revisione'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},{n:'Landing Aziendale',s:'Sezioni Multiple',p:'€500+',r:'€500 — €1,200',b:'RACCOMANDATO',f:['React + Tailwind + Motion','Fino a 5 sezioni','Modulo intelligente','Pannello admin base','2 revisioni'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},{n:'Landing Cinematografico',s:'Esperienza Immersiva',p:'€1,200+',r:'€1,200 — €2,500',f:['React + Three.js','Animazioni 3D/WebGL','Video background','Micro-interazioni','3 revisioni'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},{n:'Portale SaaS',s:'Piattaforma Autonoma',p:'€2,500+',r:'€2,500 — €6,000',f:['Full Stack (React+Node)','Database + API','Chat IA intelligente','Pannello admin completo','Automazioni'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}],tl:'Testimonianze',tt:'Cosa dicono i clienti',tc:[{t:'Il piano Aziendale ha trasformato la nostra attività.',n:'Pedro Martínez',r:'CEO — Inversiones del Sur'},{t:'Da sito statico a piattaforma IA. I clienti prenotano da soli.',n:'Dott.ssa Ana García',r:'Direttrice — Clinica MediSalud'},{t:'Il design cinematografico ha superato le aspettative.',n:'Carlos Ruiz',r:'Proprietario — Ristorante La Mesa'}]},c:{t1:'Pronto per il tuo',t2:'prossimo progetto?',d:'Parliamone e creiamo qualcosa di straordinario.',b1:'WhatsApp →',b2:'Email'},f:['Avviso Legale','Termini di Servizio','Privacy'],ft:'Ottimizzazione ad Alto Impatto • Deploy Git • SSL HTTPS Attivo'},
   de:{nav:['Start','Services','Pakete','Kontakt'],i:{b:'AUTOREN-ENGINEERING • VERFÜGBAR',r:'Gründer und Direktor von AlcaTech-WebDesign.',d:'Ich verwandle komplexe Ideen in schnelle, robuste digitale Plattformen.',b1:'WhatsApp →',b2:'Email',s1:'Projekte',s2:'Zufriedenheit',s3:'Lighthouse',s4:'Sicher',sb1:'Autoren-Engineering',sb2:'Lösungen mit Wirkung',al:'Über mich',at:'Autoren-',ad:'AlcaTech-WebDesign verwandelt komplexe Ideen in leistungsstarke Plattformen.',ap1:'Ich spezialisiere mich auf technische Optimierung und Frontend-Engineering.',ap2:'Ich erstelle keine generischen Seiten. Ich entwerfe schnelle, robuste Lösungen.',ml:'Methodik',mt:'Mein Arbeitsansatz',mc:[{t:'Leistung & Geschwindigkeit',d:'Sauberer Code, sofortige Ladung.'},{t:'Automatisierung & Systeme',d:'Strategische Automatisierung.'},{t:'Skalierbarkeit & Zukunft',d:'Modulare Architektur.'},{t:'Konversion & Geschäft',d:'Design mit Geschäftszweck.'}],sl:'Fähigkeiten',st:'Technologien, die ich beherrsche'},s:{l:'Services',t:'Webentwicklung Pakete',d:'Professionelle Lösungen.',cl:'Vergleich',ct:'Wählen Sie den idealen Plan',f:'Merkmale',r:['Basis-Technologie','Lieferzeit','Enthaltene Abschnitte','Design-Revisionen']},p:{l:'Pakete',t:'Unsere Preise',d:'Wählen Sie den Plan.',pl:[{n:'Landing Simple',s:'Professionelle Präsenz',p:'€200+',r:'€200 — €500',f:['Responsive Design','Scroll/Hover Animationen','SEO + Analytics','SSL HTTPS','1 Revision'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},{n:'Landing Business',s:'Mehrere Abschnitte',p:'€500+',r:'€500 — €1,200',b:'EMPFEHLUNG',f:['React + Tailwind','Bis zu 5 Abschnitte','Intelligentes Formular','Admin-Panel','2 Revisionen'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},{n:'Landing Kinematografisch',s:'Immersion',p:'€1,200+',r:'€1,200 — €2,500',f:['React + Three.js','3D/WebGL Animationen','Video Hintergrund','Mikro-Interaktionen','3 Revisionen'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},{n:'SaaS Portal',s:'Autonome Plattform',p:'€2,500+',r:'€2,500 — €6,000',f:['Full Stack','Datenbank + API','KI-Chat','Admin-Panel komplett','Automatisierung'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}],tl:'Testimonien',tt:'Was Kunden sagen',tc:[{t:'Der Geschäftsplan hat uns transformiert.',n:'Pedro Martínez',r:'CEO — Inversiones del Sur'},{t:'Von statischer Seite zu KI-Plattform.',n:'Dr. Ana García',r:'Med. Direktorin — MediSalud'},{t:'Das Design übertraf alle Erwartungen.',n:'Carlos Ruiz',r:'Inhaber — Restaurant La Mesa'}]},c:{t1:'Bereit für Ihr',t2:'nächstes Projekt?',d:'Reden wir und schaffen etwas Großartiges.',b1:'WhatsApp →',b2:'Email'},f:['Impressum','AGB','Datenschutz'],ft:'Hochwirkungs-Optimierung • Git • SSL HTTPS Aktiv'},
@@ -327,16 +433,7 @@ function render(){
   document.getElementById('i-skills-l').textContent=i.sl;
   document.getElementById('i-skills-t').textContent=i.st;
   // Servicios
-  document.getElementById('s-l').textContent=s.l;
-  document.getElementById('s-t').textContent=s.t;
-  document.getElementById('s-d').textContent=s.d;
-  document.getElementById('s-comp-l').textContent=s.cl;
-  document.getElementById('s-comp-t').textContent=s.ct;
-  document.getElementById('s-f').textContent=s.f;
-  document.getElementById('s-r1').textContent=s.r[0];
-  document.getElementById('s-r2').textContent=s.r[1];
-  document.getElementById('s-r3').textContent=s.r[2];
-  document.getElementById('s-r4').textContent=s.r[3];
+  document.getElementById('servicios-content').innerHTML = s.html || '';
   // Planes
   document.getElementById('p-l').textContent=p.l;
   document.getElementById('p-t').textContent=p.t;
