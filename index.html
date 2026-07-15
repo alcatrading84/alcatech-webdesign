@@ -9,7 +9,26 @@
 :root{--bg:#010224;--bg2:#091e42;--accent:#0052cc;--accent2:#079de0;--accent3:#058aaa;--text:#f1f5f9;--text2:rgba(255,255,255,0.5);--text3:rgba(255,255,255,0.3);--gold:#fbbf24}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
-.glass{background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(10px)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(1,2,36,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.05)}
+nav .logo{font-size:1.2rem;font-weight:700}
+nav .logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
+.nav-links a{color:var(--text2);font-size:.85rem;cursor:pointer;padding:.4rem 0;border-bottom:2px solid transparent;transition:all .2s}
+.nav-links a:hover{color:#fff}
+.nav-links a.active{color:#fff;border-bottom-color:var(--accent)}
+.lang-btn{background:rgba(0,82,204,0.15);border:1px solid rgba(0,82,204,0.2);color:var(--accent2);padding:.3rem .7rem;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer;position:relative}
+.lang-dropdown{display:none;position:absolute;top:100%;right:0;margin-top:.25rem;background:var(--bg2);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:.25rem;min-width:130px;z-index:200}
+.lang-dropdown.show{display:block}
+.lang-dropdown button{display:block;width:100%;padding:.4rem .75rem;background:transparent;border:none;color:var(--text2);font-size:.8rem;cursor:pointer;border-radius:4px;text-align:left}
+.lang-dropdown button:hover{background:rgba(0,82,204,0.15);color:#fff}
+
+/* Tab content */
+.tab-content{display:none;padding-top:4rem}
+.tab-content.active{display:block}
+
+/* Hero */
 .hero{min-height:100vh;display:flex;align-items:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(0,82,204,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,82,204,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 50% at 50% 50%,black,transparent)}
 .hero-glow{position:absolute;top:50%;left:50%;width:700px;height:700px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,82,204,0.1) 0%,transparent 70%);z-index:0}
@@ -20,144 +39,156 @@ a{text-decoration:none;color:inherit}
 .hero h1 .g{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .85rem;background:rgba(0,82,204,0.1);border:1px solid rgba(0,82,204,0.2);border-radius:100px;font-size:.75rem;color:var(--accent2);margin-bottom:1.5rem;letter-spacing:.05em}
 .hero .sub{font-size:.85rem;color:var(--accent3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.3rem;font-weight:500}
-.hero .name{font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:.5rem}
-.hero .role{font-size:1.1rem;color:var(--text2);margin-bottom:1.5rem;line-height:1.6}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.75rem;border-radius:8px;font-size:.9rem;font-weight:600;transition:all .2s;cursor:pointer}
+.hero .role{font-size:1.05rem;color:var(--text2);margin-bottom:1.5rem;line-height:1.6}
+.hero .avatar{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:3rem;font-weight:700;color:#fff;box-shadow:0 0 40px rgba(0,82,204,0.3)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.75rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;border:none}
 .btn-p{background:var(--accent);color:#fff}
 .btn-p:hover{background:#0065e6;transform:translateY(-1px)}
 .btn-o{background:transparent;color:var(--text2);border:1px solid rgba(255,255,255,0.1)}
 .btn-o:hover{border-color:rgba(255,255,255,0.3);color:#fff}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.05)}
 .stats div{text-align:center}
-.stats .n{font-size:1.75rem;font-weight:700}
+.stats .n{font-size:1.5rem;font-weight:700}
 .stats .l{font-size:.8rem;color:var(--text3);margin-top:.2rem}
-.hero .avatar{width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:3.5rem;font-weight:700;color:#fff;box-shadow:0 0 40px rgba(0,82,204,0.3)}
-section{padding:5rem 2rem}
+
+/* Sections */
+section{padding:4rem 2rem}
 .inner{max-width:1100px;margin:0 auto}
 .label{font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
-h2.st{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:1rem}
-.desc{font-size:1.05rem;color:var(--text2);max-width:680px;line-height:1.7;margin-bottom:2rem}
+h2.st{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.75rem}
+.desc{font-size:1rem;color:var(--text2);max-width:680px;line-height:1.7;margin-bottom:2rem}
 .g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
-.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
 .g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
-.card{background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:2rem;transition:all .3s}
+
+/* Cards */
+.card{background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.75rem;transition:all .3s}
 .card:hover{background:rgba(9,30,66,0.6);border-color:rgba(0,82,204,0.2);transform:translateY(-2px)}
-.card .nm{width:40px;height:40px;border-radius:50%;background:rgba(0,82,204,0.15);border:1px solid rgba(0,82,204,0.2);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:1rem}
-.card h4{font-size:1.05rem;font-weight:600;margin-bottom:.5rem}
-.card p{font-size:.85rem;color:var(--text2);line-height:1.7}
-.card .ic{font-size:1.75rem;margin-bottom:.75rem}
-.card .sub{font-size:.85rem;color:var(--text3);margin-bottom:.5rem}
-.card .pr{font-size:1.75rem;font-weight:700;color:var(--accent);margin-bottom:.25rem}
-.card .rn{font-size:.85rem;color:var(--text3);margin-bottom:.75rem}
-.card ul{list-style:none;margin-bottom:1rem}
-.card ul li{font-size:.85rem;color:var(--text2);padding:.3rem 0}
+.card .ic{font-size:1.5rem;margin-bottom:.5rem}
+.card h4{font-size:1.1rem;font-weight:600;margin-bottom:.3rem}
+.card .sub{font-size:.8rem;color:var(--text3);margin-bottom:.5rem}
+.card .pr{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.card .rn{font-size:.8rem;color:var(--text3);margin-bottom:.5rem}
+.card ul{list-style:none;margin-bottom:.75rem}
+.card ul li{font-size:.85rem;color:var(--text2);padding:.25rem 0}
 .card ul li::before{content:'✓';color:#007252;font-weight:700;margin-right:.5rem}
-.card .bdg{display:inline-block;padding:.2rem .7rem;background:rgba(0,82,204,0.15);border-radius:100px;font-size:.7rem;font-weight:600;color:var(--accent2);margin-bottom:.75rem}
-.card .buy{display:block;width:100%;padding:.75rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.9rem;font-weight:600;text-align:center}
-.card.pop{position:relative;border-color:var(--accent);box-shadow:0 0 20px rgba(0,82,204,0.1)}
-.about-g{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-@media(max-width:768px){.about-g{grid-template-columns:1fr}}
-.about-g p{font-size:1rem;color:var(--text2);line-height:1.8;margin-bottom:1rem}
-.skills{display:flex;flex-wrap:wrap;gap:.75rem}
-.skill{background:rgba(0,82,204,0.1);border:1px solid rgba(0,82,204,0.15);border-radius:8px;padding:.5rem 1rem;font-size:.85rem;color:var(--accent2);font-weight:500}
-.cta{text-align:center;padding:5rem 2rem;background:linear-gradient(135deg,rgba(0,82,204,0.05),transparent);border-top:1px solid rgba(255,255,255,0.05)}
-.cta h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;margin-bottom:.75rem}
-.cta p{color:var(--text2);max-width:480px;margin:0 auto 2rem;line-height:1.7;font-size:1rem}
-.btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-.table-w{overflow-x:auto;margin-top:2rem}
-table{width:100%;min-width:700px;border-collapse:collapse}
-th{padding:1rem .75rem;text-align:center;font-size:.9rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.08)}
-th:first-child{text-align:left;font-size:1rem;color:var(--text3)}
-td{padding:1rem .75rem;text-align:center;font-size:.9rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,0.04)}
-td:first-child{text-align:left;font-weight:600;color:var(--accent2);font-size:1rem}
-.t-card{background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.75rem}
-.t-card .stars{color:var(--gold);font-size:1rem;margin-bottom:.75rem}
-.t-card p{font-size:.9rem;color:var(--text2);line-height:1.7;font-style:italic;margin-bottom:1.25rem}
-.t-card .tname{font-weight:600;font-size:.85rem}
-.t-card .trole{font-size:.8rem;color:var(--text3)}
-.t-card .tv{color:#007252;font-size:.8rem;font-weight:600;margin-top:.25rem}
+.card .buy{display:block;width:100%;padding:.7rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.85rem;font-weight:600;text-align:center}
+.card.pop{border-color:var(--accent);box-shadow:0 0 20px rgba(0,82,204,0.1)}
+.card .bdg{display:inline-block;padding:.2rem .7rem;background:rgba(0,82,204,0.15);border-radius:100px;font-size:.7rem;font-weight:600;color:var(--accent2);margin-bottom:.5rem}
+.card .nm{width:36px;height:36px;border-radius:50%;background:rgba(0,82,204,0.15);border:1px solid rgba(0,82,204,0.2);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;color:var(--accent);margin-bottom:.75rem}
+.card p{font-size:.85rem;color:var(--text2);line-height:1.7}
+
+/* Skills */
+.skills{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.skill{background:rgba(0,82,204,0.1);border:1px solid rgba(0,82,204,0.15);border-radius:8px;padding:.4rem .9rem;font-size:.85rem;color:var(--accent2);font-weight:500}
+
+/* Table */
+.table-w{overflow-x:auto}
+table{width:100%;min-width:650px;border-collapse:collapse;font-size:.85rem}
+th,td{padding:.75rem;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text2)}
+th{font-weight:600;border-bottom:1px solid rgba(255,255,255,0.08)}
+th:first-child,td:first-child{text-align:left;font-weight:600;color:var(--accent2)}
+
+/* Testimonials */
+.tc{background:rgba(9,30,66,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.5rem}
+.tc .stars{color:var(--gold);font-size:.9rem;margin-bottom:.5rem}
+.tc p{font-size:.85rem;color:var(--text2);font-style:italic;line-height:1.6;margin-bottom:1rem}
+.tc .tn{font-weight:600;font-size:.85rem}
+.tc .tr{font-size:.8rem;color:var(--text3)}
+.tc .tv{color:#007252;font-size:.8rem;margin-top:.25rem}
+
+/* CTA */
+.cta{text-align:center;padding:4rem 2rem;background:linear-gradient(135deg,rgba(0,82,204,0.05),transparent);border-top:1px solid rgba(255,255,255,0.05)}
+.btns{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
+
+/* Footer */
 footer{padding:3rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
-footer .copy{color:var(--text3);font-size:.85rem;margin-bottom:.75rem}
-footer .tech{color:rgba(255,255,255,0.12);font-size:.75rem;margin-bottom:1rem}
-.legal{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+footer .copy{color:var(--text3);font-size:.85rem;margin-bottom:.5rem}
+.legal{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-top:.75rem}
 .legal a{color:var(--text3);font-size:.8rem;cursor:pointer}
 .legal a:hover{color:var(--accent)}
+
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px}
+@media(max-width:768px){.nav-links a.nav-h{display:none}.stats{grid-template-columns:repeat(2,1fr)}}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
+<nav>
+  <div class="logo">AlcaTech<span>-</span>WebDesign</div>
+  <div class="nav-links" id="nav">
+    <a class="nav-h active" data-tab="inicio">Inicio</a>
+    <a class="nav-h" data-tab="servicios">Servicios</a>
+    <a class="nav-h" data-tab="planes">Planes</a>
+    <a class="nav-h" data-tab="contacto">Contacto</a>
+    <div class="lang-btn" onclick="toggleLang()">
+      🌐 <span id="lang-label">ES</span>
+      <div class="lang-dropdown" id="lang-dd">
+        <button onclick="setLang('es')">🇪🇸 Español</button>
+        <button onclick="setLang('en')">🇬🇧 English</button>
+        <button onclick="setLang('it')">🇮🇹 Italiano</button>
+        <button onclick="setLang('de')">🇩🇪 Deutsch</button>
+        <button onclick="setLang('fr')">🇫🇷 Français</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
 <!-- INICIO -->
+<div class="tab-content active" id="tab-inicio">
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-glow"></div>
+  <div class="hero-bg"></div><div class="hero-glow"></div>
   <div class="inner">
     <div>
-      <div class="badge">✦ INGENIERÍA DE AUTOR • DISPONIBLE</div>
+      <div class="badge">✦ <span id="i-badge">INGENIERÍA DE AUTOR • DISPONIBLE</span></div>
       <div class="sub">AlcaTech-WebDesign</div>
       <h1><span class="g">Kelvin</span> Alcántara</h1>
-      <p class="role">Fundador y director de AlcaTech-WebDesign. Ingeniería frontend, arquitectura de experiencias digitales y soluciones web de alto impacto.</p>
-      <p style="font-size:.95rem;color:var(--text2);line-height:1.7;margin-bottom:1.5rem">Transformo ideas complejas en plataformas digitales rápidas, robustas e interactivas. No creo páginas genéricas; diseño sistemas autónomos que impulsan negocios.</p>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap">
-        <a href="#plans" class="btn btn-p">Ver Planes →</a>
-        <a href="https://wa.me/393801028239" class="btn btn-o">WhatsApp</a>
+      <p class="role" id="i-role">Fundador y director de AlcaTech-WebDesign. Ingeniería frontend, arquitectura de experiencias digitales y soluciones web de alto impacto.</p>
+      <p style="font-size:.95rem;color:var(--text2);line-height:1.7;margin-bottom:1.5rem" id="i-desc">Transformo ideas complejas en plataformas digitales rápidas, robustas e interactivas. No creo páginas genéricas; diseño sistemas autónomos que impulsan negocios.</p>
+      <div class="btns" style="justify-content:flex-start">
+        <a href="https://wa.me/393801028239" class="btn btn-p" id="i-btn1">WhatsApp →</a>
+        <a href="mailto:alcatechwebdesign@gmail.com" class="btn btn-o" id="i-btn2">Email</a>
       </div>
       <div class="stats">
-        <div><div class="n" style="color:var(--accent)">30+</div><div class="l">Proyectos</div></div>
-        <div><div class="n" style="color:var(--accent2)">100%</div><div class="l">Satisfacción</div></div>
-        <div><div class="n" style="color:var(--accent3)">98</div><div class="l">Lighthouse</div></div>
-        <div><div class="n" style="color:#007252">SSL</div><div class="l">Seguro</div></div>
+        <div><div class="n" style="color:var(--accent)">30+</div><div class="l" id="i-s1">Proyectos</div></div>
+        <div><div class="n" style="color:var(--accent2)">100%</div><div class="l" id="i-s2">Satisfacción</div></div>
+        <div><div class="n" style="color:var(--accent3)">98</div><div class="l" id="i-s3">Lighthouse</div></div>
+        <div><div class="n" style="color:#007252">SSL</div><div class="l" id="i-s4">Seguro</div></div>
       </div>
     </div>
     <div style="text-align:center">
       <div class="avatar">KA</div>
-      <div style="font-size:.9rem;font-weight:600;color:var(--accent2)">Ingeniería de Autor</div>
-      <div style="font-size:.85rem;color:var(--text3);margin-top:.3rem">Soluciones que Impactan</div>
+      <div style="font-size:.9rem;font-weight:600;color:var(--accent2)" id="i-sub1">Ingeniería de Autor</div>
+      <div style="font-size:.85rem;color:var(--text3);margin-top:.3rem" id="i-sub2">Soluciones que Impactan</div>
     </div>
   </div>
 </section>
 
-<!-- SOBRE MI -->
-<section style="background:rgba(9,30,66,0.15)">
+<section style="background:rgba(9,30,66,0.1);padding:3rem 2rem">
   <div class="inner">
-    <div class="label">✦ Sobre Mí</div>
-    <h2 class="st">Ingeniería de <span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Autor</span></h2>
-    <p class="desc" style="max-width:100%">AlcaTech-WebDesign transforma ideas complejas en plataformas digitales de alto rendimiento. Ingeniería frontend de vanguardia con enfoque en resultados.</p>
-    <div class="about-g">
-      <div>
-        <p>Me especializo en optimización técnica avanzada, despliegue eficiente de arquitecturas de software e ingeniería frontend con herramientas locales y de vanguardia.</p>
-        <p>No creo páginas web genéricas. Diseño soluciones rápidas, robustas e interactivas, integrando sistemas autónomos y automatizaciones a medida para que tu negocio destaque en el entorno digital.</p>
-      </div>
-      <div>
-        <div style="font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">✦ Mi Metodología</div>
-        <p style="color:var(--text2);font-size:.9rem;line-height:1.6">Cuatro pilares fundamentales que guían cada proyecto que emprendo.</p>
-      </div>
-    </div>
+    <div class="label">✦ <span id="i-about-l">Sobre Mí</span></div>
+    <h2 class="st" id="i-about-t">Ingeniería de <span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Autor</span></h2>
+    <p class="desc" style="max-width:100%" id="i-about-d">AlcaTech-WebDesign transforma ideas complejas en plataformas de alto rendimiento.</p>
+    <p style="font-size:.95rem;color:var(--text2);line-height:1.8;margin-bottom:1rem" id="i-about-p1">Me especializo en optimización técnica avanzada, despliegue eficiente de arquitecturas de software e ingeniería frontend con herramientas locales y de vanguardia.</p>
+    <p style="font-size:.95rem;color:var(--text2);line-height:1.8" id="i-about-p2">No creo páginas genéricas. Diseño soluciones rápidas, robustas e interactivas, con sistemas autónomos y automatizaciones a medida.</p>
   </div>
 </section>
 
-<!-- METODOLOGIA -->
-<section>
+<section style="padding:3rem 2rem">
   <div class="inner">
-    <div class="label">✦ Metodología</div>
-    <h2 class="st">Mi enfoque de trabajo</h2>
-    <div class="g4">
-      <div class="card"><div class="nm">⚡</div><h4>Rendimiento y Velocidad</h4><p><strong style="color:var(--accent2)">Código Limpio, Cargas Instantáneas</strong> — Optimizo cada línea para velocidades mínimas. Un sitio rápido retiene visitantes y mejora el posicionamiento.</p></div>
-      <div class="card"><div class="nm">🤖</div><h4>Automatización y Sistemas</h4><p><strong style="color:var(--accent2)">Automatización Estratégica</strong> — Desarrollo integraciones que reducen tareas repetitivas. Tu plataforma trabaja por ti 24/7.</p></div>
-      <div class="card"><div class="nm">📈</div><h4>Escalabilidad y Futuro</h4><p><strong style="color:var(--accent2)">Arquitectura Escalable</strong> — Soluciones modulares preparadas para crecer sin reescribir el proyecto.</p></div>
-      <div class="card"><div class="nm">🎯</div><h4>Conversión y Negocio</h4><p><strong style="color:var(--accent2)">Diseño con Propósito</strong> — Cada elemento está orientado a captar clientes, retener usuarios y potenciar tu marca.</p></div>
-    </div>
+    <div class="label">✦ <span id="i-method-l">Metodología</span></div>
+    <h2 class="st" id="i-method-t">Mi enfoque de trabajo</h2>
+    <div class="g4" style="margin-top:1rem" id="i-methods"></div>
   </div>
 </section>
 
-<!-- SKILLS -->
-<section style="background:rgba(9,30,66,0.15)">
+<section style="background:rgba(9,30,66,0.1);padding:3rem 2rem">
   <div class="inner">
-    <div class="label">✦ Habilidades</div>
-    <h2 class="st">Tecnologías que domino</h2>
+    <div class="label">✦ <span id="i-skills-l">Habilidades</span></div>
+    <h2 class="st" id="i-skills-t">Tecnologías que domino</h2>
     <div class="skills">
       <span class="skill">React / Next.js</span>
       <span class="skill">Node.js / Express</span>
@@ -170,76 +201,181 @@ footer .tech{color:rgba(255,255,255,0.12);font-size:.75rem;margin-bottom:1rem}
     </div>
   </div>
 </section>
+</div>
 
-<!-- PLANES -->
-<section id="plans">
+<!-- SERVICIOS -->
+<div class="tab-content" id="tab-servicios">
+<section style="padding:5rem 2rem">
   <div class="inner">
-    <div class="label">✦ Planes</div>
-    <h2 class="st">Planes de Desarrollo Web</h2>
-    <p class="desc">Soluciones profesionales para cada etapa de tu negocio, desde landing pages hasta plataformas con inteligencia artificial.</p>
-    <div class="g2">
-      <div class="card"><div class="ic">🚀</div><h4>Landing Simple</h4><div class="sub">Presencia Profesional</div><div class="pr">$200+</div><div class="rn">$200 — $500</div><ul><li>Diseño responsive completo</li><li>Animaciones scroll y hover</li><li>SEO on-page + Google Analytics</li><li>SSL HTTPS incluido</li><li>1 revisión de diseño</li></ul><a href="https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01" target="_blank" class="buy">Contratar →</a></div>
-      <div class="card pop"><div class="bdg">RECOMENDADO</div><div class="ic">⚡</div><h4>Landing Empresarial</h4><div class="sub">Múltiples Secciones</div><div class="pr">$500+</div><div class="rn">$500 — $1,200</div><ul><li>React + Tailwind + Motion</li><li>Hasta 5 secciones personalizadas</li><li>Formulario inteligente con lógica</li><li>Panel de administración básico</li><li>2 revisiones de diseño</li></ul><a href="https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03" target="_blank" class="buy">Contratar →</a></div>
-      <div class="card"><div class="ic">🎬</div><h4>Landing Cinematográfico</h4><div class="sub">Experiencia Inmersiva</div><div class="pr">$1,200+</div><div class="rn">$1,200 — $2,500</div><ul><li>React + Three.js + WebGL</li><li>Animaciones 3D, WebGL y Parallax</li><li>Video background interactivo</li><li>Micro-interacciones premium</li><li>3 revisiones de diseño</li></ul><a href="https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04" target="_blank" class="buy">Contratar →</a></div>
-      <div class="card"><div class="ic">🧠</div><h4>Portal Interactivo SaaS</h4><div class="sub">Plataforma Autónoma</div><div class="pr">$2,500+</div><div class="rn">$2,500 — $6,000</div><ul><li>Full Stack (React + Node)</li><li>Base de datos + API REST</li><li>Chat con IA inteligente</li><li>Panel de administración completo</li><li>Automatizaciones a medida</li></ul><a href="https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05" target="_blank" class="buy">Contratar →</a></div>
-    </div>
+    <div class="label">✦ <span id="s-l">Servicios</span></div>
+    <h2 class="st" id="s-t">Planes de Desarrollo Web</h2>
+    <p class="desc" id="s-d">Soluciones profesionales para cada etapa de tu negocio.</p>
   </div>
 </section>
-
-<!-- COMPARATIVA -->
-<section style="background:rgba(9,30,66,0.15)">
+<section style="background:rgba(9,30,66,0.1);padding:2rem 2rem">
   <div class="inner">
-    <div class="label">✦ Comparativa</div>
-    <h2 class="st">Elige el plan ideal</h2>
-    <p class="desc">Características detalladas de cada solución.</p>
+    <div class="label">✦ <span id="s-comp-l">Comparativa</span></div>
+    <h2 class="st" id="s-comp-t">Elige el plan ideal</h2>
     <div class="table-w">
       <table>
-        <thead><tr><th>Características</th><th>Landing Simple</th><th style="color:var(--accent)">Landing Empresarial</th><th>Landing Cinematográfico</th><th>Portal SaaS</th></tr></thead>
+        <thead><tr><th id="s-f">Características</th><th>Landing Simple</th><th style="color:var(--accent)">Landing Empresarial</th><th>Landing Cinematográfico</th><th>Portal SaaS</th></tr></thead>
         <tbody>
-          <tr><td>Tecnología Base</td><td>HTML + CSS</td><td style="color:var(--accent)">React + Tailwind</td><td>React + Three.js</td><td>Full Stack</td></tr>
-          <tr><td>Entrega</td><td>24-48h</td><td style="color:var(--accent)">3-5 días</td><td>5-10 días</td><td>2-4 sem</td></tr>
-          <tr><td>Secciones</td><td>1 sección</td><td style="color:var(--accent)">Hasta 5</td><td>Hasta 8</td><td>Hasta 12+</td></tr>
-          <tr><td>Revisiones</td><td>1</td><td style="color:var(--accent)">2</td><td>3</td><td>Ilimitadas</td></tr>
+          <tr><td id="s-r1">Tecnología Base</td><td>HTML + CSS</td><td style="color:var(--accent)">React + Tailwind</td><td>React + Three.js</td><td>Full Stack</td></tr>
+          <tr><td id="s-r2">Tiempo de Entrega</td><td>24-48h</td><td style="color:var(--accent)">3-5 días</td><td>5-10 días</td><td>2-4 sem</td></tr>
+          <tr><td id="s-r3">Secciones Incluidas</td><td>1 sección</td><td style="color:var(--accent)">Hasta 5</td><td>Hasta 8</td><td>Hasta 12+</td></tr>
+          <tr><td id="s-r4">Revisiones de Diseño</td><td>1</td><td style="color:var(--accent)">2</td><td>3</td><td>Ilimitadas</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
+</div>
 
-<!-- TESTIMONIOS -->
-<section>
+<!-- PLANES -->
+<div class="tab-content" id="tab-planes">
+<section style="padding:5rem 2rem">
   <div class="inner">
-    <div class="label">✦ Testimonios</div>
-    <h2 class="st">Lo que dicen nuestros clientes</h2>
-    <div class="g3" style="margin-top:2rem">
-      <div class="t-card"><div class="stars">★★★★★</div><p>"El plan Empresarial transformó nuestro negocio. La velocidad de carga subió un 200%."</p><div class="tname">Pedro Martínez</div><div class="trole">CEO — Inversiones del Sur</div><div class="tv">✓ Cliente Verificado</div></div>
-      <div class="t-card"><div class="stars">★★★★★</div><p>"Pasamos de un sitio estático a una plataforma con IA. Ahora los clientes reservan solos."</p><div class="tname">Dra. Ana García</div><div class="trole">Directora Médica — Clínica MediSalud</div><div class="tv">✓ Cliente Verificado</div></div>
-      <div class="t-card"><div class="stars">★★★★★</div><p>"El diseño cinematográfico superó todas las expectativas. La experiencia 3D nos diferencia."</p><div class="tname">Carlos Ruiz</div><div class="trole">Propietario — Restaurante La Mesa</div><div class="tv">✓ Cliente Verificado</div></div>
-    </div>
+    <div class="label">✦ <span id="p-l">Planes</span></div>
+    <h2 class="st" id="p-t">Nuestros precios</h2>
+    <p class="desc" id="p-d">Elige el plan que mejor se adapte a tu negocio.</p>
+    <div class="g2" id="p-cards"></div>
   </div>
 </section>
+<section style="background:rgba(9,30,66,0.1);padding:3rem 2rem">
+  <div class="inner">
+    <div class="label">✦ <span id="p-test-l">Testimonios</span></div>
+    <h2 class="st" id="p-test-t">Lo que dicen nuestros clientes</h2>
+    <div class="g3" style="margin-top:1.5rem" id="p-testimonials"></div>
+  </div>
+</section>
+</div>
 
-<!-- CTA -->
-<section class="cta">
-  <h2>¿Listo para tu <span style="color:var(--accent)">próximo proyecto</span>?</h2>
-  <p>Hablemos y creemos algo increíble juntos. Sin compromiso.</p>
+<!-- CONTACTO -->
+<div class="tab-content" id="tab-contacto">
+<section class="cta" style="min-height:80vh;display:flex;flex-direction:column;justify-content:center">
+  <h2 id="c-t1">¿Listo para tu</h2>
+  <h2 style="color:var(--accent)" id="c-t2">próximo proyecto?</h2>
+  <p style="color:var(--text2);max-width:480px;margin:1rem auto 2rem;line-height:1.7;font-size:1rem" id="c-d">Hablemos y creemos algo increíble juntos. Sin compromiso.</p>
   <div class="btns">
-    <a href="https://wa.me/393801028239" target="_blank" class="btn btn-p">WhatsApp →</a>
-    <a href="mailto:alcatechwebdesign@gmail.com" class="btn btn-o">Email</a>
+    <a href="https://wa.me/393801028239" target="_blank" class="btn btn-p" id="c-btn1">WhatsApp →</a>
+    <a href="mailto:alcatechwebdesign@gmail.com" class="btn btn-o" id="c-btn2">Email</a>
     <a href="https://www.instagram.com/alcatechwebdesign" target="_blank" class="btn btn-o">Instagram</a>
     <a href="https://www.facebook.com/profile.php?id=61591897798944" target="_blank" class="btn btn-o">Facebook</a>
   </div>
 </section>
+</div>
 
 <footer>
   <div class="copy">© 2026 AlcaTech-WebDesign</div>
-  <div class="tech">Optimización de alto impacto • Despliegue Git • SSL HTTPS Activo</div>
+  <div style="color:rgba(255,255,255,0.12);font-size:.75rem;margin-bottom:.75rem" id="footer-tag">Optimización de alto impacto • Despliegue Git • SSL HTTPS Activo</div>
   <div class="legal">
-    <a>Aviso Legal</a>
-    <a>Términos del Servicio</a>
-    <a>Privacidad y Cookies</a>
+    <a id="f1">Aviso Legal</a>
+    <a id="f2">Términos del Servicio</a>
+    <a id="f3">Privacidad y Cookies</a>
   </div>
 </footer>
 
+<script>
+const L = {
+  es:{nav:['Inicio','Servicios','Planes','Contacto'],i:{b:'INGENIERÍA DE AUTOR • DISPONIBLE',r:'Fundador y director de AlcaTech-WebDesign. Ingeniería frontend, arquitectura de experiencias digitales y soluciones web de alto impacto.',d:'Transformo ideas complejas en plataformas digitales rápidas, robustas e interactivas. No creo páginas genéricas; diseño sistemas autónomos que impulsan negocios.',b1:'WhatsApp →',b2:'Email',s1:'Proyectos',s2:'Satisfacción',s3:'Lighthouse',s4:'Seguro',sb1:'Ingeniería de Autor',sb2:'Soluciones que Impactan',al:'Sobre Mí',at:'Ingeniería de',ad:'AlcaTech-WebDesign transforma ideas complejas en plataformas de alto rendimiento.',ap1:'Me especializo en optimización técnica avanzada, despliegue eficiente de arquitecturas de software e ingeniería frontend con herramientas locales y de vanguardia.',ap2:'No creo páginas genéricas. Diseño soluciones rápidas, robustas e interactivas, con sistemas autónomos y automatizaciones a medida.',ml:'Metodología',mt:'Mi enfoque de trabajo',mc:[{t:'Rendimiento y Velocidad (WPO)',d:'Código Limpio, Cargas Instantáneas — Optimizo cada línea para velocidades mínimas. Un sitio rápido retiene visitantes y mejora el posicionamiento.'},{t:'Automatización y Sistemas',d:'Automatización Estratégica — Desarrollo integraciones que reducen tareas repetitivas. Tu plataforma trabaja por ti 24/7.'},{t:'Escalabilidad y Futuro',d:'Arquitectura Escalable — Soluciones modulares preparadas para crecer sin reescribir el proyecto desde cero.'},{t:'Conversión y Negocio',d:'Diseño con Propósito Comercial — Cada elemento está orientado a captar clientes, retener usuarios y potenciar tu marca.'}],sl:'Habilidades',st:'Tecnologías que domino'},s:{l:'Servicios',t:'Planes de Desarrollo Web',d:'Soluciones profesionales para cada etapa de tu negocio, desde landing pages hasta plataformas con inteligencia artificial.',cl:'Comparativa',ct:'Elige el plan ideal',f:'Características',r:['Tecnología Base','Tiempo de Entrega','Secciones Incluidas','Revisiones de Diseño']},p:{l:'Planes',t:'Nuestros precios',d:'Elige el plan que mejor se adapte a tu negocio.',pl:[{n:'Landing Simple',s:'Presencia Profesional',p:'$200+',r:'$200 — $500',f:['Diseño responsive','Animaciones scroll y hover','SEO + Google Analytics','SSL HTTPS','1 revisión'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},{n:'Landing Empresarial',s:'Múltiples Secciones',p:'$500+',r:'$500 — $1,200',b:'RECOMENDADO',f:['React + Tailwind + Motion','Hasta 5 secciones','Formulario inteligente','Panel admin básico','2 revisiones'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},{n:'Landing Cinematográfico',s:'Experiencia Inmersiva',p:'$1,200+',r:'$1,200 — $2,500',f:['React + Three.js + WebGL','Animaciones 3D, WebGL','Video background interactivo','Micro-interacciones','3 revisiones'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},{n:'Portal Interactivo SaaS',s:'Plataforma Autónoma',p:'$2,500+',r:'$2,500 — $6,000',f:['Full Stack (React + Node)','Base de datos + API','Chat con IA inteligente','Panel admin completo','Automatizaciones'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}],tl:'Testimonios',tt:'Lo que dicen nuestros clientes',tc:[{t:'El plan Empresarial transformó nuestro negocio. La velocidad de carga subió un 200%.',n:'Pedro Martínez',r:'CEO — Inversiones del Sur'},{t:'Pasamos de un sitio estático a una plataforma con IA. Ahora los clientes reservan solos.',n:'Dra. Ana García',r:'Directora Médica — Clínica MediSalud'},{t:'El diseño cinematográfico superó todas las expectativas. La experiencia 3D nos diferencia.',n:'Carlos Ruiz',r:'Propietario — Restaurante La Mesa'}]},c:{t1:'¿Listo para tu',t2:'próximo proyecto?',d:'Hablemos y creemos algo increíble juntos. Sin compromiso.',b1:'WhatsApp →',b2:'Email'},f:['Aviso Legal','Términos del Servicio','Privacidad y Cookies'],ft:'Optimización de alto impacto • Despliegue Git • SSL HTTPS Activo'},
+  en:{nav:['Home','Services','Plans','Contact'],i:{b:'AUTHOR ENGINEERING • AVAILABLE',r:'Founder and director of AlcaTech-WebDesign. Frontend engineering, digital experience architecture, and high-impact web solutions.',d:'I transform complex ideas into fast, robust, interactive digital platforms. I don\'t create generic pages; I design autonomous systems that drive businesses.',b1:'WhatsApp →',b2:'Email',s1:'Projects',s2:'Satisfaction',s3:'Lighthouse',s4:'Secure',sb1:'Author Engineering',sb2:'Solutions that Impact',al:'About Me',at:'Author',ad:'AlcaTech-WebDesign transforms complex ideas into high-performance digital platforms.',ap1:'I specialize in advanced technical optimization, efficient software architecture deployment, and frontend engineering with cutting-edge tools.',ap2:'I don\'t create generic pages. I design fast, robust, interactive solutions with autonomous systems and custom automation.',ml:'Methodology',mt:'My work approach',mc:[{t:'Performance & Speed (WPO)',d:'Clean Code, Instant Loads — I optimize every line for minimal load times. A fast site retains visitors and improves rankings.'},{t:'Automation & Systems',d:'Strategic Automation — I develop integrations that reduce repetitive tasks. Your platform works for you 24/7.'},{t:'Scalability & Future',d:'Scalable Architecture — Modular solutions ready to grow without rewriting the project from scratch.'},{t:'Conversion & Business',d:'Design with Business Purpose — Every element is aimed at capturing clients and growing your brand.'}],sl:'Skills',st:'Technologies I master'},s:{l:'Services',t:'Web Development Plans',d:'Professional solutions for every stage of your business, from landing pages to AI-powered platforms.',cl:'Comparison',ct:'Choose the ideal plan',f:'Features',r:['Base Technology','Delivery Time','Included Sections','Design Revisions']},p:{l:'Plans',t:'Our prices',d:'Choose the plan that best fits your business.',pl:[{n:'Landing Simple',s:'Professional Presence',p:'$200+',r:'$200 — $500',f:['Responsive design','Scroll & hover animations','SEO + Google Analytics','SSL HTTPS','1 revision'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},{n:'Landing Business',s:'Multiple Sections',p:'$500+',r:'$500 — $1,200',b:'RECOMMENDED',f:['React + Tailwind + Motion','Up to 5 sections','Smart form with logic','Basic admin panel','2 revisions'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},{n:'Landing Cinematic',s:'Immersive Experience',p:'$1,200+',r:'$1,200 — $2,500',f:['React + Three.js + WebGL','3D, WebGL animations','Interactive video bg','Premium micro-interactions','3 revisions'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},{n:'SaaS Interactive Portal',s:'Autonomous Platform',p:'$2,500+',r:'$2,500 — $6,000',f:['Full Stack (React + Node)','Database + API','AI smart chat','Complete admin panel','Custom automation'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}],tl:'Testimonials',tt:'What our clients say',tc:[{t:'The Business plan transformed our business. Load speed increased 200%.',n:'Pedro Martínez',r:'CEO — Inversiones del Sur'},{t:'We went from a static site to an AI platform. Clients now book on their own.',n:'Dr. Ana García',r:'Medical Director — MediSalud Clinic'},{t:'The cinematic design exceeded all expectations. The 3D experience sets us apart.',n:'Carlos Ruiz',r:'Owner — La Mesa Restaurant'}]},c:{t1:'Ready for your',t2:'next project?',d:'Let\'s talk and create something amazing together. No commitment.',b1:'WhatsApp →',b2:'Email'},f:['Legal Notice','Terms of Service','Privacy & Cookies'],ft:'High-Impact Optimization • Git Deployment • Active SSL HTTPS'},
+  it:{nav:['Home','Servizi','Piani','Contatto'],i:{b:'INGEGNERIA D\'AUTORE • DISPONIBILE',r:'Fondatore e direttore di AlcaTech-WebDesign. Ingegneria frontend, architettura di esperienze digitali e soluzioni web ad alto impatto.',d:'Trasformo idee complesse in piattaforme digitali veloci, robuste e interattive.',b1:'WhatsApp →',b2:'Email',s1:'Progetti',s2:'Soddisfazione',s3:'Lighthouse',s4:'Sicuro',sb1:'Ingegneria d\'Autore',sb2:'Soluzioni che Impatto',al:'Su di Me',at:'Ingegneria d\'',ad:'AlcaTech-WebDesign trasforma idee complesse in piattaforme ad alte prestazioni.',ap1:'Mi specializzo in ottimizzazione tecnica avanzata e ingegneria frontend.',ap2:'Non creo pagine generiche. Progetto soluzioni veloci, robuste e interattive.',ml:'Metodologia',mt:'Il mio approccio',mc:[{t:'Performance e Velocità',d:'Codice Pulito, Carichi Istantanei — Ottimizzo ogni linea per velocità minime.'},{t:'Automazione e Sistemi',d:'Automazione Strategica — Sviluppo integrazioni che riducono compiti ripetitivi.'},{t:'Scalabilità e Futuro',d:'Architettura Scalabile — Soluzioni modulari pronte a crescere.'},{t:'Conversione e Business',d:'Design con Scopo Commerciale — Ogni elemento mira a catturare clienti.'}],sl:'Competenze',st:'Tecnologie che padroneggio'},s:{l:'Servizi',t:'Piani di Sviluppo Web',d:'Soluzioni professionali per ogni fase del tuo business.',cl:'Confronto',ct:'Scegli il piano ideale',f:'Caratteristiche',r:['Tecnologia Base','Tempi di Consegna','Sezioni Incluse','Revisioni di Design']},p:{l:'Piani',t:'I nostri prezzi',d:'Scegli il piano più adatto alla tua attività.',pl:[{n:'Landing Simple',s:'Presenza Professionale',p:'€200+',r:'€200 — €500',f:['Design responsive','Animazioni scroll/hover','SEO + Google Analytics','SSL HTTPS','1 revisione'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},{n:'Landing Aziendale',s:'Sezioni Multiple',p:'€500+',r:'€500 — €1,200',b:'RACCOMANDATO',f:['React + Tailwind + Motion','Fino a 5 sezioni','Modulo intelligente','Pannello admin base','2 revisioni'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},{n:'Landing Cinematografico',s:'Esperienza Immersiva',p:'€1,200+',r:'€1,200 — €2,500',f:['React + Three.js','Animazioni 3D/WebGL','Video background','Micro-interazioni','3 revisioni'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},{n:'Portale SaaS',s:'Piattaforma Autonoma',p:'€2,500+',r:'€2,500 — €6,000',f:['Full Stack (React+Node)','Database + API','Chat IA intelligente','Pannello admin completo','Automazioni'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}],tl:'Testimonianze',tt:'Cosa dicono i clienti',tc:[{t:'Il piano Aziendale ha trasformato la nostra attività.',n:'Pedro Martínez',r:'CEO — Inversiones del Sur'},{t:'Da sito statico a piattaforma IA. I clienti prenotano da soli.',n:'Dott.ssa Ana García',r:'Direttrice — Clinica MediSalud'},{t:'Il design cinematografico ha superato le aspettative.',n:'Carlos Ruiz',r:'Proprietario — Ristorante La Mesa'}]},c:{t1:'Pronto per il tuo',t2:'prossimo progetto?',d:'Parliamone e creiamo qualcosa di straordinario.',b1:'WhatsApp →',b2:'Email'},f:['Avviso Legale','Termini di Servizio','Privacy'],ft:'Ottimizzazione ad Alto Impatto • Deploy Git • SSL HTTPS Attivo'},
+  de:{nav:['Start','Services','Pakete','Kontakt'],i:{b:'AUTOREN-ENGINEERING • VERFÜGBAR',r:'Gründer und Direktor von AlcaTech-WebDesign.',d:'Ich verwandle komplexe Ideen in schnelle, robuste digitale Plattformen.',b1:'WhatsApp →',b2:'Email',s1:'Projekte',s2:'Zufriedenheit',s3:'Lighthouse',s4:'Sicher',sb1:'Autoren-Engineering',sb2:'Lösungen mit Wirkung',al:'Über mich',at:'Autoren-',ad:'AlcaTech-WebDesign verwandelt komplexe Ideen in leistungsstarke Plattformen.',ap1:'Ich spezialisiere mich auf technische Optimierung und Frontend-Engineering.',ap2:'Ich erstelle keine generischen Seiten. Ich entwerfe schnelle, robuste Lösungen.',ml:'Methodik',mt:'Mein Arbeitsansatz',mc:[{t:'Leistung & Geschwindigkeit',d:'Sauberer Code, sofortige Ladung.'},{t:'Automatisierung & Systeme',d:'Strategische Automatisierung.'},{t:'Skalierbarkeit & Zukunft',d:'Modulare Architektur.'},{t:'Konversion & Geschäft',d:'Design mit Geschäftszweck.'}],sl:'Fähigkeiten',st:'Technologien, die ich beherrsche'},s:{l:'Services',t:'Webentwicklung Pakete',d:'Professionelle Lösungen.',cl:'Vergleich',ct:'Wählen Sie den idealen Plan',f:'Merkmale',r:['Basis-Technologie','Lieferzeit','Enthaltene Abschnitte','Design-Revisionen']},p:{l:'Pakete',t:'Unsere Preise',d:'Wählen Sie den Plan.',pl:[{n:'Landing Simple',s:'Professionelle Präsenz',p:'€200+',r:'€200 — €500',f:['Responsive Design','Scroll/Hover Animationen','SEO + Analytics','SSL HTTPS','1 Revision'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},{n:'Landing Business',s:'Mehrere Abschnitte',p:'€500+',r:'€500 — €1,200',b:'EMPFEHLUNG',f:['React + Tailwind','Bis zu 5 Abschnitte','Intelligentes Formular','Admin-Panel','2 Revisionen'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},{n:'Landing Kinematografisch',s:'Immersion',p:'€1,200+',r:'€1,200 — €2,500',f:['React + Three.js','3D/WebGL Animationen','Video Hintergrund','Mikro-Interaktionen','3 Revisionen'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},{n:'SaaS Portal',s:'Autonome Plattform',p:'€2,500+',r:'€2,500 — €6,000',f:['Full Stack','Datenbank + API','KI-Chat','Admin-Panel komplett','Automatisierung'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}],tl:'Testimonien',tt:'Was Kunden sagen',tc:[{t:'Der Geschäftsplan hat uns transformiert.',n:'Pedro Martínez',r:'CEO — Inversiones del Sur'},{t:'Von statischer Seite zu KI-Plattform.',n:'Dr. Ana García',r:'Med. Direktorin — MediSalud'},{t:'Das Design übertraf alle Erwartungen.',n:'Carlos Ruiz',r:'Inhaber — Restaurant La Mesa'}]},c:{t1:'Bereit für Ihr',t2:'nächstes Projekt?',d:'Reden wir und schaffen etwas Großartiges.',b1:'WhatsApp →',b2:'Email'},f:['Impressum','AGB','Datenschutz'],ft:'Hochwirkungs-Optimierung • Git • SSL HTTPS Aktiv'},
+  fr:{nav:['Accueil','Services','Forfaits','Contact'],i:{b:'INGÉNIERIE D\'AUTEUR • DISPONIBLE',r:'Fondateur et directeur d\'AlcaTech-WebDesign.',d:'Je transforme des idées complexes en plateformes numériques rapides.',b1:'WhatsApp →',b2:'Email',s1:'Projets',s2:'Satisfaction',s3:'Lighthouse',s4:'Sécurisé',sb1:'Ingénierie d\'Auteur',sb2:'Solutions qui Impactent',al:'À propos',at:'Ingénierie d\'',ad:'AlcaTech-WebDesign transforme des idées en plateformes performantes.',ap1:'Je me spécialise en optimisation technique avancée.',ap2:'Je ne crée pas de pages génériques.',ml:'Méthodologie',mt:'Mon approche',mc:[{t:'Performance & Vitesse',d:'Code propre, chargements instantanés.'},{t:'Automatisation & Systèmes',d:'Automatisation stratégique.'},{t:'Évolutivité & Futur',d:'Architecture modulaire.'},{t:'Conversion & Business',d:'Design à but commercial.'}],sl:'Compétences',st:'Technologies maîtrisées'},s:{l:'Services',t:'Forfaits de Développement Web',d:'Solutions professionnelles.',cl:'Comparaison',ct:'Choisissez le forfait idéal',f:'Caractéristiques',r:['Technologie de base','Délai de livraison','Sections incluses','Révisions']},p:{l:'Forfaits',t:'Nos prix',d:'Choisissez le forfait.',pl:[{n:'Landing Simple',s:'Présence Pro',p:'€200+',r:'€200 — €500',f:['Design responsive','Animations','SEO + Analytics','SSL HTTPS','1 révision'],u:'https://buy.stripe.com/test_14AeVccBka2Z8ngauS0RG01'},{n:'Landing Entreprise',s:'Sections Multiples',p:'€500+',r:'€500 — €1,200',b:'RECOMMANDÉ',f:['React + Tailwind','Jusqu\'à 5 sections','Formulaire intelligent','Panneau admin','2 révisions'],u:'https://buy.stripe.com/test_6oU28qbxg0speLE8mK0RG03'},{n:'Landing Cinématographique',s:'Expérience Immersive',p:'€1,200+',r:'€1,200 — €2,500',f:['React + Three.js','Animations 3D','Vidéo background','Micro-interactions','3 révisions'],u:'https://buy.stripe.com/test_6oUcN41WG0sp47046u0RG04'},{n:'Portail SaaS',s:'Plateforme Autonome',p:'€2,500+',r:'€2,500 — €6,000',f:['Full Stack (React+Node)','Base de données + API','Chat IA','Panneau admin complet','Automatisations'],u:'https://buy.stripe.com/test_dRm4gy30K5MJfPIauS0RG05'}],tl:'Témoignages',tt:'Ce que disent nos clients',tc:[{t:'Le plan Entreprise a transformé notre activité.',n:'Pedro Martínez',r:'CEO — Inversiones del Sur'},{t:'De site statique à plateforme IA.',n:'Dr. Ana García',r:'Directrice Médicale — MediSalud'},{t:'Le design a dépassé les attentes.',n:'Carlos Ruiz',r:'Propriétaire — Restaurant La Mesa'}]},c:{t1:'Prêt pour votre',t2:'prochain projet?',d:'Parlons-en et créons ensemble.',b1:'WhatsApp →',b2:'Email'},f:['Mentions Légales','CGV','Confidentialité'],ft:'Optimisation à Fort Impact • Git • SSL HTTPS Actif'}
+};
+
+let lang='es', showLang=false;
+
+function t(){return L[lang]||L.es}
+
+function render(){
+  const l=t(),i=l.i,s=l.s,p=l.p,c=l.c,f=l.f;
+  document.querySelectorAll('.nav-links a[data-tab]').forEach((a,i)=>{a.textContent=l.nav[i]});
+  document.getElementById('lang-label').textContent=lang.toUpperCase();
+  // Inicio
+  document.getElementById('i-badge').textContent=i.b;
+  document.getElementById('i-role').textContent=i.r;
+  document.getElementById('i-desc').textContent=i.d;
+  document.getElementById('i-btn1').textContent=i.b1;
+  document.getElementById('i-btn2').textContent=i.b2;
+  document.getElementById('i-s1').textContent=i.s1;
+  document.getElementById('i-s2').textContent=i.s2;
+  document.getElementById('i-s3').textContent=i.s3;
+  document.getElementById('i-s4').textContent=i.s4;
+  document.getElementById('i-sub1').textContent=i.sb1;
+  document.getElementById('i-sub2').textContent=i.sb2;
+  document.getElementById('i-about-l').textContent=i.al;
+  document.getElementById('i-about-t').innerHTML=`${i.at} <span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">${lang==='de'||lang==='fr'?'':lang==='en'?'Engineering':'Autor'}</span>`;
+  document.getElementById('i-about-d').textContent=i.ad;
+  document.getElementById('i-about-p1').textContent=i.ap1;
+  document.getElementById('i-about-p2').textContent=i.ap2;
+  document.getElementById('i-method-l').textContent=i.ml;
+  document.getElementById('i-method-t').textContent=i.mt;
+  document.getElementById('i-methods').innerHTML=i.mc.map(m=>`<div class="card"><div class="nm">${['⚡','🤖','📈','🎯'][i.mc.indexOf(m)]}</div><h4>${m.t}</h4><p>${m.d}</p></div>`).join('');
+  document.getElementById('i-skills-l').textContent=i.sl;
+  document.getElementById('i-skills-t').textContent=i.st;
+  // Servicios
+  document.getElementById('s-l').textContent=s.l;
+  document.getElementById('s-t').textContent=s.t;
+  document.getElementById('s-d').textContent=s.d;
+  document.getElementById('s-comp-l').textContent=s.cl;
+  document.getElementById('s-comp-t').textContent=s.ct;
+  document.getElementById('s-f').textContent=s.f;
+  document.getElementById('s-r1').textContent=s.r[0];
+  document.getElementById('s-r2').textContent=s.r[1];
+  document.getElementById('s-r3').textContent=s.r[2];
+  document.getElementById('s-r4').textContent=s.r[3];
+  // Planes
+  document.getElementById('p-l').textContent=p.l;
+  document.getElementById('p-t').textContent=p.t;
+  document.getElementById('p-d').textContent=p.d;
+  const icons=['🚀','⚡','🎬','🧠'];
+  document.getElementById('p-cards').innerHTML=p.pl.map((pl,i)=>`<div class="card${pl.b?' pop':''}">${pl.b?`<div class="bdg">${pl.b}</div>`:''}<div class="ic">${icons[i]}</div><h4>${pl.n}</h4><div class="sub">${pl.s}</div><div class="pr">${pl.p}</div><div class="rn">${pl.r}</div><ul>${pl.f.map(f=>`<li>${f}</li>`).join('')}</ul><a href="${pl.u}" target="_blank" class="buy">${p.l==='Planes'?'Contratar →':'Purchase →'}</a></div>`).join('');
+  document.getElementById('p-test-l').textContent=p.tl;
+  document.getElementById('p-test-t').textContent=p.tt;
+  document.getElementById('p-testimonials').innerHTML=p.tc.map(tc=>`<div class="tc"><div class="stars">★★★★★</div><p>"${tc.t}"</p><div class="tn">${tc.n}</div><div class="tr">${tc.r}</div><div class="tv">✓ ${p.tl==='Testimonios'?'Cliente Verificado':p.tl==='Testimonials'?'Verified Client':p.tl==='Testimonianze'?'Cliente Verificato':p.tl==='Testimonien'?'Verifizierter Kunde':'Client Vérifié'}</div></div>`).join('');
+  // Contacto
+  document.getElementById('c-t1').textContent=c.t1;
+  document.getElementById('c-t2').textContent=c.t2;
+  document.getElementById('c-d').textContent=c.d;
+  document.getElementById('c-btn1').textContent=c.b1;
+  document.getElementById('c-btn2').textContent=c.b2;
+  // Footer
+  document.getElementById('footer-tag').textContent=l.ft;
+  document.getElementById('f1').textContent=f[0];
+  document.getElementById('f2').textContent=f[1];
+  document.getElementById('f3').textContent=f[2];
+}
+
+function switchTab(name){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelectorAll('.nav-links a[data-tab]').forEach(el=>el.classList.remove('active'));
+  document.querySelector(`.nav-links a[data-tab="${name}"]`).classList.add('active');
+}
+
+function toggleLang(){
+  showLang=!showLang;
+  document.getElementById('lang-dd').classList.toggle('show',showLang);
+}
+
+function setLang(l){
+  lang=l;showLang=false;
+  document.getElementById('lang-dd').classList.remove('show');
+  render();
+}
+
+// Tab click handlers
+document.querySelectorAll('.nav-links a[data-tab]').forEach(a=>{
+  a.addEventListener('click',()=>switchTab(a.dataset.tab));
+});
+
+// Close lang dropdown on outside click
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.lang-btn')){showLang=false;document.getElementById('lang-dd').classList.remove('show')}
+});
+
+render();
+</script>
 </body>
 </html>
