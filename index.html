@@ -651,7 +651,7 @@ function anim(){
 anim();
 </script>
 <script>
-let step=0, leadData={};
+let step=0, leadData={}, chatHistory=[];
 const API='';
 const chatMsgs=document.getElementById('chat-msgs'),chatInput=document.getElementById('chat-input');
 const BUY_KEYS=['quiero','presupuesto','contratar','precio','cotizar','comprar','plan','me interesa','registro','pagar'];
@@ -670,25 +670,20 @@ async function startChat(){
 async function sendMsg(){
   const msg=chatInput.value.trim();if(!msg)return;
   addMsg(msg,'user');chatInput.value='';showTyping();
+  chatHistory.push({role:'user',text:msg});
   
-  // Detect buying intent for lead capture
-  if(isBuyIntent(msg)){
-    try{
-      const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:[]})});
-      const d=await r.json();hideTyping();addMsg(d.reply||'...','bot');
-      // After Sofia responds, start lead capture
+  try{
+    const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:chatHistory.slice(-10)})});
+    const d=await r.json();hideTyping();
+    if(d.reply){addMsg(d.reply,'bot');chatHistory.push({role:'assistant',text:d.reply})}
+    
+    // Lead capture if buy intent
+    if(isBuyIntent(msg)){
       setTimeout(() => {
         const qs=['¿Qué tipo de proyecto necesitas?','¿Cuál es tu presupuesto aproximado?','¿En qué plazo lo necesitas?','¿Me dejas tu nombre?','¿Y tu correo electrónico de contacto?'];
         if(step<qs.length){addMsg(qs[step],'bot');step++}
       },1500);
-    }catch(e){hideTyping();addMsg('Error de conexión. Intenta de nuevo.','bot')}
-    return;
-  }
-  
-  // Normal chat - Sofia responds freely
-  try{
-    const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:[]})});
-    const d=await r.json();hideTyping();addMsg(d.reply||'...','bot');
+    }
   }catch(e){hideTyping();addMsg('Error de conexión. Intenta de nuevo.','bot')}
 }
 </script>
