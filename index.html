@@ -621,7 +621,7 @@ function askQuestion(){
   ];
   if(step<q.length){
     setTimeout(()=>{addMsg(q[step],'bot')},500);
-    if(step>=3){chatInput.style.display='none';document.querySelector('#chat-inp button').style.display='none'}
+    if(step>=5){chatInput.style.display='none';document.querySelector('#chat-inp button').style.display='none'}
     if(step==5){sendLead()}
   }
 }
@@ -636,12 +636,17 @@ async function sendMsg(){
 }
 
 async function sendLead(){
+  hideTyping();
   try{
     const r=await fetch(API+'/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(leadData)});
     const d=await r.json();
-    if(d.success)addLead('✅ ¡Datos enviados! Te contactaremos pronto.',d.whatsapp);
-    else addLead('❌ Error al enviar. Intenta de nuevo.');
-  }catch(e){addLead('❌ Error de conexión. Escríbenos directo a WhatsApp.','https://wa.me/393801028239')}
+    if(d.success)addLead('✅ ¡Datos recibidos! Te contactaremos por WhatsApp. Mientras, ¿alguna duda sobre los planes?',d.whatsapp);
+    else addLead('❌ Error. Escríbenos directo:','https://wa.me/393801028239');
+  }catch(e){addLead('❌ Error de conexión.','https://wa.me/393801028239')}
+  setTimeout(()=>{
+    chatInput.style.display='';document.querySelector('#chat-inp button').style.display='';
+    chatInput.placeholder='Pregunta sobre los planes...';
+  },1000);
 }
 </script>
 
