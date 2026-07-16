@@ -597,7 +597,7 @@ render();
 <!-- Chat Widget -->
 <button id="chat-btn" onclick="toggleChat()">💬</button>
 <div id="chat-box">
-  <div id="chat-hdr"><span>🤖 AlcaTech AI</span><button onclick="toggleChat()">✕</button></div>
+  <div id="chat-hdr"><span>🤖 Sofía - AlcaTech AI</span><button onclick="toggleChat()">✕</button></div>
   <div id="chat-msgs"></div>
   <div id="chat-inp"><input id="chat-input" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')sendMsg()"><button onclick="sendMsg()">Enviar</button></div>
 </div>
@@ -665,7 +665,7 @@ function showTyping(){const d=document.createElement('div');d.className='typing'
 
 function hideTyping(){const t=document.getElementById('typing');if(t)t.remove()}
 
-async function startChat(){addMsg('¡Hola! Soy el asistente de AlcaTech-WebDesign. ¿Cómo puedo ayudarte hoy?','bot');askQuestion()}
+async function startChat(){addMsg('¡Hola! Soy Sofía, tu asesora digital en AlcaTech-WebDesign. ¿Cómo puedo ayudarte hoy?','bot');askQuestion()}
 
 function askQuestion(){
   const q=[
