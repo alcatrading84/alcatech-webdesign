@@ -113,6 +113,36 @@ footer .copy{color:var(--text3);font-size:1rem;margin-bottom:.5rem}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px}
 @media(max-width:768px){.nav-links a.nav-h{display:none}.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* Chat Widget */
+#chat-btn{position:fixed;bottom:24px;right:24px;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-size:26px;cursor:pointer;z-index:9999;box-shadow:0 4px 20px rgba(0,82,204,0.4);transition:transform .2s}
+#chat-btn:hover{transform:scale(1.08)}
+#chat-box{position:fixed;bottom:90px;right:24px;width:360px;max-height:520px;background:var(--bg1);border:1px solid rgba(255,255,255,0.08);border-radius:16px;z-index:9998;display:none;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.4)}
+#chat-box.show{display:flex}
+#chat-hdr{background:linear-gradient(135deg,var(--accent),var(--accent2));padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+#chat-hdr span{font-weight:600;font-size:.9rem}
+#chat-hdr button{background:0;border:none;color:#fff;font-size:1.2rem;cursor:pointer;opacity:.7}
+#chat-hdr button:hover{opacity:1}
+#chat-msgs{flex:1;padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;max-height:360px;scroll-behavior:smooth}
+#chat-msgs::-webkit-scrollbar{width:4px}
+#chat-msgs::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:4px}
+.msg{max-width:85%;padding:8px 12px;border-radius:12px;font-size:.82rem;line-height:1.5;animation:fadeIn .2s}
+.msg.bot{background:rgba(0,82,204,0.12);align-self:flex-start;color:var(--text2)}
+.msg.user{background:var(--accent);align-self:flex-end;color:#fff}
+.msg.lead{background:rgba(0,130,60,0.15);align-self:center;text-align:center;border:1px solid rgba(0,130,60,0.3)}
+.msg.lead a{display:inline-block;margin-top:6px;padding:6px 16px;background:var(--accent2);color:#fff;border-radius:8px;text-decoration:none;font-weight:600}
+#chat-inp{display:flex;padding:8px;gap:6px;border-top:1px solid rgba(255,255,255,0.06)}
+#chat-inp input{flex:1;padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:var(--text2);font-size:.82rem;outline:0}
+#chat-inp input:focus{border-color:var(--accent)}
+#chat-inp button{padding:8px 14px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-size:.82rem}
+#chat-inp button:hover{background:var(--accent2)}
+.typing{display:flex;gap:4px;padding:8px 12px;background:rgba(0,82,204,0.12);border-radius:12px;align-self:flex-start;width:fit-content}
+.typing span{width:6px;height:6px;background:var(--text3);border-radius:50%;animation:typing 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes typing{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -555,5 +585,65 @@ function setLang(l){
 
 render();
 </script>
+
+<!-- Chat Widget -->
+<button id="chat-btn" onclick="toggleChat()">💬</button>
+<div id="chat-box">
+  <div id="chat-hdr"><span>🤖 AlcaTech AI</span><button onclick="toggleChat()">✕</button></div>
+  <div id="chat-msgs"></div>
+  <div id="chat-inp"><input id="chat-input" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')sendMsg()"><button onclick="sendMsg()">Enviar</button></div>
+</div>
+<script>
+let step=0, leadData={};
+const API='http://152.70.42.81:3001';
+const chatMsgs=document.getElementById('chat-msgs'),chatInput=document.getElementById('chat-input');
+
+function toggleChat(){const b=document.getElementById('chat-box');b.classList.toggle('show');if(b.classList.contains('show')&&!chatMsgs.children.length)startChat()}
+
+function addMsg(text,cls){const d=document.createElement('div');d.className='msg '+cls;d.textContent=text;chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
+
+function addLead(text,url){const d=document.createElement('div');d.className='msg lead';d.innerHTML=text+(url?'<br><a href="'+url+'" target="_blank">Abrir WhatsApp →</a>':'');chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
+
+function showTyping(){const d=document.createElement('div');d.className='typing';d.id='typing';d.innerHTML='<span></span><span></span><span></span>';chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
+
+function hideTyping(){const t=document.getElementById('typing');if(t)t.remove()}
+
+async function startChat(){addMsg('¡Hola! Soy el asistente de AlcaTech-WebDesign. ¿Cómo puedo ayudarte hoy?','bot');askQuestion()}
+
+function askQuestion(){
+  const q=[
+    '¿Qué tipo de proyecto necesitas? (Landing page, Tienda online, Plataforma web, Otro)',
+    '¿Cuál es tu presupuesto aproximado? (Menos de $500, $500-$1,200, $1,200-$3,000, $3,000-$5,000, Más de $5,000)',
+    '¿En qué plazo necesitas el proyecto? (Urgente, 1 semana, 1 mes, Sin prisa)',
+    '¡Perfecto! Para enviarte un presupuesto personalizado, ¿me dejas tu nombre?',
+    '¿Y tu correo electrónico?',
+    '📩 ¡Gracias! En breve recibirás tu presupuesto en WhatsApp.'
+  ];
+  if(step<q.length){
+    setTimeout(()=>{addMsg(q[step],'bot')},500);
+    if(step>=3){chatInput.style.display='none';document.querySelector('#chat-inp button').style.display='none'}
+    if(step==5){sendLead()}
+  }
+}
+
+async function sendMsg(){
+  const msg=chatInput.value.trim();if(!msg)return;
+  addMsg(msg,'user');chatInput.value='';showTyping();
+  if(step<3){leadData[['project','budget','deadline'][step]]=msg;step++;setTimeout(askQuestion,500);hideTyping();return}
+  if(step==3){leadData.name=msg;step++;hideTyping();askQuestion();return}
+  if(step==4){leadData.email=msg;step++;hideTyping();askQuestion();return}
+  try{const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:[]})});const d=await r.json();hideTyping();addMsg(d.reply||'...','bot')}catch(e){hideTyping();addMsg('Error de conexión. Intenta de nuevo.','bot')}
+}
+
+async function sendLead(){
+  try{
+    const r=await fetch(API+'/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(leadData)});
+    const d=await r.json();
+    if(d.success)addLead('✅ ¡Datos enviados! Te contactaremos pronto.',d.whatsapp);
+    else addLead('❌ Error al enviar. Intenta de nuevo.');
+  }catch(e){addLead('❌ Error de conexión. Escríbenos directo a WhatsApp.','https://wa.me/393801028239')}
+}
+</script>
+
 </body>
 </html>
