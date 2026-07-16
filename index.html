@@ -657,7 +657,12 @@ const chatMsgs=document.getElementById('chat-msgs'),chatInput=document.getElemen
 const BUY_KEYS=['quiero','presupuesto','contratar','precio','cotizar','comprar','plan','me interesa','registro','pagar'];
 
 function toggleChat(){const b=document.getElementById('chat-box');b.classList.toggle('show');if(b.classList.contains('show')&&!chatMsgs.children.length)startChat()}
-function addMsg(text,cls){const d=document.createElement('div');d.className='msg '+cls;d.textContent=text;chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
+function addMsg(text,cls){const d=document.createElement('div');d.className='msg '+cls;chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight;
+  // Typewriter effect - muestra letra por letra
+  let i=0;d.textContent='';const spd=20; // ms por letra
+  function type(){if(i<text.length){d.textContent+=text[i];i++;chatMsgs.scrollTop=chatMsgs.scrollHeight;setTimeout(type,spd)}}
+  type();
+}
 function addLead(text,url){const d=document.createElement('div');d.className='msg lead';d.innerHTML=text+(url?'<br><a href="'+url+'" target="_blank">Abrir WhatsApp →</a>':'');chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
 function showTyping(){const d=document.createElement('div');d.className='typing';d.id='typing';d.innerHTML='<span></span><span></span><span></span>';chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
 function hideTyping(){const t=document.getElementById('typing');if(t)t.remove()}
