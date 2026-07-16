@@ -671,10 +671,15 @@ async function sendMsg(){
   const msg=chatInput.value.trim();if(!msg)return;
   addMsg(msg,'user');chatInput.value='';showTyping();
   chatHistory.push({role:'user',text:msg});
+  const startTime=Date.now();
   
   try{
     const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:chatHistory.slice(-10)})});
-    const d=await r.json();hideTyping();
+    const d=await r.json();
+    const elapsed=Date.now()-startTime;
+    const minTypeTime=1800; // ms minimo para simular escritura humana
+    if(elapsed<minTypeTime) await new Promise(r=>setTimeout(r,minTypeTime-elapsed));
+    hideTyping();
     if(d.reply){addMsg(d.reply,'bot');chatHistory.push({role:'assistant',text:d.reply})}
     
     // Lead capture if buy intent
