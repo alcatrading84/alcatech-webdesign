@@ -654,54 +654,42 @@ anim();
 let step=0, leadData={};
 const API='http://152.70.42.81:3001';
 const chatMsgs=document.getElementById('chat-msgs'),chatInput=document.getElementById('chat-input');
+const BUY_KEYS=['quiero','presupuesto','contratar','precio','cotizar','comprar','plan','me interesa','registro','pagar'];
 
 function toggleChat(){const b=document.getElementById('chat-box');b.classList.toggle('show');if(b.classList.contains('show')&&!chatMsgs.children.length)startChat()}
-
 function addMsg(text,cls){const d=document.createElement('div');d.className='msg '+cls;d.textContent=text;chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
-
 function addLead(text,url){const d=document.createElement('div');d.className='msg lead';d.innerHTML=text+(url?'<br><a href="'+url+'" target="_blank">Abrir WhatsApp →</a>':'');chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
-
 function showTyping(){const d=document.createElement('div');d.className='typing';d.id='typing';d.innerHTML='<span></span><span></span><span></span>';chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight}
-
 function hideTyping(){const t=document.getElementById('typing');if(t)t.remove()}
+function isBuyIntent(m){const t=m.toLowerCase();return BUY_KEYS.some(k=>t.includes(k))}
 
-async function startChat(){addMsg('¡Hola! Soy Sofía, tu asesora digital en AlcaTech-WebDesign. ¿Cómo puedo ayudarte hoy?','bot');askQuestion()}
-
-function askQuestion(){
-  const q=[
-    '¿Qué tipo de proyecto necesitas? (Landing page, Tienda online, Plataforma web, Otro)',
-    '¿Cuál es tu presupuesto aproximado? (Menos de $500, $500-$1,200, $1,200-$3,000, $3,000-$5,000, Más de $5,000)',
-    '¿En qué plazo necesitas el proyecto? (Urgente, 1 semana, 1 mes, Sin prisa)',
-    '¡Perfecto! Para enviarte un presupuesto personalizado, ¿me dejas tu nombre?',
-    '¿Y tu correo electrónico?',
-    '📩 ¡Gracias! En breve recibirás tu presupuesto en WhatsApp.'
-  ];
-  if(step<q.length){
-    setTimeout(()=>{addMsg(q[step],'bot')},500);
-    if(step>=5){chatInput.style.display='none';document.querySelector('#chat-inp button').style.display='none'}
-    if(step==5){sendLead()}
-  }
+async function startChat(){
+  addMsg('¡Hola! Soy Sofía, tu asesora digital en AlcaTech-WebDesign. ¿Cómo puedo ayudarte hoy?','bot')
 }
 
 async function sendMsg(){
   const msg=chatInput.value.trim();if(!msg)return;
   addMsg(msg,'user');chatInput.value='';showTyping();
-  if(step<3){leadData[['project','budget','deadline'][step]]=msg;step++;setTimeout(askQuestion,500);hideTyping();return}
-  if(step==3){leadData.name=msg;step++;hideTyping();askQuestion();return}
-  if(step==4){leadData.email=msg;step++;hideTyping();askQuestion();return}
-  try{const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:[]})});const d=await r.json();hideTyping();addMsg(d.reply||'...','bot')}catch(e){hideTyping();addMsg('Error de conexión. Intenta de nuevo.','bot')}
-}
-
-async function sendLead(){
-  hideTyping();
-  const t=encodeURIComponent;
-  const text=`📩 *NUEVO CLIENTE - AlcaTech-WebDesign*%0A%0A👤 *Nombre:* ${t(leadData.name||"")}%0A📧 *Email:* ${t(leadData.email||"")}%0A💼 *Proyecto:* ${t(leadData.project||"")}%0A💰 *Presupuesto:* ${t(leadData.budget||"")}%0A📅 *Plazo:* ${t(leadData.deadline||"")}`;
-  const wa=`https://wa.me/393801028239?text=${text}`;
-  addLead('✅ ¡Datos listos! Abre WhatsApp para enviarnos tu consulta 👇',wa);
-  setTimeout(()=>{
-    chatInput.style.display='';document.querySelector('#chat-inp button').style.display='';
-    chatInput.placeholder='Pregunta sobre los planes...';
-  },1000);
+  
+  // Detect buying intent for lead capture
+  if(isBuyIntent(msg)){
+    try{
+      const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:[]})});
+      const d=await r.json();hideTyping();addMsg(d.reply||'...','bot');
+      // After Sofia responds, start lead capture
+      setTimeout(() => {
+        const qs=['¿Qué tipo de proyecto necesitas?','¿Cuál es tu presupuesto aproximado?','¿En qué plazo lo necesitas?','¿Me dejas tu nombre?','¿Y tu correo electrónico de contacto?'];
+        if(step<qs.length){addMsg(qs[step],'bot');step++}
+      },1500);
+    }catch(e){hideTyping();addMsg('Error de conexión. Intenta de nuevo.','bot')}
+    return;
+  }
+  
+  // Normal chat - Sofia responds freely
+  try{
+    const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:[]})});
+    const d=await r.json();hideTyping();addMsg(d.reply||'...','bot');
+  }catch(e){hideTyping();addMsg('Error de conexión. Intenta de nuevo.','bot')}
 }
 </script>
 
