@@ -637,12 +637,10 @@ async function sendMsg(){
 
 async function sendLead(){
   hideTyping();
-  try{
-    const r=await fetch(API+'/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(leadData)});
-    const d=await r.json();
-    if(d.success)addLead('✅ ¡Datos recibidos! Te contactaremos por WhatsApp. Mientras, ¿alguna duda sobre los planes?',d.whatsapp);
-    else addLead('❌ Error. Escríbenos directo:','https://wa.me/393801028239');
-  }catch(e){addLead('❌ Error de conexión.','https://wa.me/393801028239')}
+  const t=encodeURIComponent;
+  const text=`📩 *NUEVO CLIENTE - AlcaTech-WebDesign*%0A%0A👤 *Nombre:* ${t(leadData.name||"")}%0A📧 *Email:* ${t(leadData.email||"")}%0A💼 *Proyecto:* ${t(leadData.project||"")}%0A💰 *Presupuesto:* ${t(leadData.budget||"")}%0A📅 *Plazo:* ${t(leadData.deadline||"")}`;
+  const wa=`https://wa.me/393801028239?text=${text}`;
+  addLead('✅ ¡Datos listos! Abre WhatsApp para enviarnos tu consulta 👇',wa);
   setTimeout(()=>{
     chatInput.style.display='';document.querySelector('#chat-inp button').style.display='';
     chatInput.placeholder='Pregunta sobre los planes...';
