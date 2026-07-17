@@ -672,29 +672,45 @@ async function startChat(){
   addMsg('¡Hola! Soy Sofía, tu asesora digital en AlcaTech-WebDesign. ¿Cómo puedo ayudarte hoy?','bot')
 }
 
-async function sendMsg(){
-  const msg=chatInput.value.trim();if(!msg)return;
-  addMsg(msg,'user');chatInput.value='';showTyping();
-  chatHistory.push({role:'user',text:msg});
-  const startTime=Date.now();
-  
-  try{
-    const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:chatHistory.slice(-10)})});
-    const d=await r.json();
-    const elapsed=Date.now()-startTime;
-    const minTypeTime=1800; // ms minimo para simular escritura humana
-    if(elapsed<minTypeTime) await new Promise(r=>setTimeout(r,minTypeTime-elapsed));
-    hideTyping();
-    if(d.reply){addMsg(d.reply,'bot');chatHistory.push({role:'assistant',text:d.reply})}
-    
-    // Lead capture if buy intent
-    if(isBuyIntent(msg)){
-      setTimeout(() => {
-        const qs=['¿Qué tipo de proyecto necesitas?','¿Cuál es tu presupuesto aproximado?','¿En qué plazo lo necesitas?','¿Me dejas tu nombre?','¿Y tu correo electrónico de contacto?'];
-        if(step<qs.length){addMsg(qs[step],'bot');step++}
-      },1500);
+async function sendMsg() {
+  const msg = chatInput.value.trim();
+  if (!msg) return;
+
+  addMsg(msg, "user");
+  chatInput.value = "";
+
+  const typing = document.createElement("div");
+  typing.className = "typing";
+  typing.innerHTML = "<span></span><span></span><span></span>";
+  chatMsgs.appendChild(typing);
+  chatMsgs.scrollTop = chatMsgs.scrollHeight;
+
+  try {
+    const response = await fetch("/.netlify/functions/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: msg }),
+    });
+
+    const data = await response.json();
+    typing.remove();
+
+    if (response.ok && data.text) {
+      addMsg(data.text, "bot");
+    } else {
+      addMsg(
+        "Lo siento, Sofía no está disponible ahora. Escríbenos por WhatsApp: +39 380 102 8239",
+        "bot"
+      );
     }
-  }catch(e){hideTyping();addMsg('Error de conexión. Intenta de nuevo.','bot')}
+  } catch (error) {
+    typing.remove();
+    addMsg(
+      "Problema de conexión. Intenta de nuevo o escríbenos por WhatsApp.",
+      "bot"
+    );
+    console.error("Error del chat:", error);
+  }
 }
 </script>
 
