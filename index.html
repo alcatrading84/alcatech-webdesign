@@ -258,10 +258,10 @@ async function sendSofia() {
     });
     const data = await response.json();
     typing.remove();
-    addMsg(data.text || "Escríbenos por WhatsApp", "bot");
+    typeMsg(data.text || "Escríbenos por WhatsApp", "bot");
   } catch (e) {
     typing.remove();
-    addMsg("Error de conexión. WhatsApp: +39 380 102 8239", "bot");
+    typeMsg("Error de conexión. WhatsApp: +39 380 102 8239", "bot");
   } finally {
     sofiaSending = false;
     inp.disabled = false;
@@ -269,6 +269,7 @@ async function sendSofia() {
   }
 }
 function addMsg(t,tp){const d=document.createElement('div');d.className='msg '+tp;d.innerText=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
+function typeMsg(t,tp){const d=document.createElement('div');d.className='msg '+tp;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;let i=0;const iv=setInterval(()=>{if(i<t.length){d.textContent+=t[i];i++;msgs.scrollTop=msgs.scrollHeight}else{clearInterval(iv)}},22)}
 inp.addEventListener('keypress',e=>{if(e.key==='Enter')sendSofia()});
 
 /* ── SISTEMA DE TRADUCCIÓN POR data-i18n ── */
