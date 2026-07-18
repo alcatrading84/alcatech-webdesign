@@ -25,6 +25,8 @@ REGLAS:
 3. No pidas datos sensibles (claves, tarjetas).
 4. NUNCA des toda la info de golpe. Ve paso a paso.
 5. Termina cada respuesta con una pregunta para seguir la conversación.
+6. CRÍTICO: No te repitas. No te vuelvas a presentar si ya lo hiciste. No digas "como mencioné antes". No repitas servicios o precios que ya diste. Si el cliente sigue preguntando, responde lo nuevo sin repetir lo anterior.
+7. No saludes de nuevo si ya saludaste. Ve directo al grano en cada respuesta.
 `;
 
 exports.handler = async (event) => {
