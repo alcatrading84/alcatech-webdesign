@@ -234,12 +234,14 @@ addEventListener('resize',initNet);initNet();drawNet();
 
 /* ── CHAT SOFIA ── */
 const bubble=document.getElementById('sofia-bubble'),panel=document.getElementById('sofia-panel'),inp=document.getElementById('sofia-input-field'),msgs=document.getElementById('sofia-msgs');
+let chatHistory=[];
 bubble.onclick=()=>panel.classList.toggle('active');
 async function sendSofia() {
   const message = inp.value.trim();
   if (!message || sofiaSending) return;
 
   sofiaSending = true;
+  chatHistory.push({role:"user",text:message});
   addMsg(message, "user");
   inp.value = "";
   inp.disabled = true;
@@ -254,10 +256,11 @@ async function sendSofia() {
     const response = await fetch("/.netlify/functions/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, language: currentLanguage })
+      body: JSON.stringify({ message, language: currentLanguage, history: chatHistory.slice(-8) })
     });
     const data = await response.json();
     typing.remove();
+    chatHistory.push({role:"bot",text:data.text||"Escríbenos por WhatsApp"});
     typeMsg(data.text || "Escríbenos por WhatsApp", "bot");
   } catch (e) {
     typing.remove();

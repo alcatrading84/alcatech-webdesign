@@ -48,12 +48,19 @@ exports.handler = async (event) => {
 
     if (!apiKey) return { statusCode: 500, body: JSON.stringify({ error: "Falta API Key" }) };
 
+    const history = Array.isArray(body.history) ? body.history.slice(0,8) : [];
+    const contents = history.map(h => ({
+      role: h.role === "bot" ? "model" : "user",
+      parts: [{ text: h.text }]
+    }));
+    contents.push({ role: "user", parts: [{ text: `Idioma: ${language}\n\nMensaje: ${message}` }] });
+
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: BUSINESS_CONTEXT }] },
-        contents: [{ role: "user", parts: [{ text: `Idioma: ${language}\n\nMensaje: ${message}` }] }],
+        contents,
         generationConfig: { temperature: 0.4, maxOutputTokens: 1000 }
       })
     });
