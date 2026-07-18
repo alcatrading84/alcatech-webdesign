@@ -11,7 +11,7 @@
 :root{--bg:#050912;--card:#0b1428;--card2:#111e3c;--line:rgba(113,150,211,.14);--line2:rgba(113,150,211,.25);--text:#cbd8e8;--heading:#d5e0ec;--muted:#8f9fb7;--soft:#687991;--blue:#2f6df6;--blue2:#4a82ff;--cyan:#79a8ff;--green:#82cf68;--gold:#e4c878;--max:1140px;--ease:cubic-bezier(.22,1,.36,1)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font:14px Inter,system-ui,sans-serif;background:radial-gradient(circle at 78% 4%,rgba(35,75,170,.16),transparent 29%),linear-gradient(180deg,var(--bg),#060b18 55%,var(--bg));overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative;z-index:0}
 body:before{content:"";position:fixed;inset:0;z-index:-2;background-image:linear-gradient(rgba(92,135,217,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(92,135,217,.025) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(circle at center,black 20%,transparent 90%)}
-#network{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.72}
+#network{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1}
 a{color:inherit;text-decoration:none}.wrap{width:min(calc(100% - 40px),var(--max));margin:auto;position:relative;z-index:1}
 h1,h2,h3{margin:0;color:var(--heading);font-weight:700;letter-spacing:-.05em}p{color:var(--muted);line-height:1.7}
 .eyebrow{font-size:.67rem;letter-spacing:.2em;text-transform:uppercase;color:#477eff;font-weight:800;display:inline-flex;gap:10px;align-items:center}.eyebrow:before{content:"";width:21px;height:1px;background:#477eff}
@@ -257,7 +257,7 @@ let sofiaSending = false;
 /* ── CANVAS NETWORK ── */
 const cv=document.getElementById('network'),cx=cv.getContext('2d');let W,H,ns=[];
 function initNet(){W=cv.width=innerWidth;H=cv.height=innerHeight;ns=Array.from({length:innerWidth<700?50:110},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*1.5+.8}))}
-function drawNet(){cx.clearRect(0,0,W,H);ns.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;cx.beginPath();cx.fillStyle='rgba(74,130,255,.55)';cx.arc(n.x,n.y,n.r,0,6.3);cx.fill()});for(let i=0;i<ns.length;i++)for(let j=i+1;j<ns.length;j++){const d=Math.hypot(ns[i].x-ns[j].x,ns[i].y-ns[j].y);if(d<155){cx.beginPath();cx.strokeStyle='rgba(74,130,255,'+(.22*(1-d/155))+')';cx.moveTo(ns[i].x,ns[i].y);cx.lineTo(ns[j].x,ns[j].y);cx.stroke()}}requestAnimationFrame(drawNet)}
+function drawNet(){cx.clearRect(0,0,W,H);ns.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;cx.beginPath();cx.fillStyle='rgba(74,130,255,.85)';cx.arc(n.x,n.y,n.r*1.5,0,6.3);cx.fill()});for(let i=0;i<ns.length;i++)for(let j=i+1;j<ns.length;j++){const d=Math.hypot(ns[i].x-ns[j].x,ns[i].y-ns[j].y);if(d<200){cx.beginPath();cx.strokeStyle='rgba(74,130,255,'+(.5*(1-d/200))+')';cx.lineWidth=1.2;cx.moveTo(ns[i].x,ns[i].y);cx.lineTo(ns[j].x,ns[j].y);cx.stroke()}}requestAnimationFrame(drawNet)}
 addEventListener('resize',initNet);initNet();drawNet();
 
 /* ── CHAT SOFIA ── */
