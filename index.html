@@ -77,7 +77,8 @@ section{padding:66px 0}
 .client strong{display:block;color:var(--heading);font-size:.8rem}.client small{display:block;margin-top:3px;color:var(--soft);font-size:.7rem}
 .verified{display:inline-flex;align-items:center;gap:5px;margin-top:15px;color:var(--green);font-size:.7rem;font-weight:700}.verified:before{content:'✓';width:16px;height:16px;border-radius:50%;display:grid;place-items:center;background:rgba(130,207,104,.15)}
 .progress-bar{height:6px;background:rgba(255,255,255,0.05);border-radius:99px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,#2E6BFF,#8CE04A);transition:width .8s ease}
-.eval-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px}.eval-cards{display:grid;gap:14px;max-height:420px;overflow-y:auto;padding-right:6px}.eval-card{padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--card);transition:all .3s ease}.eval-card:hover{border-color:var(--blue2);transform:translateY(-2px)}.eval-card h4{margin:6px 0 3px;color:var(--heading);font-size:.88rem}.eval-card .sub{font-size:.7rem;color:var(--soft)}.eval-card p{font-size:.8rem;color:var(--muted);margin:8px 0 6px;line-height:1.5;font-style:italic}.eval-form{display:grid;gap:14px;padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--card);align-content:start}.eval-form input,.eval-form select,.eval-form textarea{background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:8px;padding:10px 12px;color:#fff;font:.8rem Inter;outline:none;width:100%}.eval-form textarea{resize:vertical;min-height:70px}.eval-form input:focus,.eval-form select:focus,.eval-form textarea:focus{border-color:var(--blue2)}.eval-form select option{background:#0b1428;color:#fff}.eval-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}.eval-avg{text-align:center;padding:16px;border:1px solid var(--line);border-radius:10px}.eval-avg b{font-size:2.5rem;color:var(--blue2);display:block}.eval-avg span{font-size:.7rem;color:var(--soft)}.eval-bars{display:grid;gap:6px;padding:16px;border:1px solid var(--line);border-radius:10px}.eval-bar-row{display:grid;grid-template-columns:20px 1fr 24px;gap:8px;align-items:center;font-size:.72rem}.eval-bar-row span:last-child{text-align:right;color:var(--muted)}
+.eval-new{display:grid;grid-template-columns:1fr 350px;gap:40px;align-items:start}.eval-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.eval-card{padding:22px;border:1px solid rgba(120,150,220,0.14);border-radius:16px;background:rgba(14,21,38,0.75);transition:all .3s ease}.eval-card:hover{border-color:rgba(46,107,255,0.4);transform:translateY(-2px)}.eval-card .stars{color:#FFB800;font-size:1rem;margin-bottom:10px}.eval-card p{font-size:14px;color:#9BA8C0;font-style:italic;line-height:1.6;margin-bottom:16px}.eval-card .author{display:flex;align-items:center;gap:12px}.eval-card .avatar{width:32px;height:32px;border-radius:50%;background:#2E6BFF;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff}.eval-card .author-info .name{font-size:14px;font-weight:700;color:var(--heading)}.eval-card .author-info .role{font-size:11px;color:#6B7896}.eval-glass{background:linear-gradient(180deg,rgba(46,107,255,0.1),transparent);border:1px solid rgba(46,107,255,0.3);padding:32px;border-radius:18px;backdrop-filter:blur(10px)}.eval-inp{background:rgba(9,15,28,0.8);border:1px solid rgba(120,150,220,0.2);border-radius:10px;padding:12px 14px;color:#fff;font:.82rem Inter;outline:none;width:100%;margin-bottom:6px}.eval-inp:focus{border-color:#2E6BFF}.eval-inp option{background:#0b1428;color:#fff}
+@media(max-width:800px){.eval-new{grid-template-columns:1fr}.eval-cards{grid-template-columns:1fr}}
 .cta{padding:42px;border:1px solid var(--line2);border-radius:15px;background:linear-gradient(135deg,#112451,#0d1730);display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
 .cta h2{font-size:clamp(1.9rem,3.8vw,3rem);line-height:1.08;max-width:15ch}.cta-side{display:grid;gap:14px}.cta-side .btn{justify-self:start}
 footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid var(--line)}
@@ -208,23 +209,19 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
 </section>
 
 <section class="wrap" id="evaluaciones">
-  <div class="head"><span>06 — Evaluaciones</span><h2 data-i18n="eval_h2">Lo que opinan quienes ya <em data-i18n="eval_h2_em">confiaron</em>.</h2></div>
-  <p style="font-size:.82rem;color:var(--muted);margin-bottom:8px" data-i18n="eval_p">Comparte tu experiencia con AlcaTech. Tu opinión ayuda a otros a decidir.</p>
-  <div class="eval-grid">
-    <div>
-      <div class="eval-stats">
-        <div class="eval-avg"><b id="eval-avg">5.0</b><span data-i18n="eval_avg_label">Promedio general</span></div>
-        <div class="eval-bars" id="eval-bars"></div>
+  <div class="head" style="margin-bottom:32px"><span>05 — PRUEBA SOCIAL</span><h2>Lo que dicen quienes ya <span style="color:#2E6BFF">confiaron.</span></h2></div>
+  <div class="eval-new">
+    <div class="eval-cards" id="eval-list"></div>
+    <div class="eval-glass" id="eval-form">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:20px" data-i18n="eval_form_t">Deja tu evaluación</h3>
+      <input id="eval-name" class="eval-inp" placeholder="Nombre completo" data-i18n-placeholder="eval_name_ph">
+      <select id="eval-product" class="eval-inp"><option value="" data-i18n="eval_product_ph">Selecciona tu plan</option></select>
+      <div style="margin:14px 0;display:flex;align-items:center;gap:10px">
+        <span style="font-size:13px;color:#6B7896" data-i18n="eval_rate">Tu puntuación:</span>
+        <span id="eval-stars" style="font-size:1.6rem;cursor:pointer;letter-spacing:5px;color:#FFB800">★★★★★</span>
       </div>
-      <div class="eval-cards" id="eval-list"></div>
-    </div>
-    <div class="eval-form" id="eval-form">
-      <h4 style="font-size:.9rem;color:var(--heading);margin:0" data-i18n="eval_form_t">Deja tu reseña</h4>
-      <input id="eval-name" placeholder="Tu nombre" data-i18n-placeholder="eval_name_ph">
-      <select id="eval-product"><option value="" data-i18n="eval_product_ph">Producto o servicio</option></select>
-      <div style="display:flex;align-items:center;gap:10px"><span style="font-size:.72rem;color:var(--soft)" data-i18n="eval_rate">Tu puntuación:</span><span id="eval-stars" style="font-size:1.4rem;cursor:pointer;letter-spacing:4px">★★★★★</span></div>
-      <textarea id="eval-comment" placeholder="Escribe tu reseña..." data-i18n-placeholder="eval_comment_ph"></textarea>
-      <button class="btn primary" onclick="submitReview()" data-i18n="eval_btn">Publicar reseña</button>
+      <textarea id="eval-comment" class="eval-inp" style="height:100px;resize:none" placeholder="Tu comentario..." data-i18n-placeholder="eval_comment_ph"></textarea>
+      <button class="btn primary" onclick="submitReview()" style="width:100%;margin-top:8px" data-i18n="eval_btn">Publicar Reseña</button>
     </div>
   </div>
 </section>
@@ -490,7 +487,7 @@ document.addEventListener('click',e=>{if(!e.target.closest('.lang'))langMenu.cla
 // ── SISTEMA DE EVALUACIONES ──
 const products=["Landing Premium","Web Empresarial","Cinematic Motion","Cinematic 3D Interactive","Enterprise / SaaS","Cinematic Signature","E-commerce Performance","Care Plan"];
 let reviews=JSON.parse(localStorage.getItem('alcatech_reviews')||'[]');
-if(!reviews.length)reviews=[{id:1,name:"Pedro Martínez",role:"CEO, Inversiones del Sur",product:"Web Empresarial",rating:5,comment:"El plan Empresarial nos ordenó la presencia digital de una vez. Serio, y carga rapidísimo.",date:"Junio 2026",verified:true},{id:2,name:"Dra. Ana García",role:"Directora médica, MediSalud",product:"Landing Premium",rating:5,comment:"Pasamos de una web plana a una experiencia que genera reservas y confianza.",date:"Mayo 2026",verified:true}];
+if(!reviews.length)reviews=[{id:1,name:"Pedro Martínez",role:"CEO, Inversiones del Sur",product:"Web Empresarial",rating:5,comment:"El plan Empresarial nos ordenó la presencia digital de una vez. Serio, y carga rapidísimo.",date:"Junio 2026",verified:true},{id:2,name:"Dra. Ana García",role:"Directora médica, MediSalud",product:"Landing Premium",rating:5,comment:"Pasamos de una web plana a una experiencia que genera reservas y confianza.",date:"Mayo 2026",verified:true},{id:3,name:"Carlos Ruiz",role:"Propietario, La Mesa",product:"Cinematic Motion",rating:5,comment:"Pega fuerte en lo visual, pero lo mejor es que no sacrificó rendimiento.",date:"Abril 2026",verified:true}];
 let evalRating=5;
 
 function initEval(){
@@ -521,13 +518,14 @@ function renderReviews(){
   // Cards
   list.innerHTML=reviews.map(r=>`
     <div class="eval-card" style="animation:fadeIn .3s">
-      <div style="color:#FFB800;font-size:.9rem">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
-      <h4>${r.name}</h4>
-      <div class="sub">${r.role||''} · ${r.product}</div>
+      <div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
       <p>"${r.comment}"</p>
-      <div style="font-size:.68rem;color:var(--soft);display:flex;gap:10px">
-        <span>${r.date||''}</span>
-        ${r.verified?'<span style="color:var(--green)">✓ Cliente verificado</span>':''}
+      <div class="author">
+        <div class="avatar">${r.name[0]}</div>
+        <div class="author-info">
+          <div class="name">${r.name}</div>
+          <div class="role">${r.role||''} · ${r.product}</div>
+        </div>
       </div>
     </div>
   `).join('');
