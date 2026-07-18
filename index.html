@@ -417,6 +417,7 @@ function applyLang(l){
 langBtn.onclick=()=>langMenu.classList.toggle('show');
 langMenu.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));
 document.addEventListener('click',e=>{if(!e.target.closest('.lang'))langMenu.classList.remove('show')});
+applyLang('es');
 </script>
 </body>
 </html>
