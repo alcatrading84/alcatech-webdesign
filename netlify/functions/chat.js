@@ -33,7 +33,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: BUSINESS_CONTEXT }] },
         contents: [{ role: "user", parts: [{ text: `Idioma: ${language}\n\nMensaje: ${message}` }] }],
-        generationConfig: { temperature: 0.4, maxOutputTokens: 500 }
+        generationConfig: { temperature: 0.4, maxOutputTokens: 1000 }
       })
     });
 
