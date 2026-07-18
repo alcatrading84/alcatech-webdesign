@@ -393,7 +393,7 @@ const LANGS={es:{nav_inicio:'Inicio',nav_servicios:'Servicios',nav_planes:'Plane
 const FLAGS={es:'🇪🇸 ES',en:'🇬🇧 EN',it:'🇮🇹 IT',de:'🇩🇪 DE',fr:'🇫🇷 FR'};
 const langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu');
 
-i18next.init({lng:'es',resources:{es:{translation:LANGS.es},en:{translation:LANGS.en},it:{translation:LANGS.it},de:{translation:LANGS.de},fr:{translation:LANGS.fr}}});
+i18next.init({lng:'es',resources:{es:{translation:LANGS.es},en:{translation:LANGS.en},it:{translation:LANGS.it},de:{translation:LANGS.de},fr:{translation:LANGS.fr}}}).then(()=>applyLang('es'));
 
 function applyLang(l){
   i18next.changeLanguage(l);
@@ -417,7 +417,6 @@ function applyLang(l){
 langBtn.onclick=()=>langMenu.classList.toggle('show');
 langMenu.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));
 document.addEventListener('click',e=>{if(!e.target.closest('.lang'))langMenu.classList.remove('show')});
-applyLang('es');
 </script>
 </body>
 </html>
