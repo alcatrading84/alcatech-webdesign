@@ -76,6 +76,8 @@ section{padding:66px 0}
 .client{display:flex;align-items:center;gap:11px}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#172a56;color:var(--cyan);font-weight:800;font-size:.8rem}
 .client strong{display:block;color:var(--heading);font-size:.8rem}.client small{display:block;margin-top:3px;color:var(--soft);font-size:.7rem}
 .verified{display:inline-flex;align-items:center;gap:5px;margin-top:15px;color:var(--green);font-size:.7rem;font-weight:700}.verified:before{content:'✓';width:16px;height:16px;border-radius:50%;display:grid;place-items:center;background:rgba(130,207,104,.15)}
+.progress-bar{height:6px;background:rgba(255,255,255,0.05);border-radius:99px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,#2E6BFF,#8CE04A);transition:width .8s ease}
+.eval-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px}.eval-cards{display:grid;gap:14px;max-height:420px;overflow-y:auto;padding-right:6px}.eval-card{padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--card);transition:all .3s ease}.eval-card:hover{border-color:var(--blue2);transform:translateY(-2px)}.eval-card h4{margin:6px 0 3px;color:var(--heading);font-size:.88rem}.eval-card .sub{font-size:.7rem;color:var(--soft)}.eval-card p{font-size:.8rem;color:var(--muted);margin:8px 0 6px;line-height:1.5;font-style:italic}.eval-form{display:grid;gap:14px;padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--card);align-content:start}.eval-form input,.eval-form select,.eval-form textarea{background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:8px;padding:10px 12px;color:#fff;font:.8rem Inter;outline:none;width:100%}.eval-form textarea{resize:vertical;min-height:70px}.eval-form input:focus,.eval-form select:focus,.eval-form textarea:focus{border-color:var(--blue2)}.eval-form select option{background:#0b1428;color:#fff}.eval-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}.eval-avg{text-align:center;padding:16px;border:1px solid var(--line);border-radius:10px}.eval-avg b{font-size:2.5rem;color:var(--blue2);display:block}.eval-avg span{font-size:.7rem;color:var(--soft)}.eval-bars{display:grid;gap:6px;padding:16px;border:1px solid var(--line);border-radius:10px}.eval-bar-row{display:grid;grid-template-columns:20px 1fr 24px;gap:8px;align-items:center;font-size:.72rem}.eval-bar-row span:last-child{text-align:right;color:var(--muted)}
 .cta{padding:42px;border:1px solid var(--line2);border-radius:15px;background:linear-gradient(135deg,#112451,#0d1730);display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
 .cta h2{font-size:clamp(1.9rem,3.8vw,3rem);line-height:1.08;max-width:15ch}.cta-side{display:grid;gap:14px}.cta-side .btn{justify-self:start}
 footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid var(--line)}
@@ -94,6 +96,7 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
     <a href="#planes"    data-i18n="nav_planes">Planes</a>
     <a href="#avanzados" data-i18n="nav_avanzados">Avanzados</a>
     <a href="#testimonios" data-i18n="nav_testimonios">Testimonios</a>
+    <a href="#evaluaciones" data-i18n="nav_evaluaciones">Evaluaciones</a>
     <a href="#contacto"  data-i18n="nav_contacto">Contacto</a>
   </div>
   <div class="right">
@@ -204,6 +207,28 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
   </div>
 </section>
 
+<section class="wrap" id="evaluaciones">
+  <div class="head"><span>06 — Evaluaciones</span><h2 data-i18n="eval_h2">Lo que opinan quienes ya <em data-i18n="eval_h2_em">confiaron</em>.</h2></div>
+  <p style="font-size:.82rem;color:var(--muted);margin-bottom:8px" data-i18n="eval_p">Comparte tu experiencia con AlcaTech. Tu opinión ayuda a otros a decidir.</p>
+  <div class="eval-grid">
+    <div>
+      <div class="eval-stats">
+        <div class="eval-avg"><b id="eval-avg">5.0</b><span data-i18n="eval_avg_label">Promedio general</span></div>
+        <div class="eval-bars" id="eval-bars"></div>
+      </div>
+      <div class="eval-cards" id="eval-list"></div>
+    </div>
+    <div class="eval-form" id="eval-form">
+      <h4 style="font-size:.9rem;color:var(--heading);margin:0" data-i18n="eval_form_t">Deja tu reseña</h4>
+      <input id="eval-name" placeholder="Tu nombre" data-i18n-placeholder="eval_name_ph">
+      <select id="eval-product"><option value="" data-i18n="eval_product_ph">Producto o servicio</option></select>
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-size:.72rem;color:var(--soft)" data-i18n="eval_rate">Tu puntuación:</span><span id="eval-stars" style="font-size:1.4rem;cursor:pointer;letter-spacing:4px">★★★★★</span></div>
+      <textarea id="eval-comment" placeholder="Escribe tu reseña..." data-i18n-placeholder="eval_comment_ph"></textarea>
+      <button class="btn primary" onclick="submitReview()" data-i18n="eval_btn">Publicar reseña</button>
+    </div>
+  </div>
+</section>
+
 <section class="wrap" id="contacto">
   <div class="cta">
     <div><span class="eyebrow" data-i18n="cta_eyebrow">Siguiente paso</span><h2 data-i18n="cta_h2">Cuéntame tu idea. Yo pongo la <em data-i18n="cta_h2_em">ingeniería</em>.</h2></div>
@@ -278,7 +303,7 @@ inp.addEventListener('keypress',e=>{if(e.key==='Enter')sendSofia()});
 /* ── SISTEMA DE TRADUCCIÓN POR data-i18n ── */
 const LANGS={
   es:{
-    nav_inicio:'Inicio',nav_servicios:'Servicios',nav_planes:'Planes',nav_avanzados:'Avanzados',nav_testimonios:'Testimonios',nav_contacto:'Contacto',nav_cta:'Hablemos ↗',
+    nav_inicio:'Inicio',nav_servicios:'Servicios',nav_planes:'Planes',nav_avanzados:'Avanzados',nav_testimonios:'Testimonios',nav_evaluaciones:'Evaluaciones',nav_contacto:'Contacto',nav_cta:'Hablemos ↗',
     hero_eyebrow:'Ingeniería digital de autor',hero_h1_em:'impulsa',hero_h1_end:'negocios',
     hero_p:'Diseño y construyo plataformas web rápidas, escalables y con criterio. No entrego páginas bonitas y vacías: entrego sistemas que cargan en menos de un segundo y empujan negocio de verdad.',
     hero_cta1:'◉ Hablemos por WhatsApp',hero_cta2:'Ver servicios →',hero_sig:'Kelvin, detrás de cada línea.',hero_sig_small:'Un solo responsable, cero intermediarios',
@@ -306,10 +331,11 @@ const LANGS={
     t3_r:'"Pega fuerte en lo visual, pero lo mejor es que no sacrificó rendimiento. Raro, y por eso vale."',
     cta_eyebrow:'Siguiente paso',cta_h2:'Cuéntame tu idea. Yo pongo la',cta_h2_em:'ingeniería',cta_p:'Sin formularios eternos ni intermediarios. Me escribes, revisamos qué necesitas de verdad, y te digo por dónde empezar.',
     footer:'© 2026 AlcaTech-WebDesign · Ingeniería digital de autor',
-    sofia_title:'Sofía · AlcaTech AI',sofia_status:'Normalmente responde al instante',sofia_welcome:'¡Hola! Soy Sofía, la asistente virtual de AlcaTech. ¿En qué puedo ayudarte hoy?',sofia_placeholder:'Escribe tu mensaje...'
+    sofia_title:'Sofía · AlcaTech AI',sofia_status:'Normalmente responde al instante',sofia_welcome:'¡Hola! Soy Sofía, la asistente virtual de AlcaTech. ¿En qué puedo ayudarte hoy?',sofia_placeholder:'Escribe tu mensaje...',
+    eval_h2:'Lo que opinan quienes ya',eval_h2_em:'confiaron',eval_p:'Comparte tu experiencia con AlcaTech. Tu opinión ayuda a otros a decidir.',eval_avg_label:'Promedio general',eval_form_t:'Deja tu reseña',eval_name_ph:'Tu nombre',eval_product_ph:'Producto o servicio',eval_rate:'Tu puntuación:',eval_comment_ph:'Escribe tu reseña...',eval_btn:'Publicar reseña'
   },
   en:{
-    nav_inicio:'Home',nav_servicios:'Services',nav_planes:'Plans',nav_avanzados:'Advanced',nav_testimonios:'Testimonials',nav_contacto:'Contact',nav_cta:'Let\'s talk ↗',
+    nav_inicio:'Home',nav_servicios:'Services',nav_planes:'Plans',nav_avanzados:'Advanced',nav_testimonios:'Testimonials',nav_evaluaciones:'Reviews',nav_contacto:'Contact',nav_cta:'Let\'s talk ↗',
     hero_eyebrow:'Bespoke digital engineering',hero_h1_em:'drives',hero_h1_end:'business growth',
     hero_p:'I design and build fast, scalable, purposeful web platforms. I don\'t deliver empty, pretty pages — I deliver systems that load in under a second and drive real business results.',
     hero_cta1:'◉ Talk on WhatsApp',hero_cta2:'View services →',hero_sig:'Kelvin, behind every line.',hero_sig_small:'One person responsible, zero middlemen',
@@ -337,7 +363,8 @@ const LANGS={
     t3_r:'"Strong visually, but the best part is it didn\'t sacrifice performance. Rare, and that\'s why it\'s worth it."',
     cta_eyebrow:'Next step',cta_h2:'Tell me your idea. I provide the',cta_h2_em:'engineering',cta_p:'No endless forms or middlemen. Message me, we review what you truly need, and I\'ll tell you where to start.',
     footer:'© 2026 AlcaTech-WebDesign · Bespoke digital engineering',
-    sofia_title:'Sofía · AlcaTech AI',sofia_status:'Usually replies instantly',sofia_welcome:'Hi! I\'m Sofía, AlcaTech\'s AI assistant. How can I help you today?',sofia_placeholder:'Type your message...'
+    sofia_title:'Sofía · AlcaTech AI',sofia_status:'Usually replies instantly',sofia_welcome:'Hi! I\\'m Sofía, AlcaTech\\'s AI assistant. How can I help you today?',sofia_placeholder:'Type your message...',
+    eval_h2:'What clients who trusted us',eval_h2_em:'think',eval_p:'Share your experience with AlcaTech. Your opinion helps others decide.',eval_avg_label:'Average rating',eval_form_t:'Leave a review',eval_name_ph:'Your name',eval_product_ph:'Product or service',eval_rate:'Your rating:',eval_comment_ph:'Write your review...',eval_btn:'Publish review'
   },
   it:{
     nav_inicio:'Inizio',nav_servicios:'Servizi',nav_planes:'Piani',nav_avanzados:'Avanzati',nav_testimonios:'Testimonianze',nav_contacto:'Contatti',nav_cta:'Parliamo ↗',
@@ -459,5 +486,66 @@ function applyLang(l){
 langBtn.onclick=()=>langMenu.classList.toggle('show');
 langMenu.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));
 document.addEventListener('click',e=>{if(!e.target.closest('.lang'))langMenu.classList.remove('show')});
+
+// ── SISTEMA DE EVALUACIONES ──
+const products=["Landing Premium","Web Empresarial","Cinematic Motion","Cinematic 3D Interactive","Enterprise / SaaS","Cinematic Signature","E-commerce Performance","Care Plan"];
+let reviews=JSON.parse(localStorage.getItem('alcatech_reviews')||'[]');
+if(!reviews.length)reviews=[{id:1,name:"Pedro Martínez",role:"CEO, Inversiones del Sur",product:"Web Empresarial",rating:5,comment:"El plan Empresarial nos ordenó la presencia digital de una vez. Serio, y carga rapidísimo.",date:"Junio 2026",verified:true},{id:2,name:"Dra. Ana García",role:"Directora médica, MediSalud",product:"Landing Premium",rating:5,comment:"Pasamos de una web plana a una experiencia que genera reservas y confianza.",date:"Mayo 2026",verified:true}];
+let evalRating=5;
+
+function initEval(){
+  const sel=document.getElementById('eval-product');
+  if(sel)products.forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o)});
+  // Click on stars
+  const starEl=document.getElementById('eval-stars');
+  if(starEl){starEl.onclick=function(e){const rect=this.getBoundingClientRect();const x=e.clientX-rect.left;const star=Math.min(5,Math.max(1,Math.ceil(x/(rect.width/5))));evalRating=star;this.textContent='★'.repeat(star)+'☆'.repeat(5-star)}}
+  renderReviews();
+}
+function renderReviews(){
+  const list=document.getElementById('eval-list');
+  const bars=document.getElementById('eval-bars');
+  const avgEl=document.getElementById('eval-avg');
+  if(!list)return;
+  const total=reviews.length;
+  const avg=total?reviews.reduce((s,r)=>s+r.rating,0)/total:0;
+  if(avgEl)avgEl.textContent=avg.toFixed(1);
+  // Bars
+  if(bars){
+    bars.innerHTML='';
+    for(let s=5;s>=1;s--){
+      const cnt=reviews.filter(r=>r.rating===s).length;
+      const pct=total?cnt/total*100:0;
+      bars.innerHTML+=`<div class="eval-bar-row"><span>${s}★</span><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div><span>${cnt}</span></div>`;
+    }
+  }
+  // Cards
+  list.innerHTML=reviews.map(r=>`
+    <div class="eval-card" style="animation:fadeIn .3s">
+      <div style="color:#FFB800;font-size:.9rem">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+      <h4>${r.name}</h4>
+      <div class="sub">${r.role||''} · ${r.product}</div>
+      <p>"${r.comment}"</p>
+      <div style="font-size:.68rem;color:var(--soft);display:flex;gap:10px">
+        <span>${r.date||''}</span>
+        ${r.verified?'<span style="color:var(--green)">✓ Cliente verificado</span>':''}
+      </div>
+    </div>
+  `).join('');
+}
+function submitReview(){
+  const name=document.getElementById('eval-name').value.trim();
+  const product=document.getElementById('eval-product').value;
+  const comment=document.getElementById('eval-comment').value.trim();
+  if(!name||!product||!comment){alert('Completa todos los campos');return}
+  reviews.unshift({id:Date.now(),name,role:'',product,rating:evalRating,comment,date:new Date().toLocaleDateString('es-ES',{month:'long',year:'numeric'}),verified:false});
+  localStorage.setItem('alcatech_reviews',JSON.stringify(reviews));
+  renderReviews();
+  document.getElementById('eval-name').value='';
+  document.getElementById('eval-product').value='';
+  document.getElementById('eval-comment').value='';
+  document.getElementById('eval-stars').textContent='★★★★★';
+  evalRating=5;
+}
+initEval();
 </script>
 </body></html>
