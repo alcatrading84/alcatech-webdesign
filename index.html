@@ -1,139 +1,413 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>AlcaTech-WebDesign | Ingeniería Digital de Autor</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        body{background:#050912;color:#EAF0FF;font-family:-apple-system,system-ui,sans-serif;overflow-x:hidden}
-        canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.6}
-        section{position:relative;z-index:1}
-        .glass-card{background:rgba(14,21,38,0.7);backdrop-filter:blur(10px);border:1px solid rgba(120,150,220,0.12);border-radius:18px;transition:all 0.3s ease}
-        input, select, textarea{background:rgba(9,15,28,0.8);border:1px solid rgba(120,150,220,0.2);color:white;padding:12px;border-radius:10px;outline:none;width:100%}
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AlcaTech-WebDesign | Ingeniería Digital de Autor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050912;--card:#0b1428;--card2:#111e3c;--line:rgba(113,150,211,.14);--line2:rgba(113,150,211,.25);--text:#cbd8e8;--heading:#d5e0ec;--muted:#8f9fb7;--soft:#687991;--blue:#2f6df6;--blue2:#4a82ff;--cyan:#79a8ff;--green:#82cf68;--gold:#e4c878;--max:1140px;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);font:14px Inter,system-ui,sans-serif;background:radial-gradient(circle at 78% 4%,rgba(35,75,170,.16),transparent 29%),linear-gradient(180deg,var(--bg),#060b18 55%,var(--bg));overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background-image:linear-gradient(rgba(92,135,217,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(92,135,217,.025) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(circle at center,black 20%,transparent 90%)}
+#network{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.72}
+a{color:inherit;text-decoration:none}.wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+h1,h2,h3{margin:0;color:var(--heading);font-weight:700;letter-spacing:-.05em}p{color:var(--muted);line-height:1.7}
+.eyebrow{font-size:.67rem;letter-spacing:.2em;text-transform:uppercase;color:#477eff;font-weight:800;display:inline-flex;gap:10px;align-items:center}.eyebrow:before{content:"";width:21px;height:1px;background:#477eff}
+nav{position:sticky;top:0;z-index:100;background:rgba(5,9,18,.87);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-weight:800;letter-spacing:-.04em;color:var(--heading)}.brand em{color:var(--blue2);font-style:normal}
+.links{display:flex;gap:26px;color:var(--soft);font-size:.78rem}.links a:hover{color:var(--heading)}
+.right{display:flex;align-items:center;gap:10px}
+.lang{position:relative}.lang>button{font:700 .76rem Inter;background:var(--card);color:var(--heading);border:1px solid var(--line2);border-radius:8px;padding:10px 12px;cursor:pointer}
+.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 8px);min-width:175px;padding:6px;background:var(--card2);border:1px solid var(--line2);border-radius:10px;box-shadow:0 16px 36px rgba(0,0,0,.35)}
+.lang-menu.show{display:grid}.lang-menu button{border:0;background:transparent;text-align:left;color:var(--muted);border-radius:6px;padding:10px;cursor:pointer}.lang-menu button:hover{background:rgba(74,130,255,.14);color:var(--heading)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:11px 17px;border-radius:8px;border:1px solid var(--line2);font-weight:700;font-size:.78rem;cursor:pointer;transition:.25s var(--ease)}.btn:hover{transform:translateY(-2px);border-color:var(--blue2)}.primary{background:var(--blue);border:0;color:#dbe6f3;box-shadow:0 10px 27px rgba(47,109,246,.25)}
+.hero{padding:82px 0 32px;text-align:center;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1}
+.hero h1{font-size:clamp(2rem,5.5vw,4.5rem);line-height:1.1;max-width:100%;margin-top:21px;width:100%;white-space:nowrap}
+.hero h1 em,h2 em{font-style:normal;color:var(--blue2)}
+.hero-row{display:flex;flex-direction:column;align-items:center;gap:30px;margin-top:30px}
+.hero-row p{max-width:65ch;font-size:.95rem;margin:0 auto}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.signature{margin-top:17px;color:var(--heading);font-size:.88rem}
+.signature small{display:block;color:var(--soft);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;margin-top:6px}
+.ledger{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);width:100%}
+.ledger>div{padding:24px 18px;border-right:1px solid var(--line);text-align:left}.ledger>div:last-child{border:0}
+.ledger b{font-size:1.55rem;color:var(--blue2)}.ledger span{display:block;margin-top:8px;color:var(--soft);font-size:.72rem;line-height:1.5}
+/* SOFIA */
+#sofia-bubble{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:var(--blue);border-radius:50%;display:grid;place-items:center;cursor:pointer;z-index:999;box-shadow:0 8px 24px rgba(47,109,246,0.4);border:1px solid rgba(255,255,255,0.1);transition:transform 0.3s var(--ease)}
+#sofia-bubble:hover{transform:scale(1.1)}
+#sofia-panel{position:fixed;bottom:90px;right:24px;width:340px;height:450px;background:var(--card);border:1px solid var(--line2);border-radius:16px;display:none;flex-direction:column;z-index:998;box-shadow:0 12px 48px rgba(0,0,0,0.5);overflow:hidden}
+#sofia-panel.active{display:flex}
+.sofia-header{padding:16px;background:rgba(255,255,255,0.03);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.sofia-header b{font-size:0.9rem;color:#fff}
+.sofia-header span{font-size:0.65rem;color:var(--green);display:flex;align-items:center;gap:4px}
+.sofia-header span::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%}
+.sofia-msgs{flex:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+.msg{padding:10px 14px;border-radius:12px;max-width:85%;font-size:0.82rem;line-height:1.4}
+.msg.bot{background:var(--line);align-self:flex-start;color:var(--text)}.msg.user{background:var(--blue);align-self:flex-end;color:#fff}
+.sofia-input{padding:12px;background:rgba(255,255,255,0.02);border-top:1px solid var(--line);display:flex;gap:8px}
+.sofia-input input{flex:1;background:transparent;border:0;color:#fff;font-size:0.8rem;outline:none}
+/* SECTIONS */
+section{padding:66px 0;position:relative;z-index:1}
+.head{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:baseline;margin-bottom:34px}
+.head>span{font-size:.7rem;color:#477eff;font-weight:800;letter-spacing:.13em}
+.head h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.08;max-width:22ch}
+.index{border-top:1px solid var(--line2)}
+.row{display:grid;grid-template-columns:60px 1fr auto;gap:24px;padding:26px 5px;border-bottom:1px solid var(--line);align-items:center;transition:.25s var(--ease)}.row:hover{padding-left:18px;background:rgba(40,84,176,.06)}
+.row-num{color:#477eff;font-size:.78rem;font-weight:700}.row h3{font-size:clamp(1.15rem,2.3vw,1.7rem)}.row p{margin:7px 0 0;max-width:60ch;font-size:.82rem}.arrow{color:#477eff}.row:hover .arrow{transform:translate(3px,-3px)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.plan{padding:25px;border:1px solid var(--line);border-radius:12px;background:var(--card);display:grid;gap:15px}
+.plan.featured{background:linear-gradient(180deg,#152750,#101c37);border-color:var(--blue2)}
+.badge{justify-self:start;padding:6px 11px;border-radius:99px;background:var(--blue);color:#dbe6f3;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800}
+.plan h3{font-size:1.15rem}.sub{color:var(--soft);font-size:.72rem;margin-top:5px}
+.price{font-size:2.15rem;font-weight:800;color:var(--heading)}.price small{font-size:.72rem;color:var(--soft);font-weight:500}
+.plan p{font-size:.8rem;margin:0}.features{display:grid;gap:8px}
+.features span{display:flex;gap:8px;color:#a0aec1;font-size:.76rem;line-height:1.4}.features span:before{content:'✓';color:#4b83ff;font-weight:800}
+.plan .btn{width:100%}
+.advanced{margin-top:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.advanced .row{grid-template-columns:1.3fr .7fr 2fr auto;padding:20px 5px}
+.advanced strong{font-size:1.05rem;color:var(--blue2)}.advanced .btn{min-height:34px;padding:8px 12px;font-size:.7rem}
+.modules{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.module{padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.module b{display:block;color:var(--heading);font-size:.84rem}.module span{display:block;margin-top:6px;color:var(--muted);font-size:.72rem;line-height:1.45}.module strong{display:block;margin-top:11px;color:var(--blue2);font-size:.72rem}
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.testimonial{padding:22px 20px;border:1px solid var(--line);border-radius:12px;background:rgba(11,20,40,.82);transition:.25s var(--ease)}.testimonial:hover{transform:translateY(-3px);border-color:var(--blue2)}
+.stars{color:var(--gold);font-size:1rem;letter-spacing:.15em}.review{margin:15px 0 19px;color:#aebbcf;font-size:.86rem;line-height:1.6}
+.client{display:flex;align-items:center;gap:11px}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#172a56;color:var(--cyan);font-weight:800;font-size:.8rem}
+.client strong{display:block;color:var(--heading);font-size:.8rem}.client small{display:block;margin-top:3px;color:var(--soft);font-size:.7rem}
+.verified{display:inline-flex;align-items:center;gap:5px;margin-top:15px;color:var(--green);font-size:.7rem;font-weight:700}.verified:before{content:'✓';width:16px;height:16px;border-radius:50%;display:grid;place-items:center;background:rgba(130,207,104,.15)}
+.cta{padding:42px;border:1px solid var(--line2);border-radius:15px;background:linear-gradient(135deg,#112451,#0d1730);display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
+.cta h2{font-size:clamp(1.9rem,3.8vw,3rem);line-height:1.08;max-width:15ch}.cta-side{display:grid;gap:14px}.cta-side .btn{justify-self:start}
+footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid var(--line);position:relative;z-index:1}
+/* EVALUACIONES */
+.eval-grid{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
+.eval-cards{display:grid;gap:16px}
+.eval-card{padding:20px 22px;border:1px solid var(--line);border-radius:12px;background:rgba(11,20,40,.82);transition:.25s var(--ease)}.eval-card:hover{border-color:var(--blue2);transform:translateY(-2px)}
+.eval-stars{color:var(--gold);font-size:1rem;letter-spacing:.1em;margin-bottom:10px}
+.eval-comment{font-size:.84rem;color:#aebbcf;font-style:italic;line-height:1.6;margin-bottom:14px}
+.eval-author{display:flex;align-items:center;gap:10px}
+.eval-avatar{width:34px;height:34px;border-radius:50%;background:#172a56;color:var(--cyan);font-weight:800;font-size:.75rem;display:grid;place-items:center}
+.eval-name{font-size:.8rem;font-weight:700;color:var(--heading)}
+.eval-role{font-size:.7rem;color:var(--soft);margin-top:2px}
+/* FORM */
+.eval-form{padding:28px;border:1px solid var(--line2);border-radius:14px;background:linear-gradient(180deg,rgba(47,109,246,.08),rgba(11,20,40,.9));backdrop-filter:blur(8px)}
+.eval-form h3{font-size:1rem;color:var(--heading);margin-bottom:20px}
+.eval-form input,.eval-form select,.eval-form textarea{width:100%;background:rgba(5,9,18,.7);border:1px solid var(--line2);color:var(--text);padding:10px 12px;border-radius:8px;font:13px Inter,sans-serif;outline:none;margin-bottom:12px;transition:border-color .2s}
+.eval-form input:focus,.eval-form select:focus,.eval-form textarea:focus{border-color:var(--blue2)}
+.eval-form select option{background:var(--card2)}
+.eval-form textarea{height:90px;resize:none}
+.star-row{display:flex;align-items:center;gap:6px;margin-bottom:14px}
+.star-row span{font-size:.78rem;color:var(--soft)}
+.star-btn{font-size:1.5rem;cursor:pointer;color:rgba(255,255,255,.12);transition:color .15s,transform .15s;background:none;border:none;padding:0;line-height:1}
+.star-btn.active,.star-btn:hover{color:var(--gold);transform:scale(1.2)}
+.eval-submit{width:100%;background:var(--blue);border:none;color:#dbe6f3;padding:12px;border-radius:8px;font:700 .85rem Inter;cursor:pointer;transition:.2s var(--ease);box-shadow:0 8px 20px rgba(47,109,246,.3)}
+.eval-submit:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(47,109,246,.4)}
+@media(max-width:950px){.hero h1{white-space:normal;font-size:3rem}.hero-row,.cta{grid-template-columns:1fr}.plans,.testimonials{grid-template-columns:1fr}.modules{grid-template-columns:repeat(2,1fr)}.ledger{grid-template-columns:repeat(2,1fr)}.eval-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.links{display:none}.wrap{width:min(calc(100% - 28px),var(--max))}}
+</style>
 </head>
-<body>
-<div id="root"></div>
-<script type="text/babel">
-const { useState, useEffect, useRef } = React;
+<body id="top">
+<canvas id="network"></canvas>
 
-const App = () => {
-    const canvasRef = useRef(null);
-    const [chatOpen, setChatOpen] = useState(false);
-    const [userRating, setUserRating] = useState(0);
-    const [reviews, setReviews] = useState([
-        { id: 1, name: "Pedro Martínez", role: "CEO, Inversiones del Sur", product: "Web Empresarial", rating: 5, comment: "Excelente trabajo, carga rapidísimo.", date: "Junio 2026" },
-        { id: 2, name: "Ana García", role: "Directora, MediSalud", product: "Landing Premium", rating: 5, comment: "Diseño impecable y muy profesional.", date: "Mayo 2026" }
-    ]);
+<nav><div class="wrap nav">
+  <a class="brand" href="#top">AlcaTech<em>·</em>WebDesign</a>
+  <div class="links">
+    <a href="#top"       data-i18n="nav_inicio">Inicio</a>
+    <a href="#servicios" data-i18n="nav_servicios">Servicios</a>
+    <a href="#planes"    data-i18n="nav_planes">Planes</a>
+    <a href="#avanzados" data-i18n="nav_avanzados">Avanzados</a>
+    <a href="#testimonios" data-i18n="nav_testimonios">Testimonios</a>
+    <a href="#evaluaciones" data-i18n="nav_evaluaciones">Evaluaciones</a>
+    <a href="#contacto"  data-i18n="nav_contacto">Contacto</a>
+  </div>
+  <div class="right">
+    <div class="lang">
+      <button id="langBtn">🇪🇸 ES</button>
+      <div class="lang-menu" id="langMenu">
+        <button data-lang="es">🇪🇸 Español</button>
+        <button data-lang="en">🇬🇧 English</button>
+        <button data-lang="it">🇮🇹 Italiano</button>
+        <button data-lang="de">🇩🇪 Deutsch</button>
+        <button data-lang="fr">🇫🇷 Français</button>
+      </div>
+    </div>
+    <a class="btn primary" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20vengo%20del%20nav%20de%20AlcaTech." target="_blank" data-i18n="nav_cta">Hablemos ↗</a>
+  </div>
+</div></nav>
 
-    // LÓGICA DE PARTÍCULAS
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let animationId;
+<header class="wrap hero">
+  <span class="eyebrow" data-i18n="hero_eyebrow">Ingeniería digital de autor</span>
+  <h1>Digital que <em data-i18n="hero_h1_em">impulsa</em> <span data-i18n="hero_h1_end">negocios</span></h1>
+  <div class="hero-row">
+    <p data-i18n="hero_p">Diseño y construyo plataformas web rápidas, escalables y con criterio. No entrego páginas bonitas y vacías: entrego sistemas que cargan en menos de un segundo y empujan negocio de verdad.</p>
+    <div>
+      <div class="actions">
+        <a class="btn primary" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20vengo%20del%20hero%20de%20AlcaTech." target="_blank" data-i18n="hero_cta1">◉ Hablemos por WhatsApp</a>
+        <a class="btn" href="#servicios" data-i18n="hero_cta2">Ver servicios →</a>
+      </div>
+      <div class="signature" data-i18n="hero_sig">Kelvin, detrás de cada línea.<small data-i18n="hero_sig_small">Un solo responsable, cero intermediarios</small></div>
+    </div>
+  </div>
+  <div class="ledger">
+    <div><b>30+</b><span data-i18n="stat1">proyectos entregados</span></div>
+    <div><b>0.8s</b><span data-i18n="stat2">carga promedio</span></div>
+    <div><b>98%</b><span data-i18n="stat3">puntaje promedio Lighthouse</span></div>
+    <div><b>100%</b><span data-i18n="stat4">satisfacción de clientes</span></div>
+  </div>
+</header>
 
-        const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-        window.addEventListener('resize', resize);
-        resize();
+<section class="wrap" id="servicios">
+  <div class="head"><span>01 — 04</span><h2 data-i18n="serv_h2">Lo que construyo, y por qué <em data-i18n="serv_h2_em">importa</em>.</h2></div>
+  <div class="index">
+    <div class="row"><span class="row-num">01</span><div><h3 data-i18n="s1_h">Landing y sitios web</h3><p data-i18n="s1_p">Páginas rápidas y modernas, con estructura pensada para convertir visitas en conversaciones y ventas.</p></div><span class="arrow">↗</span></div>
+    <div class="row"><span class="row-num">02</span><div><h3 data-i18n="s2_h">E-commerce y SaaS</h3><p data-i18n="s2_p">Tiendas y plataformas centradas en experiencia, rendimiento y una base lista para escalar sin dramas.</p></div><span class="arrow">↗</span></div>
+    <div class="row"><span class="row-num">03</span><div><h3 data-i18n="s3_h">Experiencias 3D y motion</h3><p data-i18n="s3_p">Capas visuales inmersivas que elevan la marca sin sacrificar velocidad ni usabilidad.</p></div><span class="arrow">↗</span></div>
+    <div class="row"><span class="row-num">04</span><div><h3 data-i18n="s4_h">Automatización y DevOps</h3><p data-i18n="s4_p">Deploys limpios, CI/CD y optimización técnica para que el sistema trabaje solo.</p></div><span class="arrow">↗</span></div>
+  </div>
+</section>
 
-        for(let i=0; i<85; i++) {
-            particles.push({
-                x: Math.random()*canvas.width, y: Math.random()*canvas.height,
-                vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
-                r: Math.random()*2+1
-            });
-        }
+<section class="wrap" id="planes">
+  <div class="head"><span>02 — Portada</span><h2 data-i18n="planes_h2">Tres planes para mostrar el valor sin <em data-i18n="planes_h2_em">confundir</em>.</h2></div>
+  <div class="plans">
+    <article class="plan">
+      <div><h3 data-i18n="p1_h">Landing Premium</h3><div class="sub" data-i18n="p1_sub">Presencia, marca y conversión</div></div>
+      <div class="price">€1.200<small>+</small></div>
+      <p data-i18n="p1_p">Una presencia profesional con diseño de marca, varias secciones y estructura para convertir.</p>
+      <div class="features"><span data-i18n="p1_f1">Diseño premium responsive</span><span data-i18n="p1_f2">SEO técnico base y Analytics</span><span data-i18n="p1_f3">Formulario de leads + WhatsApp</span><span data-i18n="p1_f4">Despliegue, SSL y soporte inicial</span></div>
+      <a class="btn" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20me%20interesa%20el%20plan%20Landing%20Premium." target="_blank" data-i18n="p1_btn">Consultar plan</a>
+    </article>
+    <article class="plan featured">
+      <span class="badge" data-i18n="p2_badge">Recomendado</span>
+      <div><h3 data-i18n="p2_h">Web Empresarial</h3><div class="sub" data-i18n="p2_sub">La base seria para crecer</div></div>
+      <div class="price">€2.400<small>+</small></div>
+      <p data-i18n="p2_p">Web completa para autoridad, contenido, captación y automatizaciones básicas.</p>
+      <div class="features"><span data-i18n="p2_f1">Arquitectura multipágina + blog</span><span data-i18n="p2_f2">UX/UI y eventos de conversión</span><span data-i18n="p2_f3">Sofía IA o automatización básica</span><span data-i18n="p2_f4">Soporte de lanzamiento 30 días</span></div>
+      <a class="btn primary" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20me%20interesa%20el%20plan%20Web%20Empresarial." target="_blank" data-i18n="p2_btn">Empezar conversación</a>
+    </article>
+    <article class="plan">
+      <div><h3 data-i18n="p3_h">Cinematic Motion</h3><div class="sub" data-i18n="p3_sub">Experiencia visual premium</div></div>
+      <div class="price">€3.500<small>+</small></div>
+      <p data-i18n="p3_p">Una web memorable con movimiento, partículas y producción visual controlada.</p>
+      <div class="features"><span data-i18n="p3_f1">Dirección visual exclusiva</span><span data-i18n="p3_f2">Video optimizado + fallback</span><span data-i18n="p3_f3">Partículas, motion y dashboard</span><span data-i18n="p3_f4">Hasta 5 secciones + soporte 30 días</span></div>
+      <a class="btn" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20me%20interesa%20el%20plan%20Cinematic%20Motion." target="_blank" data-i18n="p3_btn">Cotizar experiencia</a>
+    </article>
+  </div>
+</section>
 
-        const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((p, i) => {
-                p.x += p.vx; p.y += p.vy;
-                if(p.x<0 || p.x>canvas.width) p.vx*=-1;
-                if(p.y<0 || p.y>canvas.height) p.vy*=-1;
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-                ctx.fillStyle = 'rgba(46, 107, 255, 0.4)'; ctx.fill();
-                
-                for(let j=i+1; j<particles.length; j++){
-                    const p2 = particles[j];
-                    const dist = Math.hypot(p.x-p2.x, p.y-p2.y);
-                    if(dist<150){
-                        ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(p2.x,p2.y);
-                        ctx.strokeStyle = `rgba(46,107,255,${0.15*(1-dist/150)})`;
-                        ctx.lineWidth = 0.5; ctx.stroke();
-                    }
-                }
-            });
-            animationId = requestAnimationFrame(animate);
-        };
-        animate();
-        return () => { cancelAnimationFrame(animationId); window.removeEventListener('resize', resize); };
-    }, []);
+<section class="wrap" id="avanzados">
+  <div class="head"><span>03 — Escala</span><h2 data-i18n="adv_h2">Los proyectos complejos necesitan <em data-i18n="adv_h2_em">otra liga</em>.</h2></div>
+  <div class="advanced">
+    <div class="row"><h3 data-i18n="a1_h">Cinematic 3D Interactive</h3><strong>€5.500+</strong><p data-i18n="a1_p">Three.js, objetos 3D, interacción con cursor o dispositivo, storytelling por escenas, preloader y auditoría de rendimiento.</p><a class="btn" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20me%20interesa%20Cinematic%203D." target="_blank" data-i18n="adv_btn">Consultar</a></div>
+    <div class="row"><h3 data-i18n="a2_h">Enterprise / SaaS</h3><strong>€7.500+</strong><p data-i18n="a2_p">Dashboards, IA, CRM, automatizaciones, integraciones externas, analítica de conversión y soporte prioritario.</p><a class="btn" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20me%20interesa%20Enterprise%20SaaS." target="_blank" data-i18n="adv_btn">Consultar</a></div>
+    <div class="row"><h3 data-i18n="a3_h">Cinematic Signature</h3><strong>€8.000+</strong><p data-i18n="a3_p">Estrategia de marca, UX/UI desde cero, varias escenas 3D, audiovisual premium y dirección técnica completa.</p><a class="btn" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20me%20interesa%20Cinematic%20Signature." target="_blank" data-i18n="adv_btn">Consultar</a></div>
+    <div class="row"><h3 data-i18n="a4_h">E-commerce Performance</h3><strong>€3.500+</strong><p data-i18n="a4_p">Tienda seria con catálogo, Stripe, checkout, eventos de conversión y optimización de ventas.</p><a class="btn" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20me%20interesa%20E-commerce%20Performance." target="_blank" data-i18n="adv_btn">Consultar</a></div>
+    <div class="row"><h3 data-i18n="a5_h">Care Plan</h3><strong>€97/mes</strong><p data-i18n="a5_p">Mantenimiento técnico, copias de seguridad, actualizaciones, monitoreo y soporte continuo.</p><a class="btn" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20me%20interesa%20el%20Care%20Plan." target="_blank" data-i18n="adv_btn">Consultar</a></div>
+  </div>
+</section>
 
-    return (
-        <div style={{ minHeight: '100vh' }}>
-            <canvas ref={canvasRef} />
-            
-            {/* NAV */}
-            <nav style={{ position: 'fixed', top: 0, width: '100%', zIndex: 100, background: 'rgba(7,11,20,0.8)', backdropFilter: 'blur(10px)', borderBottom: '1px solid rgba(255,255,255,0.05)', height: '70px', display: 'flex', alignItems: 'center' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ fontWeight: 900, fontSize: '20px' }}>ALCA<span style={{ color: '#2E6BFF' }}>TECH</span></div>
-                    <div style={{ display: 'flex', gap: '30px', fontSize: '14px' }}>
-                        <a href="#servicios" style={{ color: '#9BA8C0' }}>Servicios</a>
-                        <a href="#planes" style={{ color: '#9BA8C0' }}>Planes</a>
-                        <a href="#evaluaciones" style={{ color: '#9BA8C0' }}>Evaluaciones</a>
-                    </div>
-                </div>
-            </nav>
+<section class="wrap">
+  <div class="head"><span>04 — Módulos</span><h2 data-i18n="mod_h2">Extras claros para aumentar valor sin regalar <em data-i18n="mod_h2_em">horas</em>.</h2></div>
+  <div class="modules">
+    <div class="module"><b data-i18n="m1_b">Chat IA Sofía</b><span data-i18n="m1_s">Atención y captación.</span><strong>Desde €490</strong></div>
+    <div class="module"><b data-i18n="m2_b">Multiidioma profesional</b><span data-i18n="m2_s">ES, IT, EN, DE y FR.</span><strong>Desde €350</strong></div>
+    <div class="module"><b data-i18n="m3_b">Sistema de reservas</b><span data-i18n="m3_s">Citas y servicios.</span><strong>Desde €450</strong></div>
+    <div class="module"><b data-i18n="m4_b">Stripe / pagos</b><span data-i18n="m4_s">Checkout y eventos.</span><strong>Desde €590</strong></div>
+    <div class="module"><b data-i18n="m5_b">Dashboard privado</b><span data-i18n="m5_s">Métricas y flujos.</span><strong>Desde €1.200</strong></div>
+    <div class="module"><b data-i18n="m6_b">Escena 3D interactiva</b><span data-i18n="m6_s">Objeto o ambiente WebGL.</span><strong>Desde €900</strong></div>
+    <div class="module"><b data-i18n="m7_b">Video cinematográfico</b><span data-i18n="m7_s">Edición o producción.</span><strong data-i18n="m7_price">A medida</strong></div>
+    <div class="module"><b data-i18n="m8_b">Mantenimiento técnico</b><span data-i18n="m8_s">Care Plan mensual.</span><strong>Desde €97/mes</strong></div>
+  </div>
+</section>
 
-            {/* HERO */}
-            <section style={{ paddingTop: '150px', textAlign: 'center' }}>
-                <h1 style={{ fontSize: '4rem', fontWeight: 900, marginBottom: '20px' }}>Digital que <span style={{ color: '#2E6BFF' }}>impulsa negocios.</span></h1>
-                <button style={{ background: '#2E6BFF', border: 'none', padding: '15px 30px', borderRadius: '12px', color: 'white', fontWeight: 700, cursor: 'pointer' }}>◉ Hablar por WhatsApp</button>
-            </section>
+<section class="wrap" id="testimonios">
+  <div class="head"><span>05 — Testimonios</span><h2 data-i18n="test_h2">Clientes que dejaron de <em data-i18n="test_h2_em">improvisar</em>.</h2></div>
+  <div class="testimonials">
+    <article class="testimonial"><div class="stars">★★★★★</div><p class="review" data-i18n="t1_r">"El plan Empresarial nos ordenó la presencia digital de una vez. Serio, y carga rapidísimo."</p><div class="client"><div class="avatar">PM</div><div><strong>Pedro Martínez</strong><small>CEO, Inversiones del Sur</small></div></div><span class="verified" data-i18n="verified">Cliente verificado</span></article>
+    <article class="testimonial"><div class="stars">★★★★★</div><p class="review" data-i18n="t2_r">"Pasamos de una web plana a una experiencia que genera reservas y confianza."</p><div class="client"><div class="avatar">AG</div><div><strong>Dra. Ana García</strong><small>Directora médica, MediSalud</small></div></div><span class="verified" data-i18n="verified">Cliente verificado</span></article>
+    <article class="testimonial"><div class="stars">★★★★★</div><p class="review" data-i18n="t3_r">"Pega fuerte en lo visual, pero lo mejor es que no sacrificó rendimiento. Raro, y por eso vale."</p><div class="client"><div class="avatar">CR</div><div><strong>Carlos Ruiz</strong><small>Propietario, La Mesa</small></div></div><span class="verified" data-i18n="verified">Cliente verificado</span></article>
+  </div>
+</section>
 
-            {/* EVALUACIONES INTERACTIVAS */}
-            <section id="evaluaciones" style={{ padding: '100px 20px' }}>
-                <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-                    <div style={{ color: '#2E6BFF', fontSize: '11px', fontWeight: 700, letterSpacing: '2px', marginBottom: '10px' }}>05 / EVALUACIONES</div>
-                    <h2 style={{ fontSize: '40px', fontWeight: 900, marginBottom: '40px' }}>Lo que opinan nuestros clientes.</h2>
-                    
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '30px' }}>
-                        <div style={{ display: 'grid', gap: '20px' }}>
-                            {reviews.map(r => (
-                                <div key={r.id} className="glass-card" style={{ padding: '20px' }}>
-                                    <div style={{ color: '#FFB800', marginBottom: '10px' }}>{'★'.repeat(r.rating)}</div>
-                                    <p style={{ fontStyle: 'italic', color: '#9BA8C0' }}>"{r.comment}"</p>
-                                    <div style={{ marginTop: '15px', fontWeight: 700 }}>{r.name} - <span style={{ fontWeight: 400, color: '#6B7896' }}>{r.product}</span></div>
-                                </div>
-                            ))}
-                        </div>
+<!-- EVALUACIONES CON ESTRELLAS INTERACTIVAS -->
+<section class="wrap" id="evaluaciones">
+  <div class="head"><span>06 — Prueba Social</span><h2 data-i18n="eval_h2">Lo que dicen quienes ya <em data-i18n="eval_h2_em">confiaron</em>.</h2></div>
+  <div class="eval-grid">
+    <div class="eval-cards" id="eval-cards">
+      <div class="eval-card">
+        <div class="eval-stars">★★★★★</div>
+        <p class="eval-comment">"El plan Empresarial nos ordenó la presencia digital de una vez. Serio, y carga rapidísimo."</p>
+        <div class="eval-author"><div class="eval-avatar">PM</div><div><div class="eval-name">Pedro Martínez</div><div class="eval-role">CEO, Inversiones del Sur · Web Empresarial</div></div></div>
+      </div>
+      <div class="eval-card">
+        <div class="eval-stars">★★★★★</div>
+        <p class="eval-comment">"Pasamos de una web plana a una experiencia que genera reservas y confianza."</p>
+        <div class="eval-author"><div class="eval-avatar">AG</div><div><div class="eval-name">Dra. Ana García</div><div class="eval-role">Directora médica, MediSalud · Landing Premium</div></div></div>
+      </div>
+      <div class="eval-card">
+        <div class="eval-stars">★★★★★</div>
+        <p class="eval-comment">"Pega fuerte en lo visual, pero lo mejor es que no sacrificó rendimiento. Raro, y por eso vale."</p>
+        <div class="eval-author"><div class="eval-avatar">CR</div><div><div class="eval-name">Carlos Ruiz</div><div class="eval-role">Propietario, La Mesa · Cinematic Motion</div></div></div>
+      </div>
+    </div>
 
-                        <div className="glass-card" style={{ padding: '30px' }}>
-                            <h3>Danos tu opinión</h3>
-                            <div style={{ margin: '20px 0' }}>
-                                <div style={{ marginBottom: '10px' }}>Puntuación:</div>
-                                {[1,2,3,4,5].map(s => (
-                                    <span key={s} onClick={() => setUserRating(s)} style={{ fontSize: '30px', cursor: 'pointer', color: s <= userRating ? '#FFB800' : '#222' }}>★</span>
-                                ))}
-                            </div>
-                            <textarea placeholder="Tu experiencia..." style={{ height: '100px', marginBottom: '15px' }}></textarea>
-                            <button style={{ width: '100%', background: '#2E6BFF', border: 'none', color: 'white', padding: '12px', borderRadius: '8px', fontWeight: 700 }}>Publicar</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    );
+    <div class="eval-form">
+      <h3 data-i18n="eval_form_title">Deja tu evaluación</h3>
+      <input type="text" id="eval-name" data-i18n-placeholder="eval_name_ph" placeholder="Tu nombre completo">
+      <select id="eval-plan">
+        <option value="" data-i18n="eval_plan_ph">Selecciona tu plan</option>
+        <option>Landing Premium</option>
+        <option>Web Empresarial</option>
+        <option>Cinematic Motion</option>
+        <option>Cinematic 3D Interactive</option>
+        <option>Enterprise / SaaS</option>
+        <option>E-commerce Performance</option>
+      </select>
+      <div class="star-row">
+        <span data-i18n="eval_score_label">Tu puntuación:</span>
+        <button class="star-btn" data-star="1" onclick="setRating(1)">★</button>
+        <button class="star-btn" data-star="2" onclick="setRating(2)">★</button>
+        <button class="star-btn" data-star="3" onclick="setRating(3)">★</button>
+        <button class="star-btn" data-star="4" onclick="setRating(4)">★</button>
+        <button class="star-btn" data-star="5" onclick="setRating(5)">★</button>
+      </div>
+      <textarea id="eval-comment" data-i18n-placeholder="eval_comment_ph" placeholder="Cuéntanos tu experiencia..."></textarea>
+      <button class="eval-submit" onclick="submitEval()" data-i18n="eval_submit">Publicar Reseña</button>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="contacto">
+  <div class="cta">
+    <div><span class="eyebrow" data-i18n="cta_eyebrow">Siguiente paso</span><h2 data-i18n="cta_h2">Cuéntame tu idea. Yo pongo la <em data-i18n="cta_h2_em">ingeniería</em>.</h2></div>
+    <div class="cta-side"><p data-i18n="cta_p">Sin formularios eternos ni intermediarios. Me escribes, revisamos qué necesitas de verdad, y te digo por dónde empezar.</p><a class="btn primary" href="https://wa.me/393801028239?text=Hola%20Kelvin,%20vengo%20de%20la%20sección%20de%20contacto%20de%20AlcaTech.%20Tengo%20una%20idea..." target="_blank" data-i18n="hero_cta1">◉ Hablemos por WhatsApp</a></div>
+  </div>
+</section>
+
+<footer class="wrap"><span data-i18n="footer">© 2026 AlcaTech-WebDesign · Ingeniería digital de autor</span></footer>
+
+<!-- CHAT SOFIA -->
+<div id="sofia-bubble"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+<div id="sofia-panel">
+  <div class="sofia-header"><div><b data-i18n="sofia_title">Sofía · AlcaTech AI</b><br><span data-i18n="sofia_status">Normalmente responde al instante</span></div><button onclick="document.getElementById('sofia-panel').classList.remove('active')" style="background:none;border:none;color:var(--soft);font-size:1.2rem;cursor:pointer">×</button></div>
+  <div class="sofia-msgs" id="sofia-msgs"><div class="msg bot" id="sofia-welcome">¡Hola! Soy Sofía, la asistente virtual de AlcaTech. ¿En qué puedo ayudarte hoy?</div></div>
+  <div class="sofia-input"><input type="text" id="sofia-input-field" data-i18n-placeholder="sofia_placeholder" placeholder="Escribe tu mensaje..."><button class="btn primary" style="min-height:30px;padding:8px 14px" onclick="sendSofia()">➤</button></div>
+</div>
+
+<script>
+/* ── CANVAS PARTÍCULAS ── */
+(function(){
+  const cv=document.getElementById('network'),cx=cv.getContext('2d');
+  let W,H,ns=[];
+  function init(){
+    W=cv.width=innerWidth;H=cv.height=innerHeight;
+    ns=Array.from({length:innerWidth<700?55:110},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,
+      r:Math.random()*1.5+.8
+    }));
+  }
+  function draw(){
+    cx.clearRect(0,0,W,H);
+    ns.forEach(n=>{
+      n.x+=n.vx;n.y+=n.vy;
+      if(n.x<0||n.x>W)n.vx*=-1;
+      if(n.y<0||n.y>H)n.vy*=-1;
+      cx.beginPath();cx.arc(n.x,n.y,n.r,0,6.3);
+      cx.fillStyle='rgba(74,130,255,.6)';cx.fill();
+    });
+    for(let i=0;i<ns.length;i++)for(let j=i+1;j<ns.length;j++){
+      const dx=ns[i].x-ns[j].x,dy=ns[i].y-ns[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<155){
+        cx.beginPath();cx.moveTo(ns[i].x,ns[i].y);cx.lineTo(ns[j].x,ns[j].y);
+        cx.strokeStyle='rgba(74,130,255,'+(.22*(1-d/155))+')';cx.lineWidth=.7;cx.stroke();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize',init);init();draw();
+})();
+
+/* ── CHAT SOFIA ── */
+const bubble=document.getElementById('sofia-bubble'),panel=document.getElementById('sofia-panel'),inp=document.getElementById('sofia-input-field'),msgs=document.getElementById('sofia-msgs');
+bubble.onclick=()=>panel.classList.toggle('active');
+function sendSofia(){
+  const v=inp.value.trim();if(!v)return;
+  addMsg(v,'user');inp.value='';
+  setTimeout(()=>addMsg('Gracias por tu mensaje. Kelvin te responderá pronto. También puedes escribirle directamente por WhatsApp: +39 380 102 8239','bot'),600);
+}
+function addMsg(t,tp){const d=document.createElement('div');d.className='msg '+tp;d.innerText=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
+inp.addEventListener('keypress',e=>{if(e.key==='Enter')sendSofia()});
+
+/* ── ESTRELLAS INTERACTIVAS ── */
+let currentRating=0;
+function setRating(n){
+  currentRating=n;
+  document.querySelectorAll('.star-btn').forEach((b,i)=>{
+    b.classList.toggle('active',i<n);
+  });
+}
+document.querySelectorAll('.star-btn').forEach(b=>{
+  b.addEventListener('mouseenter',()=>{
+    const n=parseInt(b.dataset.star);
+    document.querySelectorAll('.star-btn').forEach((s,i)=>s.style.color=i<n?'var(--gold)':'rgba(255,255,255,.12)');
+  });
+  b.addEventListener('mouseleave',()=>{
+    document.querySelectorAll('.star-btn').forEach((s,i)=>s.style.color=i<currentRating?'var(--gold)':'rgba(255,255,255,.12)');
+  });
+});
+
+function submitEval(){
+  const name=document.getElementById('eval-name').value.trim();
+  const plan=document.getElementById('eval-plan').value;
+  const comment=document.getElementById('eval-comment').value.trim();
+  if(!name||!plan||!comment||currentRating===0){alert('Por favor completa todos los campos y selecciona una puntuación.');return;}
+  const stars='★'.repeat(currentRating)+'☆'.repeat(5-currentRating);
+  const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  const card=document.createElement('div');
+  card.className='eval-card';
+  card.innerHTML=`<div class="eval-stars">${stars}</div><p class="eval-comment">"${comment}"</p><div class="eval-author"><div class="eval-avatar">${initials}</div><div><div class="eval-name">${name}</div><div class="eval-role">${plan}</div></div></div>`;
+  document.getElementById('eval-cards').prepend(card);
+  document.getElementById('eval-name').value='';
+  document.getElementById('eval-plan').value='';
+  document.getElementById('eval-comment').value='';
+  setRating(0);
+}
+
+/* ── IDIOMAS ── */
+const LANGS={
+  es:{nav_inicio:'Inicio',nav_servicios:'Servicios',nav_planes:'Planes',nav_avanzados:'Avanzados',nav_testimonios:'Testimonios',nav_evaluaciones:'Evaluaciones',nav_contacto:'Contacto',nav_cta:'Hablemos ↗',hero_eyebrow:'Ingeniería digital de autor',hero_h1_em:'impulsa',hero_h1_end:'negocios',hero_p:'Diseño y construyo plataformas web rápidas, escalables y con criterio. No entrego páginas bonitas y vacías: entrego sistemas que cargan en menos de un segundo y empujan negocio de verdad.',hero_cta1:'◉ Hablemos por WhatsApp',hero_cta2:'Ver servicios →',hero_sig:'Kelvin, detrás de cada línea.',hero_sig_small:'Un solo responsable, cero intermediarios',stat1:'proyectos entregados',stat2:'carga promedio',stat3:'puntaje promedio Lighthouse',stat4:'satisfacción de clientes',serv_h2:'Lo que construyo, y por qué',serv_h2_em:'importa',s1_h:'Landing y sitios web',s1_p:'Páginas rápidas y modernas, con estructura pensada para convertir visitas en conversaciones y ventas.',s2_h:'E-commerce y SaaS',s2_p:'Tiendas y plataformas centradas en experiencia, rendimiento y una base lista para escalar sin dramas.',s3_h:'Experiencias 3D y motion',s3_p:'Capas visuales inmersivas que elevan la marca sin sacrificar velocidad ni usabilidad.',s4_h:'Automatización y DevOps',s4_p:'Deploys limpios, CI/CD y optimización técnica para que el sistema trabaje solo.',planes_h2:'Tres planes para mostrar el valor sin',planes_h2_em:'confundir',p1_h:'Landing Premium',p1_sub:'Presencia, marca y conversión',p1_p:'Una presencia profesional con diseño de marca, varias secciones y estructura para convertir.',p1_f1:'Diseño premium responsive',p1_f2:'SEO técnico base y Analytics',p1_f3:'Formulario de leads + WhatsApp',p1_f4:'Despliegue, SSL y soporte inicial',p1_btn:'Consultar plan',p2_badge:'Recomendado',p2_h:'Web Empresarial',p2_sub:'La base seria para crecer',p2_p:'Web completa para autoridad, contenido, captación y automatizaciones básicas.',p2_f1:'Arquitectura multipágina + blog',p2_f2:'UX/UI y eventos de conversión',p2_f3:'Sofía IA o automatización básica',p2_f4:'Soporte de lanzamiento 30 días',p2_btn:'Empezar conversación',p3_h:'Cinematic Motion',p3_sub:'Experiencia visual premium',p3_p:'Una web memorable con movimiento, partículas y producción visual controlada.',p3_f1:'Dirección visual exclusiva',p3_f2:'Video optimizado + fallback',p3_f3:'Partículas, motion y dashboard',p3_f4:'Hasta 5 secciones + soporte 30 días',p3_btn:'Cotizar experiencia',adv_h2:'Los proyectos complejos necesitan',adv_h2_em:'otra liga',adv_btn:'Consultar',a1_h:'Cinematic 3D Interactive',a1_p:'Three.js, objetos 3D, interacción con cursor o dispositivo, storytelling por escenas, preloader y auditoría de rendimiento.',a2_h:'Enterprise / SaaS',a2_p:'Dashboards, IA, CRM, automatizaciones, integraciones externas, analítica de conversión y soporte prioritario.',a3_h:'Cinematic Signature',a3_p:'Estrategia de marca, UX/UI desde cero, varias escenas 3D, audiovisual premium y dirección técnica completa.',a4_h:'E-commerce Performance',a4_p:'Tienda seria con catálogo, Stripe, checkout, eventos de conversión y optimización de ventas.',a5_h:'Care Plan',a5_p:'Mantenimiento técnico, copias de seguridad, actualizaciones, monitoreo y soporte continuo.',mod_h2:'Extras claros para aumentar valor sin regalar',mod_h2_em:'horas',m1_b:'Chat IA Sofía',m1_s:'Atención y captación.',m2_b:'Multiidioma profesional',m2_s:'ES, IT, EN, DE y FR.',m3_b:'Sistema de reservas',m3_s:'Citas y servicios.',m4_b:'Stripe / pagos',m4_s:'Checkout y eventos.',m5_b:'Dashboard privado',m5_s:'Métricas y flujos.',m6_b:'Escena 3D interactiva',m6_s:'Objeto o ambiente WebGL.',m7_b:'Video cinematográfico',m7_s:'Edición o producción.',m7_price:'A medida',m8_b:'Mantenimiento técnico',m8_s:'Care Plan mensual.',test_h2:'Clientes que dejaron de',test_h2_em:'improvisar',verified:'Cliente verificado',t1_r:'"El plan Empresarial nos ordenó la presencia digital de una vez. Serio, y carga rapidísimo."',t2_r:'"Pasamos de una web plana a una experiencia que genera reservas y confianza."',t3_r:'"Pega fuerte en lo visual, pero lo mejor es que no sacrificó rendimiento. Raro, y por eso vale."',eval_h2:'Lo que dicen quienes ya',eval_h2_em:'confiaron',eval_form_title:'Deja tu evaluación',eval_name_ph:'Tu nombre completo',eval_plan_ph:'Selecciona tu plan',eval_score_label:'Tu puntuación:',eval_comment_ph:'Cuéntanos tu experiencia...',eval_submit:'Publicar Reseña',cta_eyebrow:'Siguiente paso',cta_h2:'Cuéntame tu idea. Yo pongo la',cta_h2_em:'ingeniería',cta_p:'Sin formularios eternos ni intermediarios. Me escribes, revisamos qué necesitas de verdad, y te digo por dónde empezar.',footer:'© 2026 AlcaTech-WebDesign · Ingeniería digital de autor',sofia_title:'Sofía · AlcaTech AI',sofia_status:'Normalmente responde al instante',sofia_welcome:'¡Hola! Soy Sofía, la asistente virtual de AlcaTech. ¿En qué puedo ayudarte hoy?',sofia_placeholder:'Escribe tu mensaje...'},
+  en:{nav_inicio:'Home',nav_servicios:'Services',nav_planes:'Plans',nav_avanzados:'Advanced',nav_testimonios:'Testimonials',nav_evaluaciones:'Reviews',nav_contacto:'Contact',nav_cta:"Let's talk ↗",hero_eyebrow:'Bespoke digital engineering',hero_h1_em:'drives',hero_h1_end:'business growth',hero_p:"I design and build fast, scalable, purposeful web platforms. I don't deliver empty, pretty pages — I deliver systems that load in under a second and drive real business results.",hero_cta1:'◉ Talk on WhatsApp',hero_cta2:'View services →',hero_sig:'Kelvin, behind every line.',hero_sig_small:'One person responsible, zero middlemen',stat1:'projects delivered',stat2:'average load time',stat3:'average Lighthouse score',stat4:'client satisfaction',serv_h2:'What I build, and why it',serv_h2_em:'matters',s1_h:'Landing pages & websites',s1_p:'Fast, modern pages structured to turn visits into conversations and sales.',s2_h:'E-commerce & SaaS',s2_p:'Stores and platforms focused on experience, performance, and a solid foundation for scaling.',s3_h:'3D & motion experiences',s3_p:'Immersive visual layers that elevate the brand without sacrificing speed or usability.',s4_h:'Automation & DevOps',s4_p:'Clean deployments, CI/CD, and technical optimization so the system works for you.',planes_h2:'Three plans to show value without',planes_h2_em:'confusion',p1_h:'Premium Landing',p1_sub:'Presence, brand & conversion',p1_p:'A professional presence with brand design, multiple sections, and a conversion-focused structure.',p1_f1:'Premium responsive design',p1_f2:'Base technical SEO & Analytics',p1_f3:'Leads form + WhatsApp',p1_f4:'Deployment, SSL & initial support',p1_btn:'Discuss plan',p2_badge:'Recommended',p2_h:'Business Web',p2_sub:'The solid foundation for growth',p2_p:'Full website for authority, content, lead capture, and basic automations.',p2_f1:'Multi-page architecture + blog',p2_f2:'UX/UI & conversion events',p2_f3:'Sofía AI or basic automation',p2_f4:'30-day launch support',p2_btn:'Start conversation',p3_h:'Cinematic Motion',p3_sub:'Premium visual experience',p3_p:'A memorable website with motion, particles, and controlled visual production.',p3_f1:'Exclusive visual direction',p3_f2:'Optimized video + fallback',p3_f3:'Particles, motion & dashboard',p3_f4:'Up to 5 sections + 30-day support',p3_btn:'Quote experience',adv_h2:'Complex projects need',adv_h2_em:'another league',adv_btn:'Inquire',a1_h:'Cinematic 3D Interactive',a1_p:'Three.js, 3D objects, cursor/device interaction, scene-based storytelling, preloader, and performance audit.',a2_h:'Enterprise / SaaS',a2_p:'Dashboards, AI, CRM, automations, external integrations, conversion analytics, and priority support.',a3_h:'Cinematic Signature',a3_p:'Brand strategy, UX/UI from scratch, multiple 3D scenes, premium audiovisual, and full technical direction.',a4_h:'E-commerce Performance',a4_p:'Serious store with catalog, Stripe, checkout, conversion events, and sales optimization.',a5_h:'Care Plan',a5_p:'Technical maintenance, backups, updates, monitoring, and continuous support.',mod_h2:'Clear extras to add value without giving away',mod_h2_em:'hours',m1_b:'Sofía AI Chat',m1_s:'Support & lead capture.',m2_b:'Professional Multilanguage',m2_s:'ES, IT, EN, DE & FR.',m3_b:'Booking System',m3_s:'Appointments & services.',m4_b:'Stripe / Payments',m4_s:'Checkout & events.',m5_b:'Private Dashboard',m5_s:'Metrics & flows.',m6_b:'3D Interactive Scene',m6_s:'Object or WebGL environment.',m7_b:'Cinematic Video',m7_s:'Editing or production.',m7_price:'Custom quote',m8_b:'Technical Maintenance',m8_s:'Monthly Care Plan.',test_h2:'Clients who stopped',test_h2_em:'improvising',verified:'Verified client',t1_r:'"The Business plan organized our digital presence once and for all. Serious and incredibly fast."',t2_r:'"We went from a flat site to an experience that generates bookings and trust."',t3_r:"\"Strong visually, but the best part is it didn't sacrifice performance. Rare, and that's why it's worth it.\"",eval_h2:'What those who already',eval_h2_em:'trusted say',eval_form_title:'Leave your review',eval_name_ph:'Your full name',eval_plan_ph:'Select your plan',eval_score_label:'Your score:',eval_comment_ph:'Tell us about your experience...',eval_submit:'Publish Review',cta_eyebrow:'Next step',cta_h2:'Tell me your idea. I provide the',cta_h2_em:'engineering',cta_p:"No endless forms or middlemen. Message me, we review what you truly need, and I'll tell you where to start.",footer:'© 2026 AlcaTech-WebDesign · Bespoke digital engineering',sofia_title:'Sofía · AlcaTech AI',sofia_status:'Usually replies instantly',sofia_welcome:"Hi! I'm Sofía, AlcaTech's AI assistant. How can I help you today?",sofia_placeholder:'Type your message...'},
+  it:{nav_inicio:'Inizio',nav_servicios:'Servizi',nav_planes:'Piani',nav_avanzados:'Avanzati',nav_testimonios:'Testimonianze',nav_evaluaciones:'Recensioni',nav_contacto:'Contatti',nav_cta:'Parliamo ↗',hero_eyebrow:"Ingegneria digitale d'autore",hero_h1_em:'spinge',hero_h1_end:'gli affari',hero_p:"Progetto e costruisco piattaforme web veloci, scalabili e con criterio. Non consegno pagine belle e vuote: offro sistemi che caricano in meno di un secondo e fanno crescere davvero il business.",hero_cta1:'◉ Scrivici su WhatsApp',hero_cta2:'Vedi servizi →',hero_sig:'Kelvin, dietro ogni riga.',hero_sig_small:'Un solo responsabile, zero intermediari',stat1:'progetti consegnati',stat2:'tempo di caricamento medio',stat3:'punteggio Lighthouse medio',stat4:'soddisfazione clienti',serv_h2:'Cosa costruisco e perché',serv_h2_em:'è importante',s1_h:'Landing e siti web',s1_p:'Pagine veloci e moderne, con una struttura pensata per convertire le visite in conversazioni e vendite.',s2_h:'E-commerce e SaaS',s2_p:'Negozi e piattaforme focalizzati su esperienza, prestazioni e una base pronta a scalare senza drammi.',s3_h:'Esperienze 3D e motion',s3_p:'Livelli visivi immersivi che elevano il brand senza sacrificare velocità o usabilità.',s4_h:'Automazione e DevOps',s4_p:'Deploy puliti, CI/CD e ottimizzazione tecnica affinché il sistema lavori da solo.',planes_h2:'Tre piani per mostrare il valore senza',planes_h2_em:'confusione',p1_h:'Landing Premium',p1_sub:'Presenza, brand e conversione',p1_p:'Una presenza professionale con design del brand, varie sezioni e struttura per convertire.',p1_f1:'Design premium responsive',p1_f2:'SEO tecnico base e Analytics',p1_f3:'Modulo lead + WhatsApp',p1_f4:'Lancio, SSL e supporto iniziale',p1_btn:'Consulta piano',p2_badge:'Consigliato',p2_h:'Web Aziendale',p2_sub:'La base solida per crescere',p2_p:'Sito completo per autorità, contenuti, lead generation e automazioni di base.',p2_f1:'Architettura multipagina + blog',p2_f2:'UX/UI ed eventi di conversione',p2_f3:'Sofía IA o automazione di base',p2_f4:'Supporto lancio 30 giorni',p2_btn:'Inizia conversazione',p3_h:'Cinematic Motion',p3_sub:'Esperienza visiva premium',p3_p:'Un sito memorabile con movimento, particelle e produzione visiva controllata.',p3_f1:'Direzione visiva esclusiva',p3_f2:'Video ottimizzato + fallback',p3_f3:'Particelle, motion e dashboard',p3_f4:'Fino a 5 sezioni + supporto 30 giorni',p3_btn:'Quota esperienza',adv_h2:'I progetti complessi richiedono',adv_h2_em:'un altro livello',adv_btn:'Consulta',a1_h:'Cinematic 3D Interactive',a1_p:'Three.js, oggetti 3D, interazione con cursore o dispositivo, storytelling a scene, preloader e audit delle prestazioni.',a2_h:'Enterprise / SaaS',a2_p:'Dashboard, IA, CRM, automazioni, integrazioni esterne, analisi delle conversioni e supporto prioritario.',a3_h:'Cinematic Signature',a3_p:'Strategia di brand, UX/UI da zero, varie scene 3D, audiovisivo premium e direzione tecnica completa.',a4_h:'E-commerce Performance',a4_p:'Negozio serio con catalogo, Stripe, checkout, eventi di conversione e ottimizzazione delle vendite.',a5_h:'Care Plan',a5_p:'Manutenzione tecnica, backup, aggiornamenti, monitoraggio e supporto continuo.',mod_h2:'Extra chiari per aumentare il valore senza regalare',mod_h2_em:'ore',m1_b:'Chat AI Sofía',m1_s:'Assistenza e acquisizione lead.',m2_b:'Multi-lingua professionale',m2_s:'ES, IT, EN, DE e FR.',m3_b:'Sistema di prenotazione',m3_s:'Appuntamenti e servizi.',m4_b:'Stripe / pagamenti',m4_s:'Checkout ed eventi.',m5_b:'Dashboard privata',m5_s:'Metriche e flussi.',m6_b:'Scena 3D interattiva',m6_s:'Oggetto o ambiente WebGL.',m7_b:'Video cinematografico',m7_s:'Montaggio o produzione.',m7_price:'Su misura',m8_b:'Manutenzione tecnica',m8_s:'Care Plan mensile.',test_h2:'Clienti che hanno smesso di',test_h2_em:'improvvisare',verified:'Cliente verificato',t1_r:'"Il piano Aziendale ha finalmente ordinato la nostra presenza digitale. Serio e velocissimo."',t2_r:"\"Siamo passati da un sito piatto a un'esperienza che genera prenotazioni e fiducia.\"",t3_r:'"Forte visivamente, ma la cosa migliore è che non ha sacrificato le prestazioni. Raro, e per questo vale."',eval_h2:'Cosa dicono quelli che hanno già',eval_h2_em:'scelto',eval_form_title:'Lascia la tua recensione',eval_name_ph:'Il tuo nome completo',eval_plan_ph:'Seleziona il tuo piano',eval_score_label:'Il tuo punteggio:',eval_comment_ph:'Raccontaci la tua esperienza...',eval_submit:'Pubblica Recensione',cta_eyebrow:'Prossimo passo',cta_h2:"Raccontami la tua idea. Io ci metto l'",cta_h2_em:'ingegneria',cta_p:"Niente moduli infiniti o intermediari. Scrivimi, valutiamo cosa ti serve davvero e ti dirò da dove iniziare.",footer:"© 2026 AlcaTech-WebDesign · Ingegneria digitale d'autore",sofia_title:'Sofía · AlcaTech AI',sofia_status:'Risposta immediata',sofia_welcome:"Ciao! Sono Sofía, l'assistente AI di AlcaTech. Come posso aiutarti oggi?",sofia_placeholder:'Scrivi un messaggio...'},
+  de:{nav_inicio:'Start',nav_servicios:'Leistungen',nav_planes:'Pakete',nav_avanzados:'Erweitert',nav_testimonios:'Referenzen',nav_evaluaciones:'Bewertungen',nav_contacto:'Kontakt',nav_cta:'Kontakt aufnehmen ↗',hero_eyebrow:'Digitale Ingenieurskunst',hero_h1_em:'treibt',hero_h1_end:'Unternehmen voran',hero_p:'Ich entwerfe und baue schnelle, skalierbare Webplattformen mit Anspruch. Ich liefere keine leeren, hübschen Seiten — ich liefere Systeme, die in unter einer Sekunde laden und echtes Geschäft antreiben.',hero_cta1:'◉ WhatsApp schreiben',hero_cta2:'Leistungen ansehen →',hero_sig:'Kelvin, hinter jeder Zeile.',hero_sig_small:'Ein Verantwortlicher, null Mittelsmänner',stat1:'abgeschlossene Projekte',stat2:'durchschnittliche Ladezeit',stat3:'Ø Lighthouse-Score',stat4:'Kundenzufriedenheit',serv_h2:'Was ich baue und warum es',serv_h2_em:'wichtig ist',s1_h:'Landingpages & Websites',s1_p:'Schnelle, moderne Seiten mit einer Struktur, die Besuche in Gespräche und Verkäufe umwandelt.',s2_h:'E-Commerce & SaaS',s2_p:'Shops und Plattformen mit Fokus auf Erlebnis, Performance und einer soliden Basis zum Skalieren.',s3_h:'3D- & Motion-Erlebnisse',s3_p:'Immersive visuelle Ebenen, die die Marke stärken, ohne Geschwindigkeit oder Usability zu opfern.',s4_h:'Automatisierung & DevOps',s4_p:'Saubere Deployments, CI/CD und technische Optimierung, damit das System für Sie arbeitet.',planes_h2:'Drei Pakete, die den Wert zeigen ohne',planes_h2_em:'Verwirrung',p1_h:'Premium Landing',p1_sub:'Präsenz, Marke & Conversion',p1_p:'Eine professionelle Präsenz mit Markendesign, mehreren Sektionen und einer conversion-orientierten Struktur.',p1_f1:'Premium responsives Design',p1_f2:'Basis-SEO & Analytics',p1_f3:'Lead-Formular + WhatsApp',p1_f4:'Deployment, SSL & Erstsupport',p1_btn:'Paket anfragen',p2_badge:'Empfohlen',p2_h:'Business-Website',p2_sub:'Die solide Basis zum Wachsen',p2_p:'Vollständige Website für Autorität, Inhalte, Lead-Generierung und grundlegende Automatisierungen.',p2_f1:'Mehrseitige Architektur + Blog',p2_f2:'UX/UI & Conversion-Events',p2_f3:'Sofía KI oder Basisautomatisierung',p2_f4:'30 Tage Launch-Support',p2_btn:'Gespräch starten',p3_h:'Cinematic Motion',p3_sub:'Premium-Visuelles Erlebnis',p3_p:'Eine unvergessliche Website mit Bewegung, Partikeln und kontrollierter visueller Produktion.',p3_f1:'Exklusive visuelle Leitung',p3_f2:'Optimiertes Video + Fallback',p3_f3:'Partikel, Motion & Dashboard',p3_f4:'Bis zu 5 Sektionen + 30 Tage Support',p3_btn:'Erlebnis anfragen',adv_h2:'Komplexe Projekte brauchen',adv_h2_em:'eine andere Liga',adv_btn:'Anfragen',a1_h:'Cinematic 3D Interactive',a1_p:'Three.js, 3D-Objekte, Cursor-/Geräteinteraktion, szenisches Storytelling, Preloader und Performance-Audit.',a2_h:'Enterprise / SaaS',a2_p:'Dashboards, KI, CRM, Automatisierungen, externe Integrationen, Conversion-Analytik und Prioritätssupport.',a3_h:'Cinematic Signature',a3_p:'Markenstrategie, UX/UI von Grund auf, mehrere 3D-Szenen, Premium-Audiovisual und vollständige technische Leitung.',a4_h:'E-Commerce Performance',a4_p:'Seriöser Shop mit Katalog, Stripe, Checkout, Conversion-Events und Verkaufsoptimierung.',a5_h:'Care Plan',a5_p:'Technische Wartung, Backups, Updates, Monitoring und kontinuierlicher Support.',mod_h2:'Klare Extras für mehr Wert ohne',mod_h2_em:'Stunden zu verschenken',m1_b:'Sofía KI-Chat',m1_s:'Support & Lead-Generierung.',m2_b:'Professionelle Mehrsprachigkeit',m2_s:'ES, IT, EN, DE & FR.',m3_b:'Buchungssystem',m3_s:'Termine & Dienstleistungen.',m4_b:'Stripe / Zahlungen',m4_s:'Checkout & Events.',m5_b:'Privates Dashboard',m5_s:'Metriken & Abläufe.',m6_b:'Interaktive 3D-Szene',m6_s:'Objekt oder WebGL-Umgebung.',m7_b:'Cinematisches Video',m7_s:'Schnitt oder Produktion.',m7_price:'Auf Anfrage',m8_b:'Technische Wartung',m8_s:'Monatlicher Care Plan.',test_h2:'Kunden, die aufgehört haben zu',test_h2_em:'improvisieren',verified:'Verifizierter Kunde',t1_r:'"Der Business-Plan hat unsere digitale Präsenz endlich geordnet. Seriös und blitzschnell."',t2_r:'"Wir sind von einer flachen Website zu einem Erlebnis gewechselt, das Buchungen und Vertrauen generiert."',t3_r:'"Visuell stark, aber das Beste ist, dass die Performance nicht gelitten hat. Selten, und deshalb wertvoll."',eval_h2:'Was diejenigen sagen, die bereits',eval_h2_em:'vertraut haben',eval_form_title:'Ihre Bewertung abgeben',eval_name_ph:'Ihr vollständiger Name',eval_plan_ph:'Paket auswählen',eval_score_label:'Ihre Bewertung:',eval_comment_ph:'Erzählen Sie uns von Ihrer Erfahrung...',eval_submit:'Bewertung veröffentlichen',cta_eyebrow:'Nächster Schritt',cta_h2:'Erzähl mir deine Idee. Ich liefere die',cta_h2_em:'Ingenieurskunst',cta_p:'Keine endlosen Formulare oder Mittelsmänner. Schreib mir, wir prüfen, was du wirklich brauchst, und ich sage dir, wo wir anfangen.',footer:'© 2026 AlcaTech-WebDesign · Digitale Ingenieurskunst',sofia_title:'Sofía · AlcaTech KI',sofia_status:'Antwortet normalerweise sofort',sofia_welcome:'Hallo! Ich bin Sofía, der KI-Assistent von AlcaTech. Wie kann ich Ihnen heute helfen?',sofia_placeholder:'Nachricht eingeben...'},
+  fr:{nav_inicio:'Accueil',nav_servicios:'Services',nav_planes:'Offres',nav_avanzados:'Avancé',nav_testimonios:'Témoignages',nav_evaluaciones:'Avis',nav_contacto:'Contact',nav_cta:'Échangeons ↗',hero_eyebrow:'Ingénierie digitale sur mesure',hero_h1_em:'propulse',hero_h1_end:'les entreprises',hero_p:"Je conçois et construis des plateformes web rapides, évolutives et réfléchies. Je ne livre pas de belles pages vides : je livre des systèmes qui chargent en moins d'une seconde et font vraiment avancer les affaires.",hero_cta1:'◉ Écrire sur WhatsApp',hero_cta2:'Voir les services →',hero_sig:'Kelvin, derrière chaque ligne.',hero_sig_small:'Un seul responsable, zéro intermédiaire',stat1:'projets livrés',stat2:'temps de chargement moyen',stat3:'score Lighthouse moyen',stat4:'satisfaction client',serv_h2:'Ce que je construis et pourquoi cela',serv_h2_em:'compte',s1_h:'Landing pages & sites web',s1_p:"Pages rapides et modernes, avec une structure pensée pour convertir les visites en conversations et en ventes.",s2_h:'E-commerce & SaaS',s2_p:"Boutiques et plateformes centrées sur l'expérience, la performance et une base prête à évoluer sans accroc.",s3_h:'Expériences 3D & motion',s3_p:"Couches visuelles immersives qui élèvent la marque sans sacrifier la vitesse ni l'utilisabilité.",s4_h:'Automatisation & DevOps',s4_p:"Déploiements propres, CI/CD et optimisation technique pour que le système travaille tout seul.",planes_h2:'Trois offres pour montrer la valeur sans',planes_h2_em:'confusion',p1_h:'Landing Premium',p1_sub:'Présence, marque & conversion',p1_p:"Une présence professionnelle avec design de marque, plusieurs sections et une structure orientée conversion.",p1_f1:'Design premium responsive',p1_f2:'SEO technique de base & Analytics',p1_f3:'Formulaire de leads + WhatsApp',p1_f4:'Déploiement, SSL & support initial',p1_btn:"Consulter l'offre",p2_badge:'Recommandé',p2_h:'Web Entreprise',p2_sub:'La base sérieuse pour grandir',p2_p:"Site complet pour l'autorité, le contenu, la capture de leads et les automatisations de base.",p2_f1:'Architecture multi-pages + blog',p2_f2:'UX/UI & événements de conversion',p2_f3:'Sofía IA ou automatisation de base',p2_f4:'Support de lancement 30 jours',p2_btn:'Démarrer la conversation',p3_h:'Cinematic Motion',p3_sub:'Expérience visuelle premium',p3_p:'Un site mémorable avec mouvement, particules et production visuelle maîtrisée.',p3_f1:'Direction visuelle exclusive',p3_f2:'Vidéo optimisée + fallback',p3_f3:'Particules, motion & dashboard',p3_f4:"Jusqu'à 5 sections + support 30 jours",p3_btn:"Demander un devis",adv_h2:'Les projets complexes nécessitent',adv_h2_em:'une autre dimension',adv_btn:'Renseignements',a1_h:'Cinematic 3D Interactive',a1_p:"Three.js, objets 3D, interaction curseur/appareil, storytelling par scènes, preloader et audit de performance.",a2_h:'Enterprise / SaaS',a2_p:"Dashboards, IA, CRM, automatisations, intégrations externes, analytique de conversion et support prioritaire.",a3_h:'Cinematic Signature',a3_p:"Stratégie de marque, UX/UI de zéro, plusieurs scènes 3D, audiovisuel premium et direction technique complète.",a4_h:'E-commerce Performance',a4_p:"Boutique sérieuse avec catalogue, Stripe, checkout, événements de conversion et optimisation des ventes.",a5_h:'Care Plan',a5_p:"Maintenance technique, sauvegardes, mises à jour, monitoring et support continu.",mod_h2:'Des extras clairs pour augmenter la valeur sans brader',mod_h2_em:'les heures',m1_b:'Chat IA Sofía',m1_s:'Support & acquisition de leads.',m2_b:'Multilingue professionnel',m2_s:'ES, IT, EN, DE & FR.',m3_b:'Système de réservation',m3_s:'Rendez-vous & services.',m4_b:'Stripe / paiements',m4_s:'Checkout & événements.',m5_b:'Dashboard privé',m5_s:'Métriques & flux.',m6_b:'Scène 3D interactive',m6_s:'Objet ou environnement WebGL.',m7_b:'Vidéo cinématographique',m7_s:'Montage ou production.',m7_price:'Sur devis',m8_b:'Maintenance technique',m8_s:'Care Plan mensuel.',test_h2:"Clients qui ont arrêté d'",test_h2_em:'improviser',verified:'Client vérifié',t1_r:'"Le plan Entreprise a enfin organisé notre présence digitale. Sérieux et ultra-rapide."',t2_r:"\"Nous sommes passés d'un site plat à une expérience qui génère des réservations et de la confiance.\"",t3_r:"\"Fort visuellement, mais le mieux c'est qu'il n'a pas sacrifié la performance. Rare, et c'est pour ça que ça vaut.\"",eval_h2:'Ce que disent ceux qui ont déjà',eval_h2_em:'fait confiance',eval_form_title:'Laissez votre avis',eval_name_ph:'Votre nom complet',eval_plan_ph:'Sélectionnez votre offre',eval_score_label:'Votre note :',eval_comment_ph:'Parlez-nous de votre expérience...',eval_submit:'Publier mon avis',cta_eyebrow:'Prochaine étape',cta_h2:"Parlez-moi de votre idée. Je fournis l'",cta_h2_em:'ingénierie',cta_p:"Pas de formulaires interminables ni d'intermédiaires. Écrivez-moi, on évalue ce dont vous avez vraiment besoin, et je vous dis par où commencer.",footer:'© 2026 AlcaTech-WebDesign · Ingénierie digitale sur mesure',sofia_title:'Sofía · AlcaTech IA',sofia_status:'Répond généralement instantanément',sofia_welcome:"Bonjour ! Je suis Sofía, l'assistante IA d'AlcaTech. Comment puis-je vous aider aujourd'hui ?",sofia_placeholder:'Écrivez votre message...'}
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+const FLAGS={es:'🇪🇸 ES',en:'🇬🇧 EN',it:'🇮🇹 IT',de:'🇩🇪 DE',fr:'🇫🇷 FR'};
+const langBtn=document.getElementById('langBtn'),langMenu=document.getElementById('langMenu');
+
+function applyLang(l){
+  const d=LANGS[l];if(!d)return;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(d[k]!==undefined)el.textContent=d[k];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const k=el.getAttribute('data-i18n-placeholder');
+    if(d[k]!==undefined)el.placeholder=d[k];
+  });
+  const sw=document.getElementById('sofia-welcome');
+  if(sw&&d.sofia_welcome)sw.textContent=d.sofia_welcome;
+  langBtn.textContent=FLAGS[l];
+  langMenu.classList.remove('show');
+  document.documentElement.lang=l;
+}
+
+langBtn.onclick=()=>langMenu.classList.toggle('show');
+langMenu.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));
+document.addEventListener('click',e=>{if(!e.target.closest('.lang'))langMenu.classList.remove('show')});
 </script>
 </body>
 </html>
