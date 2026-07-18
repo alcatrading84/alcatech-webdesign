@@ -218,7 +218,13 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
       <select id="eval-product" class="eval-inp"><option value="" data-i18n="eval_product_ph">Selecciona tu plan</option></select>
       <div style="margin:14px 0;display:flex;align-items:center;gap:10px">
         <span style="font-size:13px;color:#6B7896" data-i18n="eval_rate">Tu puntuación:</span>
-        <span id="eval-stars" style="font-size:1.6rem;cursor:pointer;letter-spacing:5px;color:#FFB800">★★★★★</span>
+        <div id="eval-stars" style="display:flex;gap:4px;font-size:24px;line-height:1">
+          <span data-s="1" style="cursor:pointer;color:rgba(255,255,255,0.15);transition:all .2s">★</span>
+          <span data-s="2" style="cursor:pointer;color:rgba(255,255,255,0.15);transition:all .2s">★</span>
+          <span data-s="3" style="cursor:pointer;color:rgba(255,255,255,0.15);transition:all .2s">★</span>
+          <span data-s="4" style="cursor:pointer;color:rgba(255,255,255,0.15);transition:all .2s">★</span>
+          <span data-s="5" style="cursor:pointer;color:rgba(255,255,255,0.15);transition:all .2s">★</span>
+        </div>
       </div>
       <textarea id="eval-comment" class="eval-inp" style="height:100px;resize:none" placeholder="Tu comentario..." data-i18n-placeholder="eval_comment_ph"></textarea>
       <button class="btn primary" onclick="submitReview()" style="width:100%;margin-top:8px" data-i18n="eval_btn">Publicar Reseña</button>
@@ -494,8 +500,19 @@ function initEval(){
   const sel=document.getElementById('eval-product');
   if(sel)products.forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o)});
   // Click on stars
-  const starEl=document.getElementById('eval-stars');
-  if(starEl){starEl.onclick=function(e){const rect=this.getBoundingClientRect();const x=e.clientX-rect.left;const star=Math.min(5,Math.max(1,Math.ceil(x/(rect.width/5))));evalRating=star;this.textContent='★'.repeat(star)+'☆'.repeat(5-star)}}
+  const starContainer=document.getElementById('eval-stars');
+  if(starContainer){
+    const stars=starContainer.querySelectorAll('span');
+    function highlight(s){
+      stars.forEach((el,i)=>{el.style.color=i<s?'#FFB800':'rgba(255,255,255,0.15)';el.style.transform=i<s?'scale(1.2)':'scale(1)'});
+    }
+    stars.forEach(el=>{
+      el.onclick=()=>{evalRating=parseInt(el.dataset.s);highlight(evalRating)};
+      el.onmouseenter=()=>{const s=parseInt(el.dataset.s);stars.forEach((e,i)=>{e.style.color=i<s?'#FFB800':'rgba(255,255,255,0.15)';e.style.transform=i<s?'scale(1.15)':'scale(1)'})};
+    });
+    starContainer.onmouseleave=()=>highlight(evalRating);
+    highlight(evalRating);
+  }
   renderReviews();
 }
 function renderReviews(){
@@ -541,8 +558,9 @@ function submitReview(){
   document.getElementById('eval-name').value='';
   document.getElementById('eval-product').value='';
   document.getElementById('eval-comment').value='';
-  document.getElementById('eval-stars').textContent='★★★★★';
   evalRating=5;
+  const sc=document.getElementById('eval-stars');
+  if(sc)sc.querySelectorAll('span').forEach((el,i)=>{el.style.color=i<5?'#FFB800':'rgba(255,255,255,0.15)';el.style.transform='scale(1)'});
 }
 initEval();
 </script>
