@@ -219,11 +219,11 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
       <div style="margin:14px 0;display:flex;align-items:center;gap:10px">
         <span style="font-size:13px;color:#6B7896" data-i18n="eval_rate">Tu puntuación:</span>
         <div id="eval-stars" style="display:flex;gap:4px;font-size:24px;line-height:1">
-          <span data-s="1" style="cursor:pointer;color:rgba(255,255,255,0.15);transition:all .2s">★</span>
-          <span data-s="2" style="cursor:pointer;color:rgba(255,255,255,0.15);transition:all .2s">★</span>
-          <span data-s="3" style="cursor:pointer;color:rgba(255,255,255,0.15);transition:all .2s">★</span>
-          <span data-s="4" style="cursor:pointer;color:rgba(255,255,255,0.15);transition:all .2s">★</span>
-          <span data-s="5" style="cursor:pointer;color:rgba(255,255,255,0.15);transition:all .2s">★</span>
+          <span data-s="1" onclick="evalRating=1;document.getElementById('eval-stars').querySelectorAll('span').forEach((e,i)=>{e.style.color=i<1?'#FFB800':'rgba(255,255,255,0.15)';e.style.transform=i<1?'scale(1.2)':'scale(1)'})" style="cursor:pointer;color:#FFB800;transition:all .2s">★</span>
+          <span data-s="2" onclick="evalRating=2;document.getElementById('eval-stars').querySelectorAll('span').forEach((e,i)=>{e.style.color=i<2?'#FFB800':'rgba(255,255,255,0.15)';e.style.transform=i<2?'scale(1.2)':'scale(1)'})" style="cursor:pointer;color:#FFB800;transition:all .2s">★</span>
+          <span data-s="3" onclick="evalRating=3;document.getElementById('eval-stars').querySelectorAll('span').forEach((e,i)=>{e.style.color=i<3?'#FFB800':'rgba(255,255,255,0.15)';e.style.transform=i<3?'scale(1.2)':'scale(1)'})" style="cursor:pointer;color:#FFB800;transition:all .2s">★</span>
+          <span data-s="4" onclick="evalRating=4;document.getElementById('eval-stars').querySelectorAll('span').forEach((e,i)=>{e.style.color=i<4?'#FFB800':'rgba(255,255,255,0.15)';e.style.transform=i<4?'scale(1.2)':'scale(1)'})" style="cursor:pointer;color:#FFB800;transition:all .2s">★</span>
+          <span data-s="5" onclick="evalRating=5;document.getElementById('eval-stars').querySelectorAll('span').forEach((e,i)=>{e.style.color=i<5?'#FFB800':'rgba(255,255,255,0.15)';e.style.transform=i<5?'scale(1.2)':'scale(1)'})" style="cursor:pointer;color:#FFB800;transition:all .2s">★</span>
         </div>
       </div>
       <textarea id="eval-comment" class="eval-inp" style="height:100px;resize:none" placeholder="Tu comentario..." data-i18n-placeholder="eval_comment_ph"></textarea>
