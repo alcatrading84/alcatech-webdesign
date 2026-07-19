@@ -67,7 +67,7 @@ exports.handler = async (event) => {
 
     const data = await response.json();
     if (!response.ok || data?.error) {
-      return { statusCode: 200, body: JSON.stringify({ text: "Lo siento, tuve un problema. Escríbenos por WhatsApp: +39 380 102 8239" }) };
+      return { statusCode: 200, body: JSON.stringify({ text: "DEBUG: " + JSON.stringify(data).slice(0,500) }) };
     }
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Escríbenos por WhatsApp: +39 380 102 8239";
 
