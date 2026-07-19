@@ -333,19 +333,22 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
 
 /* ── CHAT SOFIA ── */
 const bubble=document.getElementById('sofia-bubble'),panel=document.getElementById('sofia-panel'),inp=document.getElementById('sofia-input-field'),msgs=document.getElementById('sofia-msgs');
+let chatHistory=[{role:'bot',text:document.getElementById('sofia-welcome')?.innerText||''}];
 bubble.onclick=()=>panel.classList.toggle('active');
 async function sendSofia(){
   const v=inp.value.trim();if(!v)return;
+  chatHistory.push({role:'user',text:v});
   addMsg(v,'user');inp.value='';
   const loading=addMsg('...','bot');
   try{
     const r=await fetch('/api/chat',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:v,language:document.documentElement.lang||'es'})
+      body:JSON.stringify({message:v,language:document.documentElement.lang||'es',history:chatHistory.slice(0,-1)})
     });
     const d=await r.json();
     const txt=(d.text||'Escríbenos por WhatsApp: +39 380 102 8239');
+    chatHistory.push({role:'bot',text:txt});
     loading.innerText='';
     let i=0;
     const sp=document.createElement('span');
@@ -421,7 +424,7 @@ function applyLang(l){
     if(d[k]!==undefined)el.placeholder=d[k];
   });
   const sw=document.getElementById('sofia-welcome');
-  if(sw&&d.sofia_welcome)sw.textContent=d.sofia_welcome;
+  if(sw&&d.sofia_welcome){sw.textContent=d.sofia_welcome;if(chatHistory[0])chatHistory[0].text=d.sofia_welcome}
   langBtn.textContent=FLAGS[l];
   langMenu.classList.remove('show');
   document.documentElement.lang=l;
