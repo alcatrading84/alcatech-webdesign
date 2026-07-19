@@ -334,10 +334,22 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
 /* ── CHAT SOFIA ── */
 const bubble=document.getElementById('sofia-bubble'),panel=document.getElementById('sofia-panel'),inp=document.getElementById('sofia-input-field'),msgs=document.getElementById('sofia-msgs');
 bubble.onclick=()=>panel.classList.toggle('active');
-function sendSofia(){
+async function sendSofia(){
   const v=inp.value.trim();if(!v)return;
   addMsg(v,'user');inp.value='';
-  setTimeout(()=>addMsg('Gracias por tu mensaje. Kelvin te responderá pronto. También puedes escribirle directamente por WhatsApp: +39 380 102 8239','bot'),600);
+  const loading=addMsg('...','bot');
+  try{
+    const r=await fetch('/api/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({message:v,language:document.documentElement.lang||'es'})
+    });
+    const d=await r.json();
+    loading.innerText=d.text||'Escríbenos por WhatsApp: +39 380 102 8239';
+  }catch(e){
+    loading.innerText='Escríbenos por WhatsApp: +39 380 102 8239';
+  }
+  msgs.scrollTop=msgs.scrollHeight;
 }
 function addMsg(t,tp){const d=document.createElement('div');d.className='msg '+tp;d.innerText=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
 inp.addEventListener('keypress',e=>{if(e.key==='Enter')sendSofia()});
