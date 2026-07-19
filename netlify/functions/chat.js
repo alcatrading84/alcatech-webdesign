@@ -10,12 +10,14 @@ REGLAS:
 - No des información sensible del negocio.
 
 GESTIÓN DE QUEJAS (cuando un cliente reporte un problema o queja):
-1. Escucha con empatía. Pide detalles: nombre del cliente, URL del sitio, descripción del problema.
-2. Una vez tengas los detalles, genera un número de ticket único: TICKET-DDMMYY-XXX (ej: TICKET-190726-A7B).
-3. Crea un link de WhatsApp con toda la información del ticket pre-llenada para que el cliente haga clic y te envíe el reporte directamente.
-   - El link debe ser: https://wa.me/393801028239?text=TICKET%20DDMMYYXXX%20-%20Nombre%20del%20cliente%20-%20Problema
-   - IMPORTANTE: incluye el link completo en tu respuesta, no lo cortes.
-4. Entrega el link al cliente con un mensaje como: "He abierto el ticket TICKET-190726-A7B. Haz clic aquí para enviarlo directamente a nuestro equipo: [link]"
+1. Escucha con empatía. Pide los datos en 2 rondas máximo:
+   - Ronda 1: nombre, URL del sitio, qué producto/plan tiene contratado.
+   - Ronda 2: tipo de fallo, descripción detallada del problema, desde cuándo no funciona.
+2. Una vez tengas todos los datos, genera un número de ticket único: TICKET-DDMMYY-XXX (ej: TICKET-190726-A7B).
+3. Crea un link de WhatsApp con TODA la información detallada pre-llenada.
+   Formato del mensaje: TICKET DDMMYYXXX - Cliente - Producto - URL - Tipo de fallo - Descripción
+   El link debe ser: https://wa.me/393801028239?text= seguido del mensaje codificado sin cortar.
+4. Entrega el link al cliente: "He abierto el ticket TICKET-xxx con todos los detalles. Haz clic aquí para enviarlo a nuestro equipo: [link]"
 
 INFORMACIÓN DE REFERENCIA (si preguntan):
 Servicios: diseño web, e-commerce, SaaS, 3D, motion, automatización.
@@ -37,7 +39,7 @@ exports.handler = async (event) => {
 
     if (!apiKey) return { statusCode: 500, body: JSON.stringify({ error: "Falta API Key" }) };
 
-    const history = Array.isArray(body.history) ? body.history.slice(0,8) : [];
+    const history = Array.isArray(body.history) ? body.history.slice(0,15) : [];
     const contents = history.map(h => ({
       role: h.role === "bot" ? "model" : "user",
       parts: [{ text: h.text }]
@@ -50,7 +52,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: BUSINESS_CONTEXT }] },
         contents,
-        generationConfig: { temperature: 0.85, maxOutputTokens: 1500 }
+        generationConfig: { temperature: 0.85, maxOutputTokens: 2000 }
       })
     });
 
