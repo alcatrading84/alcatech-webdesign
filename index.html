@@ -47,7 +47,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(5,9,18,.87);backdrop-filte
 .sofia-header span::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%}
 .sofia-msgs{flex:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
 .msg{padding:10px 14px;border-radius:12px;max-width:85%;font-size:0.82rem;line-height:1.4}
-.msg.bot{background:var(--line);align-self:flex-start;color:var(--text)}.msg.user{background:var(--blue);align-self:flex-end;color:#fff}
+.msg.bot{background:var(--line);align-self:flex-start;color:var(--text)}.msg.user{background:var(--blue);align-self:flex-end;color:#fff}.cursor{animation:blink .8s infinite}@keyframes blink{50%{opacity:0}}
 .sofia-input{padding:12px;background:rgba(255,255,255,0.02);border-top:1px solid var(--line);display:flex;gap:8px}
 .sofia-input input{flex:1;background:transparent;border:0;color:#fff;font-size:0.8rem;outline:none}
 /* SECTIONS */
@@ -348,8 +348,12 @@ async function sendSofia(){
     const txt=(d.text||'Escríbenos por WhatsApp: +39 380 102 8239');
     loading.innerText='';
     let i=0;
+    const sp=document.createElement('span');
+    sp.className='cursor';
+    loading.appendChild(sp);
     (function type(){
-      if(i<txt.length){loading.innerText+=txt[i++];msgs.scrollTop=msgs.scrollHeight;setTimeout(type,25)}
+      if(i<txt.length){sp.before(txt[i++]);msgs.scrollTop=msgs.scrollHeight;setTimeout(type,35)}
+      else sp.remove();
     })();
   }catch(e){
     loading.innerText='Escríbenos por WhatsApp: +39 380 102 8239';
