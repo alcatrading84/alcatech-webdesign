@@ -69,7 +69,8 @@ exports.handler = async (event) => {
     if (!response.ok || data?.error) {
       return { statusCode: 200, body: JSON.stringify({ text: "Error Gemini: " + JSON.stringify(data?.error || data) }) };
     }
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Escríbenos por WhatsApp: +39 380 102 8239";
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!text) return { statusCode: 200, body: JSON.stringify({ text: "DEBUG raw: " + JSON.stringify(data).slice(0,500) }) };
 
     return {
       statusCode: 200,
