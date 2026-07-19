@@ -346,13 +346,18 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
     }
     requestAnimationFrame(draw);
   }
-  addEventListener('resize',init);init();draw();
+  addEventListener('resize',init);requestIdleCallback?requestIdleCallback(()=>{init();draw();}):setTimeout(()=>{init();draw();},200);
 })();
 
 /* ── CHAT SOFIA ── */
 const bubble=document.getElementById('sofia-bubble'),panel=document.getElementById('sofia-panel'),inp=document.getElementById('sofia-input-field'),msgs=document.getElementById('sofia-msgs');
-let chatHistory=[{role:'bot',text:document.getElementById('sofia-welcome')?.innerText||''}];
-bubble.onclick=()=>panel.classList.toggle('active');
+let chatHistory;
+function initChat(){
+  chatHistory=[{role:'bot',text:document.getElementById('sofia-welcome')?.innerText||''}];
+  bubble.onclick=()=>panel.classList.toggle('active');
+  inp.addEventListener('keypress',e=>{if(e.key==='Enter')sendSofia()});
+}
+requestIdleCallback?requestIdleCallback(initChat):setTimeout(initChat,300);
 async function sendSofia(){
   const v=inp.value.trim();if(!v)return;
   chatHistory.push({role:'user',text:v});
@@ -451,7 +456,7 @@ function applyLang(l){
     if(d[k]!==undefined)el.placeholder=d[k];
   });
   const sw=document.getElementById('sofia-welcome');
-  if(sw&&d.sofia_welcome){sw.textContent=d.sofia_welcome;if(chatHistory[0])chatHistory[0].text=d.sofia_welcome}
+  if(sw&&d.sofia_welcome){sw.textContent=d.sofia_welcome;if(chatHistory&&chatHistory[0])chatHistory[0].text=d.sofia_welcome}
   langBtn.textContent=FLAGS[l];
   langMenu.classList.remove('show');
   document.documentElement.lang=l;
