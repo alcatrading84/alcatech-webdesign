@@ -320,7 +320,8 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
   const cv=document.getElementById('network'),cx=cv.getContext('2d');
   let W,H,ns=[];
   function init(){
-    W=cv.width=innerWidth;H=cv.height=innerHeight;
+    W=innerWidth;H=innerHeight;
+    cv.width=W;cv.height=H;
     ns=Array.from({length:innerWidth<700?55:110},()=>({
       x:Math.random()*W,y:Math.random()*H,
       vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,
