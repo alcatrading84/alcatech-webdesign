@@ -345,7 +345,12 @@ async function sendSofia(){
       body:JSON.stringify({message:v,language:document.documentElement.lang||'es'})
     });
     const d=await r.json();
-    loading.innerText=d.text||'Escríbenos por WhatsApp: +39 380 102 8239';
+    const txt=(d.text||'Escríbenos por WhatsApp: +39 380 102 8239');
+    loading.innerText='';
+    let i=0;
+    (function type(){
+      if(i<txt.length){loading.innerText+=txt[i++];msgs.scrollTop=msgs.scrollHeight;setTimeout(type,25)}
+    })();
   }catch(e){
     loading.innerText='Escríbenos por WhatsApp: +39 380 102 8239';
   }
