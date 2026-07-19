@@ -66,6 +66,9 @@ exports.handler = async (event) => {
     });
 
     const data = await response.json();
+    if (!response.ok || data?.error) {
+      return { statusCode: 200, body: JSON.stringify({ text: "Error Gemini: " + JSON.stringify(data?.error || data) }) };
+    }
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Escríbenos por WhatsApp: +39 380 102 8239";
 
     return {
