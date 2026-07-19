@@ -3,6 +3,12 @@
   functions = "netlify/functions"
 
 [[redirects]]
+  from = "https://alcatech-webdesign.netlify.app/*"
+  to = "https://alcatechwebdesign.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/api/chat"
   to = "/.netlify/functions/chat"
   status = 200
