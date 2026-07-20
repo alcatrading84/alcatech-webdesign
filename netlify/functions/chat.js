@@ -37,7 +37,7 @@ exports.handler = async (event) => {
     const language = ALLOWED_LANGUAGES.includes(body.language) ? body.language : "es";
     const apiKey = process.env.GEMINI_API_KEY;
 
-    if (!apiKey) return { statusCode: 500, body: JSON.stringify({ error: "Falta API Key" }) };
+    if (!apiKey) return { statusCode: 200, body: JSON.stringify({ text: "Falta API Key" }) };
 
     const history = Array.isArray(body.history) ? body.history.slice(0,15) : [];
     const contents = history.map(h => ({
@@ -46,25 +46,24 @@ exports.handler = async (event) => {
     }));
     contents.push({ role: "user", parts: [{ text: `Idioma: ${language}\n\nMensaje: ${message}` }] });
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 12000);
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`, {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`;
+    const payload = JSON.stringify({
+      systemInstruction: { parts: [{ text: BUSINESS_CONTEXT }] },
+      contents,
+      generationConfig: { temperature: 0.85, maxOutputTokens: 500 }
+    });
+
+    const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: BUSINESS_CONTEXT }] },
-        contents,
-        generationConfig: { temperature: 0.85, maxOutputTokens: 500 }
-      }),
-      signal: controller.signal
+      body: payload
     });
-    clearTimeout(timeout);
 
     const data = await response.json();
     if (!response.ok || data?.error) {
       return { statusCode: 200, body: JSON.stringify({ text: "Error " + (response.status) + ": " + (data?.error?.message || JSON.stringify(data?.error) || "desconocido") }) };
     }
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Escríbenos por WhatsApp: +39 380 102 8239";
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || (()=>{throw new Error("No text in response")})();
 
     return {
       statusCode: 200,
@@ -72,6 +71,6 @@ exports.handler = async (event) => {
       body: JSON.stringify({ text })
     };
   } catch (error) {
-    return { statusCode: 500, body: JSON.stringify({ error: "Error de conexión" }) };
+    return { statusCode: 200, body: JSON.stringify({ text: "Catch: " + error.message }) };
   }
 };
