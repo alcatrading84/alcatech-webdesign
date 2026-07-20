@@ -42,7 +42,7 @@ function geminiFetch(apiKey, contents) {
       path: "/v1beta/models/gemini-3.5-flash:generateContent?key=" + apiKey,
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      timeout: 8000
+      timeout: 15000
     }, res => {
       let data = "";
       res.on("data", c => data += c);
