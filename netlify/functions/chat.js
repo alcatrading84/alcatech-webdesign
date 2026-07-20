@@ -52,7 +52,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: BUSINESS_CONTEXT }] },
         contents,
-        generationConfig: { temperature: 0.85, maxOutputTokens: 2000 }
+        generationConfig: { temperature: 0.85, maxOutputTokens: 500 }
       })
     });
 

@@ -338,7 +338,7 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
 <!-- CHAT SOFIA -->
 <div id="sofia-bubble"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
 <div id="sofia-panel">
-  <div class="sofia-header"><div><b data-i18n="sofia_title">Sofía · AlcaTech AI</b><br><span data-i18n="sofia_status">Normalmente responde al instante</span></div><button onclick="document.getElementById('sofia-panel').classList.remove('active')" style="background:none;border:none;color:var(--soft);font-size:1.2rem;cursor:pointer">×</button></div>
+  <div class="sofia-header"><div><b data-i18n="sofia_title">Sofía · AlcaTech AI</b><br><span data-i18n="sofia_status">Normalmente responde al instante</span></div><button onclick="closeSofia()" style="background:none;border:none;color:var(--soft);font-size:1.2rem;cursor:pointer">×</button></div>
   <div class="sofia-msgs" id="sofia-msgs"><div class="msg bot" id="sofia-welcome">¡Hola! Soy Sofía, la asistente virtual de AlcaTech. ¿En qué puedo ayudarte hoy?</div></div>
   <div class="sofia-input"><input type="text" id="sofia-input-field" data-i18n-placeholder="sofia_placeholder" placeholder="Escribe tu mensaje..."><button class="btn primary" style="min-height:30px;padding:8px 14px" onclick="sendSofia()">➤</button></div>
 </div>
@@ -403,7 +403,16 @@ const bubble=document.getElementById('sofia-bubble'),panel=document.getElementBy
 let chatHistory;
 function initChat(){
   chatHistory=[{role:'bot',text:document.getElementById('sofia-welcome')?.innerText||''}];
-  bubble.onclick=()=>panel.classList.toggle('active');
+    function resetChat(){
+    const w=document.getElementById('sofia-welcome');
+    msgs.innerHTML='<div class="msg bot" id="sofia-welcome">'+w.innerHTML+'</div>';
+    chatHistory=[{role:'bot',text:w.innerText||''}];
+  }
+  function closeSofia(){panel.classList.remove('active');resetChat()}
+  bubble.onclick=()=>{
+    const active=panel.classList.toggle('active');
+    if(active){resetChat()}else{resetChat()}
+  };
   inp.addEventListener('keypress',e=>{if(e.key==='Enter')sendSofia()});
 }
 requestIdleCallback?requestIdleCallback(initChat):setTimeout(initChat,300);
@@ -427,9 +436,10 @@ async function sendSofia(){
     sp.className='cursor';
     loading.appendChild(sp);
     (function type(){
-      if(i<txt.length){sp.before(txt[i++]);msgs.scrollTop=msgs.scrollHeight;setTimeout(type,35)}
+      if(i<txt.length){sp.before(txt[i++]);msgs.scrollTop=msgs.scrollHeight;setTimeout(type,12)}
       else sp.remove();
     })();
+  }catch(e){
   }catch(e){
     loading.innerText='Escríbenos por WhatsApp: +39 380 102 8239';
   }
