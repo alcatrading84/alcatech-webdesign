@@ -42,7 +42,7 @@ function geminiFetch(apiKey, contents) {
       path: "/v1beta/models/gemini-3.5-flash:generateContent?key=" + apiKey,
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      timeout: 15000
+      timeout: 10000
     }, res => {
       let data = "";
       res.on("data", c => data += c);
@@ -76,11 +76,11 @@ exports.handler = async (event) => {
     const data = await geminiFetch(apiKey, contents);
 
     if (data?.error) {
-      return { statusCode: 200, body: JSON.stringify({ text: "Error: " + (data.error.message || JSON.stringify(data.error)) }) };
+      return { statusCode: 200, body: JSON.stringify({ text: "Lo siento, tuve un problema. Escríbenos por WhatsApp: +39 380 102 8239" }) };
     }
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Escríbenos por WhatsApp: +39 380 102 8239";
     return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) };
   } catch (error) {
-    return { statusCode: 200, body: JSON.stringify({ text: "Catch: " + error.message }) };
+    return { statusCode: 200, body: JSON.stringify({ text: "Lo siento, tuve un problema. Escríbenos por WhatsApp: +39 380 102 8239" }) };
   }
 };
