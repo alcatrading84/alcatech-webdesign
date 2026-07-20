@@ -60,6 +60,11 @@ section{padding:66px 0;position:relative;z-index:1}
 .index{border-top:1px solid var(--line2)}
 .row{display:grid;grid-template-columns:60px 1fr auto;gap:24px;padding:26px 5px;border-bottom:1px solid var(--line);align-items:center;transition:.25s var(--ease)}.row:hover{padding-left:18px;background:rgba(40,84,176,.06)}
 .row-num{color:#477eff;font-size:.78rem;font-weight:700}.row h3{font-size:clamp(1.15rem,2.3vw,1.7rem)}.row p{margin:7px 0 0;font-size:.82rem}.arrow{color:#477eff}.row:hover .arrow{transform:translate(3px,-3px)}
+.row .desc{display:grid;grid-template-rows:0fr;transition:.4s var(--ease);overflow:hidden;margin:0}
+.row .desc p{min-height:0;margin:0}
+.row.open .desc{grid-template-rows:1fr;margin-top:14px}
+.row.open .desc p:first-child{font-size:.82rem;font-weight:600;color:#477eff;margin-bottom:5px}
+.row.open .desc p:last-child{font-size:.82rem;line-height:1.7;opacity:.9}
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
 .plan{padding:25px;border:1px solid var(--line);border-radius:12px;background:var(--card);display:grid;gap:15px;transition:.3s var(--ease)}
 .plan:hover{border-color:var(--blue2);box-shadow:0 0 30px rgba(74,130,255,.15),0 0 60px rgba(74,130,255,.08);transform:translateY(-3px)}
@@ -203,7 +208,7 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
 <section class="wrap" id="servicios">
   <div class="head"><span>01 — 04</span><h2><span data-i18n="serv_h2">Lo que construyo, y por qué</span> <em data-i18n="serv_h2_em">importa</em></h2></div>
   <div class="index">
-    <div class="row"><span class="row-num">01</span><div><h3 data-i18n="s1_h">Landing y sitios web</h3><p data-i18n="s1_p">Páginas rápidas y modernas, con estructura pensada para convertir visitas en conversaciones y ventas.</p></div><span class="arrow">↗</span></div>
+    <div class="row" onclick="this.classList.toggle('open')"><span class="row-num">01</span><div><h3 data-i18n="s1_h">Landing y sitios web</h3><p data-i18n="s1_p">Páginas rápidas y modernas, con estructura pensada para convertir visitas en conversaciones y ventas.</p><div class="desc"><p>Landing pages y sitios web corporativos</p><p>Desarrollo páginas de aterrizaje y sitios web corporativos de alto rendimiento, diseñados a medida desde la primera línea de código. No utilizo plantillas genéricas sobrecargadas que ralentizan la experiencia del usuario. Cada sección y cada elemento visual están estructurados estratégicamente para captar la atención de tus clientes potenciales, comunicar la propuesta de valor de tu marca con total claridad y optimizar la tasa de conversión, transformando las visitas casuales en conversaciones de negocio y ventas reales. ↗</p></div></div><span class="arrow">↗</span></div>
     <div class="row"><span class="row-num">02</span><div><h3 data-i18n="s2_h">E-commerce y SaaS</h3><p data-i18n="s2_p">Tiendas y plataformas centradas en experiencia, rendimiento y una base lista para escalar sin dramas.</p></div><span class="arrow">↗</span></div>
     <div class="row"><span class="row-num">03</span><div><h3 data-i18n="s3_h">Experiencias 3D y motion</h3><p data-i18n="s3_p">Capas visuales inmersivas que elevan la marca sin sacrificar velocidad ni usabilidad.</p></div><span class="arrow">↗</span></div>
     <div class="row"><span class="row-num">04</span><div><h3 data-i18n="s4_h">Automatización y DevOps</h3><p data-i18n="s4_p">Deploys limpios, CI/CD y optimización técnica para que el sistema trabaje solo.</p></div><span class="arrow">↗</span></div>
