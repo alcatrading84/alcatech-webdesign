@@ -61,8 +61,10 @@ section{padding:66px 0;position:relative;z-index:1}
 .row{display:grid;grid-template-columns:60px 1fr auto;gap:24px;padding:26px 5px;border-bottom:1px solid var(--line);align-items:center;transition:.25s var(--ease)}.row:hover{padding-left:18px;background:rgba(40,84,176,.06)}
 .row-num{color:#477eff;font-size:.78rem;font-weight:700}.row h3{font-size:clamp(1.15rem,2.3vw,1.7rem)}.row p{margin:7px 0 0;font-size:.82rem}.arrow{color:#477eff}.row:hover .arrow{transform:translate(3px,-3px)}
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-.plan{padding:25px;border:1px solid var(--line);border-radius:12px;background:var(--card);display:grid;gap:15px}
+.plan{padding:25px;border:1px solid var(--line);border-radius:12px;background:var(--card);display:grid;gap:15px;transition:.3s var(--ease)}
+.plan:hover{border-color:var(--blue2);box-shadow:0 0 30px rgba(74,130,255,.15),0 0 60px rgba(74,130,255,.08);transform:translateY(-3px)}
 .plan.featured{background:linear-gradient(180deg,#152750,#101c37);border-color:var(--blue2)}
+.plan.featured:hover{box-shadow:0 0 40px rgba(74,130,255,.25),0 0 80px rgba(74,130,255,.12)}
 .badge{justify-self:start;padding:6px 11px;border-radius:99px;background:var(--blue);color:#fff;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800}
 .plan h3{font-size:1.15rem}.sub{color:var(--soft);font-size:.72rem;margin-top:5px}
 .price{font-size:2.15rem;font-weight:800;color:var(--heading)}.price small{font-size:.72rem;color:var(--soft);font-weight:500}
