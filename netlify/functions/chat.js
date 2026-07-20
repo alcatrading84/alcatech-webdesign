@@ -35,7 +35,7 @@ function geminiFetch(apiKey, contents) {
     const body = JSON.stringify({
       systemInstruction: { parts: [{ text: BUSINESS_CONTEXT }] },
       contents,
-      generationConfig: { temperature: 0.85, maxOutputTokens: 500 }
+      generationConfig: { temperature: 0.3, maxOutputTokens: 500 }
     });
     const req = https.request({
       hostname: "generativelanguage.googleapis.com",
