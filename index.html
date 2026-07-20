@@ -347,50 +347,51 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
 /* ── CANVAS PARTÍCULAS ── */
 (function(){
   const cv=document.getElementById('network'),cx=cv.getContext('2d');
-  let W,H,ns=[],mx=-9999,my=-9999,cx2=-9999,cy2=-9999,ct=0;
+  let W,H,ns=[],mx=-9999,my=-9999,cx2=-9999,cy2=-9999,ct=0,skip=0;
   function init(){
     W=innerWidth;H=innerHeight;cv.width=W;cv.height=H;
-    ns=Array.from({length:innerWidth<700?55:110},()=>({
+    ns=Array.from({length:innerWidth<700?30:60},()=>({
       x:Math.random()*W,y:Math.random()*H,
       vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,
-      r:Math.random()*1.5+.8
+      r:Math.random()*1.2+.6
     }));
   }
   addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
   addEventListener('mouseleave',()=>{mx=-9999;my=-9999});
-  addEventListener('click',e=>{cx2=e.clientX;cy2=e.clientY;ct=50});
-  addEventListener('touchstart',e=>{const t=e.touches[0];cx2=t.clientX;cy2=t.clientY;ct=50},{passive:true});
+  addEventListener('click',e=>{cx2=e.clientX;cy2=e.clientY;ct=30});
+  addEventListener('touchstart',e=>{const t=e.touches[0];cx2=t.clientX;cy2=t.clientY;ct=30},{passive:true});
   addEventListener('touchmove',e=>{const t=e.touches[0];mx=t.clientX;my=t.clientY},{passive:true});
   addEventListener('touchend',()=>{mx=-9999;my=-9999});
   function draw(){
+    skip++;if(skip&1){requestAnimationFrame(draw);return}
     cx.clearRect(0,0,W,H);
     ns.forEach(n=>{
       n.x+=n.vx;n.y+=n.vy;
       const dx=n.x-mx,dy=n.y-my,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<200&&d>12){const f=(200-d)/200*1.2;n.vx-=(dx/d)*f*.03;n.vy-=(dy/d)*f*.03}
-      if(ct>0){const dx2=n.x-cx2,dy2=n.y-cy2,d2=Math.sqrt(dx2*dx2+dy2*dy2);if(d2<200&&d2>0){const f=(200-d2)/200*ct/18;n.vx+=(dx2/d2)*f;n.vy+=(dy2/d2)*f}}
-      n.vx+=(Math.random()-.5)*.08;n.vy+=(Math.random()-.5)*.08;n.vx*=.97;n.vy*=.97;const s=Math.sqrt(n.vx*n.vx+n.vy*n.vy);if(s>2.5){n.vx=n.vx/s*2.5;n.vy=n.vy/s*2.5}
+      if(d<160&&d>12){const f=(160-d)/160*1;n.vx-=(dx/d)*f*.02;n.vy-=(dy/d)*f*.02}
+      if(ct>0){const dx2=n.x-cx2,dy2=n.y-cy2,d2=Math.sqrt(dx2*dx2+dy2*dy2);if(d2<160&&d2>0){const f=(160-d2)/160*ct/18;n.vx+=(dx2/d2)*f;n.vy+=(dy2/d2)*f}}
+      n.vx+=(Math.random()-.5)*.06;n.vy+=(Math.random()-.5)*.06;n.vx*=.96;n.vy*=.96;const s=Math.sqrt(n.vx*n.vx+n.vy*n.vy);if(s>2){n.vx=n.vx/s*2;n.vy=n.vy/s*2}
       if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;
     });
     ns.forEach(n=>{
       const dx=n.x-mx,dy=n.y-my,d=Math.sqrt(dx*dx+dy*dy);
-      const near=d<200&&d>0;const r=near?n.r*2.5:n.r;
+      const near=d<160&&d>0;const r=near?n.r*2:n.r;
       cx.beginPath();cx.arc(n.x,n.y,r,0,6.3);
-      cx.fillStyle=near?'rgba(121,168,255,.95)':'rgba(74,130,255,.6)';cx.fill();
+      cx.fillStyle=near?'rgba(121,168,255,.9)':'rgba(74,130,255,.5)';cx.fill();
     });
     for(let i=0;i<ns.length;i++)for(let j=i+1;j<ns.length;j++){
       const dx=ns[i].x-ns[j].x,dy=ns[i].y-ns[j].y,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<155){
-        const near=Math.abs(ns[i].x-mx)<220&&Math.abs(ns[i].y-my)<220||Math.abs(ns[j].x-mx)<220&&Math.abs(ns[j].y-my)<220;
-        const alpha=(near ? 0.4 : 0.22)*(1-d/155)
+      if(d<120){
+        const near=Math.abs(ns[i].x-mx)<180&&Math.abs(ns[i].y-my)<180||Math.abs(ns[j].x-mx)<180&&Math.abs(ns[j].y-my)<180;
+        const alpha=(near ? 0.3 : 0.18)*(1-d/120)
         cx.beginPath();cx.moveTo(ns[i].x,ns[i].y);cx.lineTo(ns[j].x,ns[j].y);
         cx.strokeStyle='rgba(74,130,255,'+alpha+')';
-        cx.lineWidth=near?1.1:.7;cx.stroke();
+        cx.lineWidth=near?0.8:0.5;cx.stroke();
       }
     }
     ns.forEach(n=>{
       const dx=n.x-mx,dy=n.y-my,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<220&&d>0){cx.beginPath();cx.moveTo(mx,my);cx.lineTo(n.x,n.y);cx.strokeStyle='rgba(74,130,255,'+(.18*(1-d/220))+')';cx.lineWidth=.6;cx.stroke()}
+      if(d<180&&d>0){cx.beginPath();cx.moveTo(mx,my);cx.lineTo(n.x,n.y);cx.strokeStyle='rgba(74,130,255,'+(.12*(1-d/180))+')';cx.lineWidth=.5;cx.stroke()}
     });
     if(ct>0)ct--;
     requestAnimationFrame(draw);
@@ -398,6 +399,8 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
   addEventListener('resize',init);requestIdleCallback?requestIdleCallback(()=>{init();draw();}):setTimeout(()=>{init();draw();},200);
 })();
 
+/* ── DEFERIDO: chat, idiomas, estrellas ── */
+addEventListener('DOMContentLoaded',()=>{
 /* ── CHAT SOFIA ── */
 const bubble=document.getElementById('sofia-bubble'),panel=document.getElementById('sofia-panel'),inp=document.getElementById('sofia-input-field'),msgs=document.getElementById('sofia-msgs');
 let chatHistory;
@@ -526,6 +529,6 @@ const hamBtn=document.getElementById('hamBtn'),mobileNav=document.getElementById
 hamBtn.onclick=()=>{mobileNav.classList.toggle('open');hamBtn.textContent=mobileNav.classList.contains('open')?'✕':'☰'};
 mobileNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mobileNav.classList.remove('open');hamBtn.textContent='☰'});
 document.addEventListener('click',e=>{if(!e.target.closest('nav')){mobileNav.classList.remove('open');hamBtn.textContent='☰'}});
-</script>
+});</script>
 </body>
 </html>
