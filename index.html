@@ -400,7 +400,87 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
 })();
 
 /* ── DEFERIDO: carga diferida ── */
+
+/* ── FUNCIONES CRÍTICAS (onclick) ── */
+let chatHistory;
+let currentRating=0;
+const bubble=document.getElementById('sofia-bubble'),panel=document.getElementById('sofia-panel'),inp=document.getElementById('sofia-input-field'),msgs=document.getElementById('sofia-msgs');
+function resetChat(){
+  const w=document.getElementById('sofia-welcome');
+  msgs.innerHTML='<div class="msg bot" id="sofia-welcome">'+w.innerHTML+'</div>';
+  chatHistory=[{role:'bot',text:w.innerText||''}];
+}
+function closeSofia(){panel.classList.remove('active');resetChat()}
+function initChat(){
+  chatHistory=[{role:'bot',text:document.getElementById('sofia-welcome')?.innerText||''}];
+  bubble.onclick=()=>{
+    const active=panel.classList.toggle('active');
+    if(active){resetChat()}else{resetChat()}
+  };
+  inp.addEventListener('keypress',e=>{if(e.key==='Enter')sendSofia()});
+}
+async function sendSofia(){
+  const v=inp.value.trim();if(!v)return;
+  chatHistory.push({role:'user',text:v});
+  addMsg(v,'user');inp.value='';
+  const loading=addMsg('...','bot');
+  try{
+    const r=await fetch('/api/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({message:v,language:document.documentElement.lang||'es',history:chatHistory.slice(0,-1)})
+    });
+    const d=await r.json();
+    const txt=(d.text||'Escríbenos por WhatsApp: +39 380 102 8239');
+    chatHistory.push({role:'bot',text:txt});
+    loading.innerText='';
+    let i=0;
+    const sp=document.createElement('span');
+    sp.className='cursor';
+    loading.appendChild(sp);
+    (function type(){
+      if(i<txt.length){sp.before(txt[i++]);msgs.scrollTop=msgs.scrollHeight;setTimeout(type,12)}
+      else sp.remove();
+    })();
+  }catch(e){
+    loading.innerText='Escríbenos por WhatsApp: +39 380 102 8239';
+  }
+  msgs.scrollTop=msgs.scrollHeight;
+}
+function addMsg(t,tp){const d=document.createElement('div');d.className='msg '+tp;d.innerText=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
+async function pay(btn,name,price){
+  if(btn)btn.disabled=true;
+  try{
+    const r=await fetch('/api/create-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,price})});
+    const d=await r.json();
+    if(d.url)window.location.href=d.url;else alert('Error al crear el pago');
+  }catch(e){alert('Error de conexión');}
+  if(btn)btn.disabled=false;
+}
+function setRating(n){
+  currentRating=n;
+  document.querySelectorAll('.star-btn').forEach((b,i)=>{
+    b.classList.toggle('active',i<n);
+  });
+}
+function submitEval(){
+  const name=document.getElementById('eval-name').value.trim();
+  const plan=document.getElementById('eval-plan').value;
+  const comment=document.getElementById('eval-comment').value.trim();
+  if(!name||!plan||!comment||currentRating===0){alert('Por favor completa todos los campos y selecciona una puntuación.');return;}
+  const stars='★'.repeat(currentRating)+'☆'.repeat(5-currentRating);
+  const initials=name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  const card=document.createElement('div');
+  card.className='eval-card';
+  card.innerHTML=`<div class="eval-stars">${stars}</div><p class="eval-comment">"${comment}"</p><div class="eval-author"><div class="eval-avatar">${initials}</div><div><div class="eval-name">${name}</div><div class="eval-role">${plan}</div></div></div>`;
+  document.getElementById('eval-cards').prepend(card);
+  document.getElementById('eval-name').value='';
+  document.getElementById('eval-plan').value='';
+  document.getElementById('eval-comment').value='';
+  setRating(0);
+}
 </script>
+<script defer src="/js/langs.js"></script>
 <script defer src="/js/app.js"></script>
 </body>
 </html>
