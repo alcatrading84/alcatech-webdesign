@@ -365,22 +365,22 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
     ns.forEach(n=>{
       n.x+=n.vx;n.y+=n.vy;
       const dx=n.x-mx,dy=n.y-my,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<130&&d>0){const f=(130-d)/130*2.5;n.vx+=(dx/d)*f*.03;n.vy+=(dy/d)*f*.03}
+      if(d<200&&d>12){const f=(200-d)/200*1.2;n.vx-=(dx/d)*f*.03;n.vy-=(dy/d)*f*.03}
       if(ct>0){const dx2=n.x-cx2,dy2=n.y-cy2,d2=Math.sqrt(dx2*dx2+dy2*dy2);if(d2<200&&d2>0){const f=(200-d2)/200*ct/18;n.vx+=(dx2/d2)*f;n.vy+=(dy2/d2)*f}}
       n.vx+=(Math.random()-.5)*.08;n.vy+=(Math.random()-.5)*.08;n.vx*=.97;n.vy*=.97;const s=Math.sqrt(n.vx*n.vx+n.vy*n.vy);if(s>2.5){n.vx=n.vx/s*2.5;n.vy=n.vy/s*2.5}
       if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;
     });
     ns.forEach(n=>{
       const dx=n.x-mx,dy=n.y-my,d=Math.sqrt(dx*dx+dy*dy);
-      const near=d<130&&d>0;const r=near?n.r*2.8:n.r;
+      const near=d<200&&d>0;const r=near?n.r*2.5:n.r;
       cx.beginPath();cx.arc(n.x,n.y,r,0,6.3);
       cx.fillStyle=near?'rgba(121,168,255,.95)':'rgba(74,130,255,.6)';cx.fill();
     });
     for(let i=0;i<ns.length;i++)for(let j=i+1;j<ns.length;j++){
       const dx=ns[i].x-ns[j].x,dy=ns[i].y-ns[j].y,d=Math.sqrt(dx*dx+dy*dy);
       if(d<155){
-        const near=Math.abs(ns[i].x-mx)<200&&Math.abs(ns[i].y-my)<200||Math.abs(ns[j].x-mx)<200&&Math.abs(ns[j].y-my)<200;
-        const alpha=(near ? 0.35 : 0.22)*(1-d/155)
+        const near=Math.abs(ns[i].x-mx)<220&&Math.abs(ns[i].y-my)<220||Math.abs(ns[j].x-mx)<220&&Math.abs(ns[j].y-my)<220;
+        const alpha=(near ? 0.4 : 0.22)*(1-d/155)
         cx.beginPath();cx.moveTo(ns[i].x,ns[i].y);cx.lineTo(ns[j].x,ns[j].y);
         cx.strokeStyle='rgba(74,130,255,'+alpha+')';
         cx.lineWidth=near?1.1:.7;cx.stroke();
@@ -388,7 +388,7 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
     }
     ns.forEach(n=>{
       const dx=n.x-mx,dy=n.y-my,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<160&&d>0){cx.beginPath();cx.moveTo(mx,my);cx.lineTo(n.x,n.y);cx.strokeStyle='rgba(74,130,255,'+(.12*(1-d/160))+')';cx.lineWidth=.4;cx.stroke()}
+      if(d<220&&d>0){cx.beginPath();cx.moveTo(mx,my);cx.lineTo(n.x,n.y);cx.strokeStyle='rgba(74,130,255,'+(.18*(1-d/220))+')';cx.lineWidth=.6;cx.stroke()}
     });
     if(ct>0)ct--;
     requestAnimationFrame(draw);
