@@ -373,7 +373,7 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
     ns.forEach(n=>{
       n.x+=n.vx;n.y+=n.vy;
       const dx=n.x-mx,dy=n.y-my,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<220&&d>12){const f=(220-d)/220*1;n.vx-=(dx/d)*f*.07;n.vy-=(dy/d)*f*.07}
+      if(d<240&&d>12){const f=(240-d)/240*1;n.vx-=(dx/d)*f*.12;n.vy-=(dy/d)*f*.12}
       if(ct>0){const dx2=n.x-cx2,dy2=n.y-cy2,d2=Math.sqrt(dx2*dx2+dy2*dy2);if(d2<200&&d2>0){const f=(200-d2)/200*ct/14;n.vx+=(dx2/d2)*f;n.vy+=(dy2/d2)*f}}
       n.vx+=(Math.random()-.5)*.06;n.vy+=(Math.random()-.5)*.06;n.vx*=.96;n.vy*=.96;const s=Math.sqrt(n.vx*n.vx+n.vy*n.vy);if(s>2){n.vx=n.vx/s*2;n.vy=n.vy/s*2}
       if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;
