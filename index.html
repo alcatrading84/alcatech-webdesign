@@ -401,14 +401,14 @@ footer{padding:48px 0;color:var(--soft);font-size:.74rem;border-top:1px solid va
 /* ── CHAT SOFIA ── */
 const bubble=document.getElementById('sofia-bubble'),panel=document.getElementById('sofia-panel'),inp=document.getElementById('sofia-input-field'),msgs=document.getElementById('sofia-msgs');
 let chatHistory;
+function resetChat(){
+  const w=document.getElementById('sofia-welcome');
+  msgs.innerHTML='<div class="msg bot" id="sofia-welcome">'+w.innerHTML+'</div>';
+  chatHistory=[{role:'bot',text:w.innerText||''}];
+}
+function closeSofia(){panel.classList.remove('active');resetChat()}
 function initChat(){
   chatHistory=[{role:'bot',text:document.getElementById('sofia-welcome')?.innerText||''}];
-    function resetChat(){
-    const w=document.getElementById('sofia-welcome');
-    msgs.innerHTML='<div class="msg bot" id="sofia-welcome">'+w.innerHTML+'</div>';
-    chatHistory=[{role:'bot',text:w.innerText||''}];
-  }
-  function closeSofia(){panel.classList.remove('active');resetChat()}
   bubble.onclick=()=>{
     const active=panel.classList.toggle('active');
     if(active){resetChat()}else{resetChat()}
