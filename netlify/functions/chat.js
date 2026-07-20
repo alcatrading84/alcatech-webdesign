@@ -3,45 +3,48 @@ const https = require("https");
 const ALLOWED_LANGUAGES = ["es", "en", "it", "de", "fr"];
 
 const BUSINESS_CONTEXT = `
+## IDENTIDAD
 Eres Sofía, la cara amable de AlcaTech-WebDesign. Eres una persona real atendiendo el negocio, no un robot. Hablas con naturalidad, como lo haría cualquier dueño de negocio hablando con un cliente.
 
-REGLAS:
-- Nunca te vuelvas a presentar ni saludar de nuevo si ya lo hiciste.
-- Responde en el mismo idioma del cliente.
-- Si no sabes algo, sugiere hablar por WhatsApp.
-- No des información sensible del negocio.
+## REGLAS (prioridad estricta)
+1. Nunca te vuelvas a presentar ni saludar de nuevo si ya lo hiciste.
+2. Responde en el mismo idioma del cliente.
+3. Si es queja → seguir protocolo TICKET
+4. Si es venta → presentar planes según presupuesto
+5. Si no sabes algo → sugiere hablar por WhatsApp
 
-GESTIÓN DE QUEJAS (cuando un cliente reporte un problema o queja):
-1. Escucha con empatía. Pide los datos en 2 rondas máximo:
-   - Ronda 1: nombre, URL del sitio, qué producto/plan tiene contratado.
-   - Ronda 2: tipo de fallo, descripción detallada del problema, desde cuándo no funciona.
-2. Una vez tengas todos los datos, genera un número de ticket único: TICKET-DDMMYY-XXX (ej: TICKET-190726-A7B).
-3. Crea un link de WhatsApp con TODA la información detallada pre-llenada.
-   Formato del mensaje: TICKET DDMMYYXXX - Cliente - Producto - URL - Tipo de fallo - Descripción
-   El link debe ser: https://wa.me/393801028239?text= seguido del mensaje codificado sin cortar.
-4. Entrega el link al cliente: "He abierto el ticket TICKET-xxx con todos los detalles. Haz clic aquí para enviarlo a nuestro equipo: [link]"
+## PROTOCOLO TICKET (quejas)
+Paso 1: Escucha con empatía. Pide nombre, URL del sitio, qué producto/plan tiene contratado.
+Paso 2: Pide tipo de fallo, descripción detallada, desde cuándo no funciona.
+Paso 3: Genera TICKET-DDMMYY-XXX (ej: TICKET-190726-A7B).
+Paso 4: Crea link WhatsApp: https://wa.me/393801028239?text= con TODOS los datos del ticket.
+Paso 5: Entrega: "He abierto el ticket TICKET-xxx. Haz clic aquí: [link]"
 
-INFORMACIÓN DE REFERENCIA (si preguntan):
+## DATOS
 Servicios: diseño web, e-commerce, SaaS, 3D, motion, automatización.
-Planes base: Landing Premium €1.200 | Web Empresarial €2.400 | Cinematic Motion €3.500.
-Planes avanzados: Cinematic 3D €5.500 | Enterprise SaaS €7.500 | Signature €8.000.
-Mantenimiento: Care Plan €97/mes.
+Planes: Landing Premium €1.200 | Web Empresarial €2.400 | Cinematic Motion €3.500
+Planes avanzados: Cinematic 3D €5.500 | Enterprise SaaS €7.500 | Signature €8.000
+Mantenimiento: Care Plan €97/mes
 WhatsApp: https://wa.me/393801028239
 Email: alcatechwebdesign@gmail.com
 `;
 
-function geminiFetch(apiKey, contents) {
+function openaiFetch(apiKey, messages) {
   return new Promise((resolve, reject) => {
     const body = JSON.stringify({
-      systemInstruction: { parts: [{ text: BUSINESS_CONTEXT }] },
-      contents,
-      generationConfig: { temperature: 0.3, maxOutputTokens: 500 }
+      model: "gpt-5.6",
+      messages,
+      temperature: 0.3,
+      max_tokens: 500
     });
     const req = https.request({
-      hostname: "generativelanguage.googleapis.com",
-      path: "/v1beta/models/gemini-3.5-flash:generateContent?key=" + apiKey,
+      hostname: "api.openai.com",
+      path: "/v1/chat/completions",
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + apiKey
+      },
       timeout: 15000
     }, res => {
       let data = "";
@@ -62,23 +65,20 @@ exports.handler = async (event) => {
     const body = JSON.parse(event.body || "{}");
     const message = String(body.message || "").trim();
     const language = ALLOWED_LANGUAGES.includes(body.language) ? body.language : "es";
-    const apiKey = process.env.GEMINI_API_KEY;
-
-    if (!apiKey) return { statusCode: 200, body: JSON.stringify({ text: "Lo siento, tuve un problema. Escríbenos por WhatsApp: +39 380 102 8239" }) };
 
     const history = Array.isArray(body.history) ? body.history.slice(0, 15) : [];
-    const contents = history.map(h => ({
-      role: h.role === "bot" ? "model" : "user",
-      parts: [{ text: h.text }]
-    }));
-    contents.push({ role: "user", parts: [{ text: `Idioma: ${language}\n\nMensaje: ${message}` }] });
+    const messages = [{ role: "system", content: BUSINESS_CONTEXT }];
+    for (const h of history) {
+      messages.push({ role: h.role === "bot" ? "assistant" : "user", content: h.text });
+    }
+    messages.push({ role: "user", content: `[Idioma: ${language}] ${message}` });
 
-    const data = await geminiFetch(apiKey, contents);
+    const data = await openaiFetch(process.env.OPENAI_API_KEY, messages);
 
     if (data?.error) {
       return { statusCode: 200, body: JSON.stringify({ text: "Lo siento, tuve un problema. Escríbenos por WhatsApp: +39 380 102 8239" }) };
     }
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Escríbenos por WhatsApp: +39 380 102 8239";
+    const text = data?.choices?.[0]?.message?.content || "Escríbenos por WhatsApp: +39 380 102 8239";
     return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) };
   } catch (error) {
     return { statusCode: 200, body: JSON.stringify({ text: "Lo siento, tuve un problema. Escríbenos por WhatsApp: +39 380 102 8239" }) };
